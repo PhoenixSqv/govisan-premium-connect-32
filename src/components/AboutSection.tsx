@@ -28,7 +28,7 @@ const AboutSection = () => {
             
             <div className="bg-govisan-navy/5 border border-govisan-navy/10 rounded-xl p-6 mb-8">
               <p className="text-foreground font-medium">
-                "Part of VC Ingeniería Group, we are expanding our presence across 
+                "Part of VCN Ingeniería Group, we are expanding our presence across 
                 Asia-Pacific, bringing world-class telecommunications expertise to 
                 the region's most exclusive hospitality destinations."
               </p>
