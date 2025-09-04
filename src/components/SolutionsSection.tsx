@@ -1,32 +1,34 @@
 import React from 'react';
 import { Button } from './ui/button';
 import { Wifi, Smartphone, Shield, Settings, ArrowRight } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const SolutionsSection = () => {
+  const { t } = useLanguage();
   const solutions = [
     {
       icon: Wifi,
-      title: 'Smart Connectivity for Hotels',
-      description: 'High-speed wireless networks designed specifically for luxury hospitality environments.',
-      features: ['Enterprise-grade WiFi 6E', 'Guest network isolation', 'Bandwidth management']
+      title: t('solution.smart_connectivity'),
+      description: t('solution.smart_connectivity_desc'),
+      features: [t('feature.enterprise_wifi'), t('feature.guest_isolation'), t('feature.bandwidth_mgmt')]
     },
     {
       icon: Smartphone,
-      title: 'IoT & Guest Experience',
-      description: 'Connected room automation and smart guest services for the ultimate luxury experience.',
-      features: ['Smart room controls', 'Mobile app integration', 'Personalized services']
+      title: t('solution.iot_guest'),
+      description: t('solution.iot_guest_desc'),
+      features: [t('feature.smart_controls'), t('feature.mobile_integration'), t('feature.personalized_services')]
     },
     {
       icon: Shield,
-      title: 'Secure High-Capacity Networks',
-      description: 'Military-grade security infrastructure protecting guest data and hotel operations.',
-      features: ['Advanced encryption', '24/7 monitoring', 'Compliance standards']
+      title: t('solution.secure_networks'),
+      description: t('solution.secure_networks_desc'),
+      features: [t('feature.advanced_encryption'), t('feature.monitoring'), t('feature.compliance')]
     },
     {
       icon: Settings,
-      title: 'Systems Integration',
-      description: 'Seamless integration of telecommunications with existing hotel management systems.',
-      features: ['PMS integration', 'Unified communications', 'Legacy system support']
+      title: t('solution.systems_integration'),
+      description: t('solution.systems_integration_desc'),
+      features: [t('feature.pms_integration'), t('feature.unified_comms'), t('feature.legacy_support')]
     }
   ];
 
@@ -37,17 +39,15 @@ const SolutionsSection = () => {
         <div className="text-center mb-16">
           <div className="inline-flex items-center bg-govisan-gold/10 text-govisan-gold px-4 py-2 rounded-full text-sm font-medium mb-6">
             <Settings className="h-4 w-4 mr-2" />
-            Our Solutions
+            {t('solutions.badge')}
           </div>
           
           <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
-            Solutions for{' '}
-            <span className="text-govisan-navy">Hospitality</span>
+            {t('solutions.title')}
           </h2>
           
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Comprehensive telecommunications solutions tailored for the unique 
-            needs of luxury hotels and resorts worldwide.
+            {t('solutions.description')}
           </p>
         </div>
 
@@ -86,7 +86,7 @@ const SolutionsSection = () => {
         {/* CTA */}
         <div className="text-center">
           <Button variant="premium" size="lg" className="text-lg px-8 py-4 h-auto">
-            See All Solutions
+            {t('solutions.see_all')}
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </div>

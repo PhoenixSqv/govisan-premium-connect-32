@@ -2,8 +2,10 @@ import React from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, MapPin, Users, Star } from 'lucide-react';
 import maldivesProject from '@/assets/maldives-project.jpg';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const SuccessStories = () => {
+  const { t } = useLanguage();
   const stories = [
     {
       id: 1,
@@ -56,17 +58,15 @@ const SuccessStories = () => {
         <div className="text-center mb-16">
           <div className="inline-flex items-center bg-govisan-gold/10 text-govisan-gold px-4 py-2 rounded-full text-sm font-medium mb-6">
             <Star className="h-4 w-4 mr-2" />
-            Success Stories
+            {t('success.badge')}
           </div>
           
           <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
-            Transforming{' '}
-            <span className="text-govisan-navy">Hospitality</span>
+            {t('success.title')}
           </h2>
           
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Discover how we've helped luxury hotels worldwide enhance their 
-            guest experience through innovative telecommunications solutions.
+            {t('success.description')}
           </p>
         </div>
 
@@ -126,7 +126,7 @@ const SuccessStories = () => {
                 </div>
                 
                 <Button variant="outline" className="group-hover:border-govisan-gold group-hover:text-govisan-gold transition-colors">
-                  Read Case Study
+                  {t('success.read_case')}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </div>

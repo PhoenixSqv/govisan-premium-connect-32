@@ -1,8 +1,10 @@
 import React from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, Clock, TrendingUp } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const InsightsSection = () => {
+  const { t } = useLanguage();
   const insights = [
     {
       id: 1,
@@ -49,17 +51,15 @@ const InsightsSection = () => {
         <div className="text-center mb-16">
           <div className="inline-flex items-center bg-govisan-gold/10 text-govisan-gold px-4 py-2 rounded-full text-sm font-medium mb-6">
             <TrendingUp className="h-4 w-4 mr-2" />
-            Insights & News
+            {t('insights.badge')}
           </div>
           
           <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
-            Industry{' '}
-            <span className="text-govisan-navy">Insights</span>
+            {t('insights.title')}
           </h2>
           
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Stay ahead with our latest insights on hospitality technology trends, 
-            market analysis, and innovation in telecommunications.
+            {t('insights.description')}
           </p>
         </div>
 
@@ -117,7 +117,7 @@ const InsightsSection = () => {
         {/* More Insights CTA */}
         <div className="text-center mt-12">
           <Button variant="premium" size="lg" className="text-lg px-8 py-4 h-auto">
-            Explore All Insights
+            {t('insights.explore')}
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </div>

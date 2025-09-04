@@ -1,8 +1,10 @@
 import React from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, Award, Globe, Users } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const AboutSection = () => {
+  const { t } = useLanguage();
   return (
     <section id="about" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -11,31 +13,25 @@ const AboutSection = () => {
           <div>
             <div className="inline-flex items-center bg-govisan-gold/10 text-govisan-gold px-4 py-2 rounded-full text-sm font-medium mb-6">
               <Award className="h-4 w-4 mr-2" />
-              25+ Years of Excellence
+              {t('about.badge')}
             </div>
             
             <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
-              About{' '}
-              <span className="text-govisan-navy">Govisan</span>
+              {t('about.title')}
             </h2>
             
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              As a leading provider of telecommunications solutions for luxury hotels, 
-              Govisan has been connecting hospitality worldwide for over 25 years. 
-              Our commitment to excellence and innovation has made us the trusted 
-              partner for the world's most prestigious hotel chains.
+              {t('about.description')}
             </p>
             
             <div className="bg-govisan-navy/5 border border-govisan-navy/10 rounded-xl p-6 mb-8">
               <p className="text-foreground font-medium">
-                "Part of VCN Ingeniería Group, we are expanding our presence across 
-                Asia-Pacific, bringing world-class telecommunications expertise to 
-                the region's most exclusive hospitality destinations."
+                "{t('about.quote')}"
               </p>
             </div>
             
             <Button variant="cta" size="lg" className="text-lg px-8 py-4 h-auto">
-              Learn More About Us
+              {t('about.learn_more')}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
@@ -48,11 +44,10 @@ const AboutSection = () => {
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-foreground mb-2">
-                  Global Presence
+                  {t('about.global_presence')}
                 </h3>
                 <p className="text-muted-foreground">
-                  Operating across 50+ countries with local expertise and 
-                  international standards of excellence.
+                  {t('about.global_desc')}
                 </p>
               </div>
             </div>
@@ -63,11 +58,10 @@ const AboutSection = () => {
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-foreground mb-2">
-                  Expert Team
+                  {t('about.expert_team')}
                 </h3>
                 <p className="text-muted-foreground">
-                  Over 200 certified engineers and hospitality technology 
-                  specialists dedicated to your success.
+                  {t('about.expert_desc')}
                 </p>
               </div>
             </div>
@@ -78,11 +72,10 @@ const AboutSection = () => {
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-foreground mb-2">
-                  Industry Recognition
+                  {t('about.industry_recognition')}
                 </h3>
                 <p className="text-muted-foreground">
-                  Multiple awards for innovation in hospitality technology 
-                  and customer service excellence.
+                  {t('about.industry_desc')}
                 </p>
               </div>
             </div>

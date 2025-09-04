@@ -17,7 +17,7 @@ const Header = () => {
     { name: t('header.contact'), href: '#contact' },
   ];
 
-  const languages = ['EN', 'ES', 'CN'];
+  const languages = ['EN', 'ES'];
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-border shadow-sm">

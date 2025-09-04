@@ -1,7 +1,9 @@
 import React from 'react';
 import { MapPin, Globe } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const GlobalMapSection = () => {
+  const { t } = useLanguage();
   const regions = [
     {
       name: 'Europe',
@@ -41,18 +43,15 @@ const GlobalMapSection = () => {
           <div>
             <div className="inline-flex items-center bg-govisan-gold/20 text-govisan-gold px-4 py-2 rounded-full text-sm font-medium mb-6">
               <Globe className="h-4 w-4 mr-2" />
-              Global Presence
+              {t('global.badge')}
             </div>
             
             <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-              A Global Vision.{' '}
-              <span className="text-govisan-gold">Local Expertise</span>
+              {t('global.title')}
             </h2>
             
             <p className="text-xl text-white/80 mb-8 leading-relaxed">
-              From European luxury resorts to Asia-Pacific's emerging hospitality 
-              markets, Govisan delivers world-class telecommunications solutions 
-              with deep local understanding.
+              {t('global.description')}
             </p>
             
             <div className="grid grid-cols-2 gap-6">
