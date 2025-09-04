@@ -65,7 +65,7 @@ const Footer = () => {
                 in telecommunications for luxury hotels.
               </p>
               <div className="text-sm text-white/60 mb-4">
-                Part of VC Ingeniería Group
+                Part of VCN Ingeniería Group
               </div>
               
               {/* Social Links */}
