@@ -18,12 +18,24 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'montserrat': ['Montserrat', 'sans-serif'],
+				'sans': ['Montserrat', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				
+				/* Govisan Brand Colors */
+				'govisan-navy': 'hsl(var(--govisan-navy))',
+				'govisan-gold': 'hsl(var(--govisan-gold))',
+				'govisan-gold-light': 'hsl(var(--govisan-gold-light))',
+				'govisan-navy-light': 'hsl(var(--govisan-navy-light))',
+				'govisan-blue-accent': 'hsl(var(--govisan-blue-accent))',
+				
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
