@@ -2,18 +2,19 @@ import React, { useState } from 'react';
 import { Button } from './ui/button';
 import { Menu, X, Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState('EN');
+  const { currentLanguage, setLanguage, t } = useLanguage();
 
   const navigation = [
-    { name: 'Home', href: '#home' },
-    { name: 'About Govisan', href: '#about' },
-    { name: 'Solutions', href: '#solutions' },
-    { name: 'Success Stories', href: '#success' },
-    { name: 'Insights', href: '#insights' },
-    { name: 'Contact', href: '#contact' },
+    { name: t('header.home'), href: '#home' },
+    { name: t('header.about'), href: '#about' },
+    { name: t('header.solutions'), href: '#solutions' },
+    { name: t('header.success'), href: '#success' },
+    { name: t('header.insights'), href: '#insights' },
+    { name: t('header.contact'), href: '#contact' },
   ];
 
   const languages = ['EN', 'ES', 'CN'];
@@ -48,16 +49,16 @@ const Header = () => {
             <div className="relative group">
               <button className="flex items-center space-x-1 text-muted-foreground hover:text-govisan-navy transition-premium">
                 <Globe className="h-4 w-4" />
-                <span className="text-sm font-medium">{currentLang}</span>
+                <span className="text-sm font-medium">{currentLanguage}</span>
               </button>
               <div className="absolute top-full right-0 mt-2 py-2 bg-white border border-border rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 {languages.map((lang) => (
                   <button
                     key={lang}
-                    onClick={() => setCurrentLang(lang)}
+                    onClick={() => setLanguage(lang as any)}
                     className={cn(
                       "block px-4 py-2 text-sm hover:bg-secondary transition-colors w-full text-left",
-                      currentLang === lang ? "text-govisan-navy font-medium" : "text-muted-foreground"
+                      currentLanguage === lang ? "text-govisan-navy font-medium" : "text-muted-foreground"
                     )}
                   >
                     {lang}
@@ -67,7 +68,7 @@ const Header = () => {
             </div>
 
             <Button variant="premium" size="lg">
-              Request Proposal
+              {t('header.request_proposal')}
             </Button>
           </div>
 
@@ -103,10 +104,10 @@ const Header = () => {
                     {languages.map((lang) => (
                       <button
                         key={lang}
-                        onClick={() => setCurrentLang(lang)}
+                        onClick={() => setLanguage(lang as any)}
                         className={cn(
                           "px-2 py-1 text-xs rounded transition-colors",
-                          currentLang === lang
+                          currentLanguage === lang
                             ? "bg-govisan-navy text-white"
                             : "bg-secondary text-muted-foreground hover:bg-accent"
                         )}
@@ -118,7 +119,7 @@ const Header = () => {
                 </div>
                 <div className="px-3">
                   <Button variant="premium" size="lg" className="w-full">
-                    Request Proposal
+                    {t('header.request_proposal')}
                   </Button>
                 </div>
               </div>
