@@ -183,7 +183,7 @@ const Footer = () => {
         <div className="border-t border-white/10 py-8">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="text-sm text-white/60 mb-4 md:mb-0">
-              © 2024 Govisan. All rights reserved. Part of VC Ingeniería Group.
+              © 2024 Govisan. All rights reserved. Part of VCN Ingeniería Group.
             </div>
             <div className="text-sm text-white/60">
               Connecting Hospitality Worldwide
