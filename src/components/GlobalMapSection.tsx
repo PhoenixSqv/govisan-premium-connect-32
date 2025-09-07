@@ -17,7 +17,7 @@ const GlobalMapSection = () => {
       description: 'Expanding Market Presence',
       position: { left: '75%', top: '40%' },
       projects: '150+',
-      color: 'bg-govisan-navy'
+      color: 'bg-primary'
     },
     {
       name: 'Middle East',
@@ -31,7 +31,7 @@ const GlobalMapSection = () => {
       description: 'Strategic Partnerships',
       position: { left: '25%', top: '35%' },
       projects: '120+',
-      color: 'bg-govisan-navy'
+      color: 'bg-primary'
     }
   ];
 
@@ -57,11 +57,11 @@ const GlobalMapSection = () => {
             <div className="grid grid-cols-2 gap-6">
               <div className="text-center lg:text-left">
                 <div className="text-3xl font-bold text-govisan-gold mb-2">50+</div>
-                <div className="text-white/70">Countries Served</div>
+                <div className="text-white/70">{t('global.countriesServed')}</div>
               </div>
               <div className="text-center lg:text-left">
                 <div className="text-3xl font-bold text-govisan-gold mb-2">500+</div>
-                <div className="text-white/70">Hotels Connected</div>
+                <div className="text-white/70">{t('global.hotelsConnected')}</div>
               </div>
             </div>
           </div>
@@ -97,7 +97,7 @@ const GlobalMapSection = () => {
                       <div className="font-semibold text-sm mb-1">{region.name}</div>
                       <div className="text-xs text-muted-foreground mb-2">{region.description}</div>
                       <div className="text-xs">
-                        <span className="font-medium">{region.projects}</span> Projects
+                        <span className="font-medium">{region.projects}</span> {t('global.projects')}
                       </div>
                     </div>
                     {/* Arrow */}
@@ -137,11 +137,11 @@ const GlobalMapSection = () => {
             <div className="mt-8 grid grid-cols-2 gap-4">
               <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 text-center">
                 <div className="text-2xl font-bold text-govisan-gold mb-1">24/7</div>
-                <div className="text-sm text-white/70">Global Support</div>
+                <div className="text-sm text-white/70">{t('global.globalSupport')}</div>
               </div>
               <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 text-center">
                 <div className="text-2xl font-bold text-govisan-gold mb-1">15+</div>
-                <div className="text-sm text-white/70">Time Zones</div>
+                <div className="text-sm text-white/70">{t('global.timeZones')}</div>
               </div>
             </div>
           </div>

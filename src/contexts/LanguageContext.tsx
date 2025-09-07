@@ -98,6 +98,11 @@ const translations: Translations = {
   'global.badge': { EN: 'Global Reach', ES: 'Alcance Global' },
   'global.title': { EN: 'A Global Vision. Local Expertise.', ES: 'Una Visión Global. Experiencia Local.' },
   'global.description': { EN: 'From Europe to Asia-Pacific, we deliver world-class telecommunications solutions with deep understanding of local markets and hospitality standards.', ES: 'Desde Europa hasta Asia-Pacífico, ofrecemos soluciones de telecomunicaciones de clase mundial con un profundo entendimiento de los mercados locales y estándares de hospitalidad.' },
+  'global.countriesServed': { EN: 'Countries Served', ES: 'Países Atendidos' },
+  'global.hotelsConnected': { EN: 'Hotels Connected', ES: 'Hoteles Conectados' },
+  'global.globalSupport': { EN: 'Global Support', ES: 'Soporte Global' },
+  'global.timeZones': { EN: 'Time Zones', ES: 'Zonas Horarias' },
+  'global.projects': { EN: 'Projects', ES: 'Proyectos' },
 
   // Final CTA
   'cta.title': { EN: 'Ready to Upgrade Your Hotel\'s Connectivity?', ES: '¿Listo para Actualizar la Conectividad de tu Hotel?' },
