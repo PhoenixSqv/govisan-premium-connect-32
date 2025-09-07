@@ -37,6 +37,11 @@ const Header = () => {
                 key={item.name}
                 href={item.href}
                 className="text-foreground hover:text-govisan-navy transition-premium font-medium"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const element = document.querySelector(item.href);
+                  element?.scrollIntoView({ behavior: 'smooth' });
+                }}
               >
                 {item.name}
               </a>
@@ -67,7 +72,14 @@ const Header = () => {
               </div>
             </div>
 
-            <Button variant="premium" size="lg">
+            <Button 
+              variant="premium" 
+              size="lg"
+              onClick={() => {
+                const contactSection = document.querySelector('#contact');
+                contactSection?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
               {t('header.request_proposal')}
             </Button>
           </div>
@@ -92,7 +104,12 @@ const Header = () => {
                   key={item.name}
                   href={item.href}
                   className="block px-3 py-2 text-foreground hover:text-govisan-navy hover:bg-secondary rounded-md transition-premium"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsMenuOpen(false);
+                    const element = document.querySelector(item.href);
+                    element?.scrollIntoView({ behavior: 'smooth' });
+                  }}
                 >
                   {item.name}
                 </a>
@@ -118,7 +135,15 @@ const Header = () => {
                   </div>
                 </div>
                 <div className="px-3">
-                  <Button variant="premium" size="lg" className="w-full">
+                  <Button 
+                    variant="premium" 
+                    size="lg" 
+                    className="w-full"
+                    onClick={() => {
+                      const contactSection = document.querySelector('#contact');
+                      contactSection?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                  >
                     {t('header.request_proposal')}
                   </Button>
                 </div>

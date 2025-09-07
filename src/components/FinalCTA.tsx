@@ -18,12 +18,28 @@ const FinalCTA = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Button variant="premium" size="lg" className="text-lg px-10 py-5 h-auto">
+            <Button 
+              variant="premium" 
+              size="lg" 
+              className="text-lg px-10 py-5 h-auto"
+              onClick={() => {
+                const contactSection = document.querySelector('#contact');
+                contactSection?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
               {t('cta.request')}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             
-            <Button variant="hero" size="lg" className="text-lg px-10 py-5 h-auto">
+            <Button 
+              variant="hero" 
+              size="lg" 
+              className="text-lg px-10 py-5 h-auto"
+              onClick={() => {
+                const contactSection = document.querySelector('#contact');
+                contactSection?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
               <Phone className="mr-2 h-5 w-5" />
               {t('cta.contact')}
             </Button>
