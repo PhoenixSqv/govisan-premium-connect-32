@@ -28,7 +28,7 @@ const translations: Translations = {
 
   // Hero Section
   'hero.title': { EN: 'Connecting Luxury Hospitality with the Future', ES: 'Conectando la Hospitalidad de Lujo con el Futuro' },
-  'hero.subtitle': { EN: 'Elegance. Innovation. Connectivity. In a world where luxury hospitality demands the very best, GOVISAN Solutions delivers engineering in telecommunications and technology that elevates every guest experience. From flawless connectivity to intelligent comfort, we design digital infrastructures that turn every stay into something unforgettable.', ES: 'Elegancia. Innovación. Conectividad. En un mundo donde la hospitalidad de lujo exige lo mejor, GOVISAN Solutions ofrece ingeniería en telecomunicaciones y tecnología que eleva cada experiencia de huésped. Desde conectividad impecable hasta comodidad inteligente, diseñamos infraestructuras digitales que convierten cada estadía en algo inolvidable.' },
+  'hero.subtitle': { EN: 'Advanced telecommunications engineering and technology solutions for world-class luxury hotels that demand excellence in every detail.', ES: 'Ingeniería avanzada de telecomunicaciones y soluciones tecnológicas para hoteles de lujo de clase mundial que exigen excelencia en cada detalle.' },
   'hero.cta_discover': { EN: 'Discover Our Solutions', ES: 'Descubre Nuestras Soluciones' },
   'hero.cta_demo': { EN: 'Our Expertise', ES: 'Nuestra Experiencia' },
   'hero.years_excellence': { EN: 'Years of Excellence', ES: 'Años de Excelencia' },

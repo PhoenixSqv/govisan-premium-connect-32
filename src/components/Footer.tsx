@@ -60,7 +60,7 @@ const Footer = () => {
             {/* Company Info */}
             <div className="lg:col-span-1">
               <div className="text-3xl font-bold text-govisan-gold mb-6">
-                GOVISAN
+                GOVISAN Solutions
               </div>
               <p className="text-white/70 mb-6 leading-relaxed">
                 Connecting hospitality worldwide with 25+ years of excellence 

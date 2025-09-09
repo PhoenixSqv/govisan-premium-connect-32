@@ -26,7 +26,7 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center">
             <div className="text-2xl font-bold text-govisan-navy">
-              GOVISAN
+              GOVISAN Solutions
             </div>
           </div>
 
