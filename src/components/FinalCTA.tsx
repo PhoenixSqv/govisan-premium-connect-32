@@ -1,47 +1,45 @@
 import React from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, Phone } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 const FinalCTA = () => {
-  const { t } = useLanguage();
+  const handleNavClick = (href: string) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section className="py-20 gradient-hero">
+    <section className="section--wm wm--contact py-20 gradient-hero">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
-            {t('cta.title')}
+            Ready to Transform Your Hotel's Technology?
           </h2>
           
           <p className="text-xl text-white/80 mb-12 max-w-3xl mx-auto leading-relaxed">
-            {t('cta.subtitle')}
+            GOVISAN Solutions - Your technology partner for hotels that aspire to perfection. Join the leaders in luxury hospitality innovation.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <Button 
-              variant="premium" 
               size="lg" 
-              className="text-lg px-10 py-5 h-auto"
-              onClick={() => {
-                const contactSection = document.querySelector('#contact');
-                contactSection?.scrollIntoView({ behavior: 'smooth' });
-              }}
+              className="bg-govisan-gold hover:bg-govisan-gold/90 text-white font-semibold px-10 py-5 text-lg"
+              onClick={() => handleNavClick('#contact')}
             >
-              {t('cta.request')}
+              Request Consultation
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             
             <Button 
-              variant="hero" 
+              variant="outline"
               size="lg" 
-              className="text-lg px-10 py-5 h-auto"
-              onClick={() => {
-                const contactSection = document.querySelector('#contact');
-                contactSection?.scrollIntoView({ behavior: 'smooth' });
-              }}
+              className="border-white text-white hover:bg-white hover:text-govisan-navy font-semibold px-10 py-5 text-lg"
+              onClick={() => handleNavClick('#contact')}
             >
               <Phone className="mr-2 h-5 w-5" />
-              {t('cta.contact')}
+              Contact Our Experts
             </Button>
           </div>
           

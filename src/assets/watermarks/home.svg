@@ -1,0 +1,11 @@
+<svg width="600" height="600" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g opacity="0.1">
+    <circle cx="300" cy="300" r="250" stroke="currentColor" stroke-width="2" fill="none"/>
+    <circle cx="300" cy="300" r="200" stroke="currentColor" stroke-width="1" fill="none"/>
+    <circle cx="300" cy="300" r="150" stroke="currentColor" stroke-width="1" fill="none"/>
+    <path d="M300 50L350 150H250L300 50Z" stroke="currentColor" stroke-width="2" fill="none"/>
+    <path d="M550 300L450 350V250L550 300Z" stroke="currentColor" stroke-width="2" fill="none"/>
+    <path d="M300 550L250 450H350L300 550Z" stroke="currentColor" stroke-width="2" fill="none"/>
+    <path d="M50 300L150 250V350L50 300Z" stroke="currentColor" stroke-width="2" fill="none"/>
+  </g>
+</svg>

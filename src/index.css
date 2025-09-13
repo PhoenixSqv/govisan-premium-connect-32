@@ -166,4 +166,30 @@ All colors MUST be HSL.
   .animate-ping {
     animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
   }
+
+  /* Section Watermarks */
+  .section--wm {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  
+  .section--wm::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: min(80vmin, 900px);
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .wm--home::before { background-image: url("/src/assets/watermarks/home.svg"); }
+  .wm--solutions::before { background-image: url("/src/assets/watermarks/solutions.svg"); }
+  .wm--cases::before { background-image: url("/src/assets/watermarks/cases.svg"); }
+  .wm--about::before { background-image: url("/src/assets/watermarks/about.svg"); }
+  .wm--insights::before { background-image: url("/src/assets/watermarks/insights.svg"); }
+  .wm--contact::before { background-image: url("/src/assets/watermarks/contact.svg"); }
 }

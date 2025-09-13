@@ -2,71 +2,76 @@ import React from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, MapPin, Users, Star } from 'lucide-react';
 import maldivesProject from '@/assets/maldives-project.jpg';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 const SuccessStories = () => {
-  const { t } = useLanguage();
+  const handleNavClick = (href: string) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const stories = [
     {
       id: 1,
-      title: 'Maldives Resort – 5,000 Guests Connected Seamlessly',
+      title: 'Mandarin Oriental – Seamless Smart Integration',
       location: 'Maldives',
       guests: '5,000',
       rating: '4.9',
       image: maldivesProject,
-      description: 'Transforming a luxury resort in the Maldives with cutting-edge connectivity infrastructure.',
+      description: 'Transforming a luxury resort in the Maldives with cutting-edge connectivity infrastructure for world-class guest experiences.',
       achievements: [
         '99.9% network uptime',
-        'Zero guest complaints',
-        '40% increase in guest satisfaction'
+        'Zero guest connectivity complaints',
+        '40% increase in guest satisfaction scores'
       ]
     },
     {
       id: 2,
-      title: 'Swiss Alpine Resort Network Upgrade',
+      title: 'Six Senses Alpine Resort Network',
       location: 'Switzerland',
       guests: '3,200',
       rating: '4.8',
       image: maldivesProject,
-      description: 'Complete telecommunications overhaul for a premium mountain resort chain.',
+      description: 'Complete telecommunications overhaul for a premium mountain resort chain with seamless connectivity.',
       achievements: [
         'WiFi 6E implementation',
-        'Seamless roaming',
-        '25% faster speeds'
+        'Seamless inter-resort roaming',
+        '25% faster connection speeds'
       ]
     },
     {
       id: 3,
-      title: 'Bangkok Luxury Hotel Complex',
+      title: 'Fairmont Bangkok Smart Integration',
       location: 'Thailand',
       guests: '8,500',
       rating: '4.9',
       image: maldivesProject,
-      description: 'Smart city integration for a flagship hospitality development.',
+      description: 'Smart city integration for a flagship hospitality development with advanced IoT systems.',
       achievements: [
-        'IoT room automation',
-        'Mobile-first experience',
-        '30% operational efficiency'
+        'Full IoT room automation',
+        'Mobile-first guest experience',
+        '30% operational efficiency gain'
       ]
     }
   ];
 
   return (
-    <section id="success" className="py-20 bg-background">
+    <section id="success" className="section--wm wm--cases py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center bg-govisan-gold/10 text-govisan-gold px-4 py-2 rounded-full text-sm font-medium mb-6">
             <Star className="h-4 w-4 mr-2" />
-            {t('success.badge')}
+            Case Studies
           </div>
           
           <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
-            {t('success.title')}
+            Partnering with Iconic Global Hospitality Brands
           </h2>
           
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            {t('success.description')}
+            We have partnered with iconic global hospitality brands to deliver technological excellence. Each project is a new opportunity to redefine luxury hospitality through innovation.
           </p>
         </div>
 
@@ -125,8 +130,12 @@ const SuccessStories = () => {
                   ))}
                 </div>
                 
-                <Button variant="outline" className="group-hover:border-govisan-gold group-hover:text-govisan-gold transition-colors">
-                  {t('success.read_case')}
+                <Button 
+                  variant="outline" 
+                  onClick={() => handleNavClick('#contact')}
+                  className="group-hover:border-govisan-gold group-hover:text-govisan-gold transition-colors"
+                >
+                  Read Case Study
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </div>
@@ -136,9 +145,12 @@ const SuccessStories = () => {
 
         {/* More Stories CTA */}
         <div className="text-center mt-12">
-          <Button variant="cta" size="lg" className="text-lg px-8 py-4 h-auto">
+          <Button 
+            onClick={() => handleNavClick('#contact')}
+            className="bg-govisan-gold hover:bg-govisan-gold/90 text-white font-semibold px-8 py-4 text-lg group"
+          >
             View All Success Stories
-            <ArrowRight className="ml-2 h-5 w-5" />
+            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
           </Button>
         </div>
       </div>

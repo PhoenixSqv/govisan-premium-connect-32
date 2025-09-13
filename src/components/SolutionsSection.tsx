@@ -1,53 +1,58 @@
 import React from 'react';
 import { Button } from './ui/button';
 import { Wifi, Smartphone, Shield, Settings, ArrowRight } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 const SolutionsSection = () => {
-  const { t } = useLanguage();
+  const handleNavClick = (href: string) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const solutions = [
     {
       icon: Wifi,
-      title: t('solution.smart_connectivity'),
-      description: t('solution.smart_connectivity_desc'),
-      features: [t('feature.enterprise_wifi'), t('feature.guest_isolation'), t('feature.bandwidth_mgmt')]
+      title: 'Strategic Consulting',
+      description: 'Tailored telecom and IT solutions for luxury hospitality with expert guidance and strategic planning.',
+      features: ['Premium Connectivity', 'Secure, fast, and reliable WiFi', 'Smart Rooms']
     },
     {
       icon: Smartphone,
-      title: t('solution.iot_guest'),
-      description: t('solution.iot_guest_desc'),
-      features: [t('feature.smart_controls'), t('feature.mobile_integration'), t('feature.personalized_services')]
+      title: 'Project Engineering',
+      description: 'End-to-end management, from concept to commissioning, ensuring flawless execution of every project.',
+      features: ['Intelligent rooms blending comfort', 'Next-Gen Audiovisuals', 'Digital conference rooms & entertainment']
     },
     {
       icon: Shield,
-      title: t('solution.secure_networks'),
-      description: t('solution.secure_networks_desc'),
-      features: [t('feature.advanced_encryption'), t('feature.monitoring'), t('feature.compliance')]
+      title: 'On-Site Supervision',
+      description: 'Ensuring flawless quality during every installation with dedicated on-site technical supervision.',
+      features: ['Advanced Security', 'CCTV, access control, protection systems', 'Payments & POS']
     },
     {
       icon: Settings,
-      title: t('solution.systems_integration'),
-      description: t('solution.systems_integration_desc'),
-      features: [t('feature.pms_integration'), t('feature.unified_comms'), t('feature.legacy_support')]
+      title: 'Smart Integration',
+      description: 'Coordinating providers and systems for seamless results and unified technological solutions.',
+      features: ['Reliable, frictionless payment solutions', 'Telco Coordination', 'Smooth integration with global providers']
     }
   ];
 
   return (
-    <section id="solutions" className="py-20 bg-secondary/20">
+    <section id="solutions" className="section--wm wm--solutions py-20 bg-secondary/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center bg-govisan-gold/10 text-govisan-gold px-4 py-2 rounded-full text-sm font-medium mb-6">
             <Settings className="h-4 w-4 mr-2" />
-            {t('solutions.badge')}
+            Our Services
           </div>
           
           <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
-            {t('solutions.title')}
+            Integrated Technology Ecosystems
           </h2>
           
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            {t('solutions.description')}
+            At GOVISAN Solutions, we design and execute integrated technology ecosystems that guarantee security, efficiency, and elegance in every detail.
           </p>
         </div>
 
@@ -85,9 +90,12 @@ const SolutionsSection = () => {
 
         {/* CTA */}
         <div className="text-center">
-          <Button variant="premium" size="lg" className="text-lg px-8 py-4 h-auto">
-            {t('solutions.see_all')}
-            <ArrowRight className="ml-2 h-5 w-5" />
+          <Button 
+            onClick={() => handleNavClick('#contact')}
+            className="bg-govisan-gold hover:bg-govisan-gold/90 text-white font-semibold px-8 py-4 text-lg group"
+          >
+            See All Services
+            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
           </Button>
         </div>
       </div>
