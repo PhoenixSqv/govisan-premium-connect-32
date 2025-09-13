@@ -1,0 +1,10 @@
+{
+  "items": [
+    { "label": "Home", "url": "#hero", "target": "_self", "nofollow": false },
+    { "label": "About Govisan", "url": "#about", "target": "_self", "nofollow": false },
+    { "label": "Solutions", "url": "#solutions", "target": "_self", "nofollow": false },
+    { "label": "Success Stories", "url": "#success", "target": "_self", "nofollow": false },
+    { "label": "Insights", "url": "#insights", "target": "_self", "nofollow": false },
+    { "label": "Contact", "url": "#contact", "target": "_self", "nofollow": false }
+  ]
+}

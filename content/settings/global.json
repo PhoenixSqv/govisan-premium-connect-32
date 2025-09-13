@@ -1,0 +1,32 @@
+{
+  "site": {
+    "title": "GOVISAN Solutions",
+    "description": "Technology solutions for luxury hospitality",
+    "logo": "/src/assets/logo.svg",
+    "favicon": "/favicon.ico",
+    "primaryColor": "#0A1A2F",
+    "secondaryColor": "#D4AF37"
+  },
+  "contact": {
+    "phone": "+34 91 123 45 67",
+    "email": "info@govisan.com",
+    "address": "Madrid, Spain"
+  },
+  "social": {
+    "linkedin": "https://linkedin.com/company/govisan",
+    "twitter": "https://twitter.com/govisan",
+    "facebook": "https://facebook.com/govisan"
+  },
+  "analytics": {
+    "gtag": "",
+    "hotjar": ""
+  },
+  "watermarks": {
+    "home": "/src/assets/watermarks/home.svg",
+    "solutions": "/src/assets/watermarks/solutions.svg",
+    "cases": "/src/assets/watermarks/cases.svg",
+    "about": "/src/assets/watermarks/about.svg",
+    "insights": "/src/assets/watermarks/insights.svg",
+    "contact": "/src/assets/watermarks/contact.svg"
+  }
+}

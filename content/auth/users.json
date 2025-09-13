@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "id": "admin-001",
+      "email": "admin@govisan.com",
+      "passwordHash": "$2a$10$DCtHQ4MzVD8oRZJ8iekW4.dLBXzJ3XvRg9wzjJ4ljv2CJ1mY2wOHC",
+      "role": "admin",
+      "name": "Administrator",
+      "createdAt": "2024-01-01T00:00:00Z",
+      "lastLogin": null,
+      "twoFactorEnabled": false
+    }
+  ]
+}
