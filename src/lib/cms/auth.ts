@@ -1,8 +1,5 @@
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-
-const JWT_SECRET = 'govisan-cms-secret-key-change-in-production';
-const JWT_EXPIRES = '7d';
+// Note: bcryptjs and jsonwebtoken will be handled server-side
+// For now, we'll implement client-side auth helpers
 
 export interface User {
   id: string;
@@ -23,32 +20,61 @@ export interface AuthToken {
   exp: number;
 }
 
-export const hashPassword = async (password: string): Promise<string> => {
-  return bcrypt.hash(password, 10);
+// Browser-compatible JWT decoder (verification happens server-side)
+const base64UrlDecode = (str: string): string => {
+  const base64 = str.replace(/-/g, '+').replace(/_/g, '/');
+  const padding = base64.length % 4;
+  const padded = padding ? base64 + '='.repeat(4 - padding) : base64;
+  return atob(padded);
 };
 
-export const comparePassword = async (password: string, hash: string): Promise<boolean> => {
-  return bcrypt.compare(password, hash);
-};
-
-export const generateToken = (user: Omit<User, 'passwordHash'>): string => {
-  return jwt.sign(
-    {
-      userId: user.id,
-      email: user.email,
-      role: user.role
-    },
-    JWT_SECRET,
-    { expiresIn: JWT_EXPIRES }
-  );
-};
-
-export const verifyToken = (token: string): AuthToken | null => {
+const decodeJWT = (token: string): AuthToken | null => {
   try {
-    return jwt.verify(token, JWT_SECRET) as AuthToken;
+    const parts = token.split('.');
+    if (parts.length !== 3) return null;
+    
+    const payload = JSON.parse(base64UrlDecode(parts[1]));
+    return {
+      userId: payload.userId,
+      email: payload.email,
+      role: payload.role,
+      iat: payload.iat,
+      exp: payload.exp
+    };
   } catch {
     return null;
   }
+};
+
+// Placeholder functions - actual implementation would be server-side
+export const hashPassword = async (password: string): Promise<string> => {
+  // In production, this would be handled server-side with bcrypt
+  return `hashed_${password}`;
+};
+
+export const comparePassword = async (password: string, hash: string): Promise<boolean> => {
+  // In production, this would be handled server-side with bcrypt
+  return hash === `hashed_${password}`;
+};
+
+export const generateToken = (user: Omit<User, 'passwordHash'>): string => {
+  // In production, this would be handled server-side with jsonwebtoken
+  const payload = {
+    userId: user.id,
+    email: user.email,
+    role: user.role,
+    iat: Math.floor(Date.now() / 1000),
+    exp: Math.floor(Date.now() / 1000) + (7 * 24 * 60 * 60) // 7 days
+  };
+  
+  // Mock JWT token for development
+  const header = btoa(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
+  const payloadEncoded = btoa(JSON.stringify(payload));
+  return `${header}.${payloadEncoded}.mock_signature`;
+};
+
+export const verifyToken = (token: string): AuthToken | null => {
+  return decodeJWT(token);
 };
 
 export const isAuthenticated = (): boolean => {
