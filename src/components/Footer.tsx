@@ -1,9 +1,7 @@
 import React from 'react';
 import { Linkedin, Youtube, Mail, Phone, MapPin } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 const Footer = () => {
-  const { t } = useLanguage();
   const navigation = {
     company: [
       { name: 'About Govisan', href: '#about' },
@@ -67,7 +65,7 @@ const Footer = () => {
                 in telecommunications for luxury hotels.
               </p>
               <div className="text-sm text-white/60 mb-4">
-                {t('footer.part_of')}
+                Part of VCN Ingeniería Group
               </div>
               
               {/* Social Links */}
@@ -155,7 +153,7 @@ const Footer = () => {
             
             {/* Contact Info */}
             <div className="lg:col-span-1">
-              <h3 className="text-lg font-semibold text-govisan-gold mb-6">{t('footer.global_offices')}</h3>
+              <h3 className="text-lg font-semibold text-govisan-gold mb-6">Global Offices</h3>
               <div className="space-y-6">
                 {offices.map((office) => (
                   <div key={office.region} className="border-l-2 border-govisan-gold/30 pl-4">
