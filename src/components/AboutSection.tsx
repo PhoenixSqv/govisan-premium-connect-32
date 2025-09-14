@@ -115,8 +115,8 @@ const AboutSection = () => {
           
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex">
-              {brands.map((brand, index) => <div key={brand.name} className="flex-[0_0_50%] min-w-0 md:flex-[0_0_33.333%] lg:flex-[0_0_20%] pl-4 bg-slate-50">
-                  <div className="flex items-center justify-center p-8 h-24 grayscale hover:grayscale-0 transition-all duration-300 group cursor-pointer bg-blue-200">
+              {brands.map((brand, index) => <div key={brand.name} className="flex-[0_0_50%] min-w-0 md:flex-[0_0_33.333%] lg:flex-[0_0_20%] pl-4">
+                  <div className="flex items-center justify-center p-8 h-24 w-full grayscale hover:grayscale-0 transition-all duration-300 group cursor-pointer bg-white border border-gray-100 rounded-lg mx-2">
                     <div className="text-lg font-semibold text-muted-foreground group-hover:text-govisan-navy transition-colors duration-300 text-center">
                       {brand.logo}
                     </div>
@@ -124,7 +124,7 @@ const AboutSection = () => {
                 </div>)}
               {/* Duplicate brands for seamless loop */}
               {brands.map((brand, index) => <div key={`duplicate-${brand.name}`} className="flex-[0_0_50%] min-w-0 md:flex-[0_0_33.333%] lg:flex-[0_0_20%] pl-4">
-                  <div className="flex items-center justify-center p-8 h-24 grayscale hover:grayscale-0 transition-all duration-300 group cursor-pointer bg-blue-200">
+                  <div className="flex items-center justify-center p-8 h-24 w-full grayscale hover:grayscale-0 transition-all duration-300 group cursor-pointer bg-white border border-gray-100 rounded-lg mx-2">
                     <div className="text-lg font-semibold text-muted-foreground group-hover:text-govisan-navy transition-colors duration-300 text-center">
                       {brand.logo}
                     </div>
