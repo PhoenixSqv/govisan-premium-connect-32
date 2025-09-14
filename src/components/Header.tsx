@@ -11,6 +11,7 @@ const Header = () => {
     { name: 'Home', href: '#hero' },
     { name: 'About Govisan', href: '#about' },
     { name: 'Solutions', href: '#solutions' },
+    { name: 'Specialization', href: '#specialization' },
     { name: 'Success Stories', href: '#success' },
     { name: 'Insights', href: '#insights' },
     { name: 'Contact', href: '#contact' },

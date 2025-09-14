@@ -1,0 +1,79 @@
+{
+  "badge": "Industry Expertise",
+  "title": "Our Specialization",
+  "description": "Focused expertise in hospitality and real estate technology solutions, delivering tailored systems that drive operational excellence and enhance guest experiences.",
+  "specializations": [
+    {
+      "icon": "Building2",
+      "title": "Hospitality Technology",
+      "description": "Comprehensive technology solutions for luxury hotels, resorts, and hospitality brands worldwide.",
+      "features": [
+        "Property Management Systems",
+        "Guest Experience Platforms",
+        "Revenue Management Systems",
+        "Mobile Applications",
+        "Digital Concierge Services"
+      ]
+    },
+    {
+      "icon": "Home",
+      "title": "Real Estate Technology",
+      "description": "Advanced technology infrastructure for residential and commercial real estate developments.",
+      "features": [
+        "Smart Building Systems",
+        "Property Management Solutions",
+        "Tenant Experience Platforms",
+        "Energy Management Systems",
+        "Security & Access Control"
+      ]
+    },
+    {
+      "icon": "Network",
+      "title": "Network Infrastructure",
+      "description": "Enterprise-grade network solutions designed for hospitality and real estate environments.",
+      "features": [
+        "High-Performance WiFi",
+        "Fiber Optic Networks",
+        "Network Security",
+        "Load Balancing",
+        "24/7 Monitoring"
+      ]
+    },
+    {
+      "icon": "Shield",
+      "title": "Cybersecurity",
+      "description": "Comprehensive security solutions protecting guest data and business operations.",
+      "features": [
+        "Data Protection",
+        "Threat Detection",
+        "Compliance Management",
+        "Security Audits",
+        "Incident Response"
+      ]
+    },
+    {
+      "icon": "BarChart3",
+      "title": "Business Intelligence",
+      "description": "Data analytics and reporting solutions that drive informed decision-making.",
+      "features": [
+        "Performance Dashboards",
+        "Revenue Analytics",
+        "Operational Insights",
+        "Guest Behavior Analysis",
+        "Predictive Analytics"
+      ]
+    },
+    {
+      "icon": "Headphones",
+      "title": "24/7 Support",
+      "description": "Round-the-clock technical support ensuring continuous operation and guest satisfaction.",
+      "features": [
+        "Technical Support",
+        "System Monitoring",
+        "Preventive Maintenance",
+        "Emergency Response",
+        "Training & Documentation"
+      ]
+    }
+  ]
+}
