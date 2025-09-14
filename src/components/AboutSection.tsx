@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, Award, Globe, Users } from 'lucide-react';
 import * as LucideIcons from 'lucide-react';
+import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
 interface AboutValue {
   icon: string;
   title: string;
@@ -16,6 +18,29 @@ interface AboutContent {
 }
 const AboutSection = () => {
   const [content, setContent] = useState<AboutContent | null>(null);
+  
+  // Carousel setup
+  const [emblaRef] = useEmblaCarousel(
+    { 
+      loop: true,
+      align: 'start',
+      slidesToScroll: 1,
+      breakpoints: {
+        '(min-width: 768px)': { slidesToScroll: 2 },
+        '(min-width: 1024px)': { slidesToScroll: 1 }
+      }
+    },
+    [Autoplay({ delay: 3000, stopOnInteraction: false })]
+  );
+
+  const brands = [
+    { name: 'ASG Iberia', logo: 'ASG IBERIA' },
+    { name: 'Six Senses', logo: 'SIX SENSES' },
+    { name: 'Bovis', logo: 'BOVIS' },
+    { name: 'Mandarin Oriental', logo: 'MANDARIN ORIENTAL' },
+    { name: 'Hard Rock', logo: 'HARD ROCK' },
+    { name: 'KKH Property Investors', logo: 'KKH PROPERTY' },
+  ];
   useEffect(() => {
     fetch('/content/about/main.json').then(res => res.json()).then(data => setContent(data)).catch(err => console.error('Failed to load about content:', err));
   }, []);
@@ -68,38 +93,40 @@ const AboutSection = () => {
           </div>
         </div>
         
-        {/* Trusted Brands Section */}
+        {/* Trusted Brands Carousel */}
         <div className="mt-20 text-center">
           <p className="text-lg text-muted-foreground max-w-4xl mx-auto leading-relaxed mb-12">
             Trusted by leading hospitality & real estate brands
           </p>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
-            {[{
-            name: 'ASG Iberia',
-            logo: 'ASG IBERIA'
-          }, {
-            name: 'Six Senses',
-            logo: 'SIX SENSES'
-          }, {
-            name: 'Bovis',
-            logo: 'BOVIS'
-          }, {
-            name: 'Mandarin Oriental',
-            logo: 'MANDARIN ORIENTAL'
-          }, {
-            name: 'Hard Rock',
-            logo: 'HARD ROCK'
-          }, {
-            name: 'KKH Property Investors',
-            logo: 'KKH PROPERTY'
-          }].map((brand, index) => <div key={brand.name} className="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition-all duration-300 animate-fade-in" style={{
-            animationDelay: `${index * 0.1}s`
-          }}>
-                <div className="text-lg font-semibold text-muted-foreground hover:text-govisan-navy transition-colors duration-300">
-                  {brand.logo}
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex">
+              {brands.map((brand, index) => (
+                <div 
+                  key={brand.name} 
+                  className="flex-[0_0_50%] min-w-0 md:flex-[0_0_33.333%] lg:flex-[0_0_20%] pl-4"
+                >
+                  <div className="flex items-center justify-center p-8 h-24 grayscale hover:grayscale-0 transition-all duration-300 group cursor-pointer">
+                    <div className="text-lg font-semibold text-muted-foreground group-hover:text-govisan-navy transition-colors duration-300 text-center">
+                      {brand.logo}
+                    </div>
+                  </div>
                 </div>
-              </div>)}
+              ))}
+              {/* Duplicate brands for seamless loop */}
+              {brands.map((brand, index) => (
+                <div 
+                  key={`duplicate-${brand.name}`} 
+                  className="flex-[0_0_50%] min-w-0 md:flex-[0_0_33.333%] lg:flex-[0_0_20%] pl-4"
+                >
+                  <div className="flex items-center justify-center p-8 h-24 grayscale hover:grayscale-0 transition-all duration-300 group cursor-pointer">
+                    <div className="text-lg font-semibold text-muted-foreground group-hover:text-govisan-navy transition-colors duration-300 text-center">
+                      {brand.logo}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
