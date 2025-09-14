@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, Award, Globe, Users } from 'lucide-react';
 import * as LucideIcons from 'lucide-react';
-
 interface AboutValue {
   icon: string;
   title: string;
   description: string;
 }
-
 interface AboutContent {
   badge: string;
   title: string;
@@ -16,28 +14,21 @@ interface AboutContent {
   quote: string;
   values: AboutValue[];
 }
-
 const AboutSection = () => {
   const [content, setContent] = useState<AboutContent | null>(null);
-
   useEffect(() => {
-    fetch('/content/about/main.json')
-      .then(res => res.json())
-      .then(data => setContent(data))
-      .catch(err => console.error('Failed to load about content:', err));
+    fetch('/content/about/main.json').then(res => res.json()).then(data => setContent(data)).catch(err => console.error('Failed to load about content:', err));
   }, []);
-
   const handleNavClick = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
   };
-  
   if (!content) return <div>Loading...</div>;
-  
-  return (
-    <section id="about" className="section--wm wm--about py-20 bg-background">
+  return <section id="about" className="section--wm wm--about py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
@@ -55,17 +46,14 @@ const AboutSection = () => {
               {content.description}
             </p>
             
-            <blockquote className="text-lg italic text-govisan-navy font-medium mb-8 pl-6 border-l-4 border-govisan-gold">
-              "{content.quote}"
-            </blockquote>
+            
           </div>
           
           {/* Right Content - Value Props */}
           <div className="space-y-8">
             {content.values.map((value, index) => {
-              const IconComponent = (LucideIcons as any)[value.icon] || Globe;
-              return (
-                <div key={index} className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+            const IconComponent = (LucideIcons as any)[value.icon] || Globe;
+            return <div key={index} className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0">
                       <IconComponent className="h-8 w-8 text-govisan-gold" />
@@ -75,9 +63,8 @@ const AboutSection = () => {
                       <p className="text-muted-foreground">{value.description}</p>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                </div>;
+          })}
           </div>
         </div>
         
@@ -88,29 +75,34 @@ const AboutSection = () => {
           </p>
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
-            {[
-              { name: 'ASG Iberia', logo: 'ASG IBERIA' },
-              { name: 'Six Senses', logo: 'SIX SENSES' },
-              { name: 'Bovis', logo: 'BOVIS' },
-              { name: 'Mandarin Oriental', logo: 'MANDARIN ORIENTAL' },
-              { name: 'Hard Rock', logo: 'HARD ROCK' },
-              { name: 'KKH Property Investors', logo: 'KKH PROPERTY' },
-            ].map((brand, index) => (
-              <div
-                key={brand.name}
-                className="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition-all duration-300 animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
+            {[{
+            name: 'ASG Iberia',
+            logo: 'ASG IBERIA'
+          }, {
+            name: 'Six Senses',
+            logo: 'SIX SENSES'
+          }, {
+            name: 'Bovis',
+            logo: 'BOVIS'
+          }, {
+            name: 'Mandarin Oriental',
+            logo: 'MANDARIN ORIENTAL'
+          }, {
+            name: 'Hard Rock',
+            logo: 'HARD ROCK'
+          }, {
+            name: 'KKH Property Investors',
+            logo: 'KKH PROPERTY'
+          }].map((brand, index) => <div key={brand.name} className="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition-all duration-300 animate-fade-in" style={{
+            animationDelay: `${index * 0.1}s`
+          }}>
                 <div className="text-lg font-semibold text-muted-foreground hover:text-govisan-navy transition-colors duration-300">
                   {brand.logo}
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default AboutSection;
