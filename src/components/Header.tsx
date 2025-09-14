@@ -14,7 +14,6 @@ const Header = () => {
     { name: 'Specialization', href: '#specialization' },
     { name: 'Success Stories', href: '#success' },
     { name: 'Insights', href: '#insights' },
-    { name: 'Contact', href: '#contact' },
   ];
 
   useEffect(() => {
