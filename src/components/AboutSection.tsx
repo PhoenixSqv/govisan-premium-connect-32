@@ -18,29 +18,43 @@ interface AboutContent {
 }
 const AboutSection = () => {
   const [content, setContent] = useState<AboutContent | null>(null);
-  
-  // Carousel setup
-  const [emblaRef] = useEmblaCarousel(
-    { 
-      loop: true,
-      align: 'start',
-      slidesToScroll: 1,
-      breakpoints: {
-        '(min-width: 768px)': { slidesToScroll: 2 },
-        '(min-width: 1024px)': { slidesToScroll: 1 }
-      }
-    },
-    [Autoplay({ delay: 3000, stopOnInteraction: false })]
-  );
 
-  const brands = [
-    { name: 'ASG Iberia', logo: 'ASG IBERIA' },
-    { name: 'Six Senses', logo: 'SIX SENSES' },
-    { name: 'Bovis', logo: 'BOVIS' },
-    { name: 'Mandarin Oriental', logo: 'MANDARIN ORIENTAL' },
-    { name: 'Hard Rock', logo: 'HARD ROCK' },
-    { name: 'KKH Property Investors', logo: 'KKH PROPERTY' },
-  ];
+  // Carousel setup
+  const [emblaRef] = useEmblaCarousel({
+    loop: true,
+    align: 'start',
+    slidesToScroll: 1,
+    breakpoints: {
+      '(min-width: 768px)': {
+        slidesToScroll: 2
+      },
+      '(min-width: 1024px)': {
+        slidesToScroll: 1
+      }
+    }
+  }, [Autoplay({
+    delay: 3000,
+    stopOnInteraction: false
+  })]);
+  const brands = [{
+    name: 'ASG Iberia',
+    logo: 'ASG IBERIA'
+  }, {
+    name: 'Six Senses',
+    logo: 'SIX SENSES'
+  }, {
+    name: 'Bovis',
+    logo: 'BOVIS'
+  }, {
+    name: 'Mandarin Oriental',
+    logo: 'MANDARIN ORIENTAL'
+  }, {
+    name: 'Hard Rock',
+    logo: 'HARD ROCK'
+  }, {
+    name: 'KKH Property Investors',
+    logo: 'KKH PROPERTY'
+  }];
   useEffect(() => {
     fetch('/content/about/main.json').then(res => res.json()).then(data => setContent(data)).catch(err => console.error('Failed to load about content:', err));
   }, []);
@@ -101,31 +115,21 @@ const AboutSection = () => {
           
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex">
-              {brands.map((brand, index) => (
-                <div 
-                  key={brand.name} 
-                  className="flex-[0_0_50%] min-w-0 md:flex-[0_0_33.333%] lg:flex-[0_0_20%] pl-4"
-                >
-                  <div className="flex items-center justify-center p-8 h-24 grayscale hover:grayscale-0 transition-all duration-300 group cursor-pointer">
+              {brands.map((brand, index) => <div key={brand.name} className="flex-[0_0_50%] min-w-0 md:flex-[0_0_33.333%] lg:flex-[0_0_20%] pl-4 bg-slate-50">
+                  <div className="flex items-center justify-center p-8 h-24 grayscale hover:grayscale-0 transition-all duration-300 group cursor-pointer bg-blue-200">
                     <div className="text-lg font-semibold text-muted-foreground group-hover:text-govisan-navy transition-colors duration-300 text-center">
                       {brand.logo}
                     </div>
                   </div>
-                </div>
-              ))}
+                </div>)}
               {/* Duplicate brands for seamless loop */}
-              {brands.map((brand, index) => (
-                <div 
-                  key={`duplicate-${brand.name}`} 
-                  className="flex-[0_0_50%] min-w-0 md:flex-[0_0_33.333%] lg:flex-[0_0_20%] pl-4"
-                >
-                  <div className="flex items-center justify-center p-8 h-24 grayscale hover:grayscale-0 transition-all duration-300 group cursor-pointer">
+              {brands.map((brand, index) => <div key={`duplicate-${brand.name}`} className="flex-[0_0_50%] min-w-0 md:flex-[0_0_33.333%] lg:flex-[0_0_20%] pl-4">
+                  <div className="flex items-center justify-center p-8 h-24 grayscale hover:grayscale-0 transition-all duration-300 group cursor-pointer bg-blue-200">
                     <div className="text-lg font-semibold text-muted-foreground group-hover:text-govisan-navy transition-colors duration-300 text-center">
                       {brand.logo}
                     </div>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </div>
