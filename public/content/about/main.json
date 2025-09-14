@@ -1,0 +1,23 @@
+{
+  "badge": "25+ Years Creating Technological Experiences",
+  "title": "Over 25 years creating technological experiences for world-class hospitality",
+  "description": "At GOVISAN Solutions, we are more than engineers: we are strategic partners of luxury hotels. With an international track record of prestigious projects, we bring trust, innovation, and bespoke service to properties that seek true distinction.",
+  "quote": "We design and execute integrated technology ecosystems that guarantee security, efficiency, and elegance in every detail.",
+  "values": [
+    {
+      "icon": "Globe",
+      "title": "Global Experience", 
+      "description": "Two decades supporting leading hospitality brands with international standards of excellence."
+    },
+    {
+      "icon": "Award",
+      "title": "Commitment to Excellence",
+      "description": "Quality across every phase, from design to operation, ensuring perfection in every project."
+    },
+    {
+      "icon": "Users",
+      "title": "Customer-Centric",
+      "description": "Exclusive solutions tailored to every space and every guest for truly personalized experiences."
+    }
+  ]
+}

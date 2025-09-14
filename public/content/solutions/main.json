@@ -1,0 +1,39 @@
+{
+  "title": "Technological Excellence for Luxury Hospitality",
+  "description": "From telecommunications infrastructure to advanced audiovisual systems, we deliver comprehensive technology solutions that enhance guest experiences and operational efficiency.",
+  "solutions": [
+    {
+      "title": "Network Infrastructure",
+      "description": "Robust telecommunications and connectivity solutions designed for high-demand hospitality environments.",
+      "icon": "Network",
+      "features": [
+        "High-speed fiber optic networks",
+        "Redundant connectivity systems", 
+        "Guest WiFi and enterprise networks",
+        "Network security and monitoring"
+      ]
+    },
+    {
+      "title": "Audiovisual Systems",
+      "description": "State-of-the-art AV solutions for meeting rooms, restaurants, and entertainment spaces.",
+      "icon": "Monitor",
+      "features": [
+        "Conference room AV systems",
+        "Digital signage solutions",
+        "Restaurant entertainment systems",
+        "Outdoor display installations"
+      ]
+    },
+    {
+      "title": "Smart Building Integration",
+      "description": "Integrated building management systems that optimize operations and enhance guest comfort.",
+      "icon": "Building",
+      "features": [
+        "HVAC control and monitoring",
+        "Lighting automation systems",
+        "Energy management solutions",
+        "Environmental monitoring"
+      ]
+    }
+  ]
+}

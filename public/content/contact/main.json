@@ -1,0 +1,49 @@
+{
+  "title": "Let's Build the Future of Hospitality Together",
+  "description": "Ready to transform your hotel with cutting-edge technology solutions? Contact our team of experts today.",
+  "offices": [
+    {
+      "city": "Madrid", 
+      "country": "Spain",
+      "address": "Calle Tecnología 123\n28001 Madrid, Spain",
+      "phone": "+34 91 123 45 67",
+      "email": "madrid@govisan.com"
+    },
+    {
+      "city": "London",
+      "country": "United Kingdom", 
+      "address": "Tech Square 45\nLondon EC1A 1BB, UK",
+      "phone": "+44 20 7123 4567",
+      "email": "london@govisan.com"
+    }
+  ],
+  "form": {
+    "title": "Send us a message",
+    "fields": [
+      {
+        "name": "name",
+        "label": "Full Name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "email", 
+        "label": "Email Address",
+        "type": "email",
+        "required": true
+      },
+      {
+        "name": "company",
+        "label": "Company/Hotel",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "message",
+        "label": "Message", 
+        "type": "textarea",
+        "required": true
+      }
+    ]
+  }
+}

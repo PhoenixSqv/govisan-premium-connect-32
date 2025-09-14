@@ -1,0 +1,32 @@
+{
+  "title": "Success Stories from World-Class Hotels",
+  "description": "Discover how we've transformed luxury hospitality experiences through innovative technology solutions across the globe.",
+  "cases": [
+    {
+      "title": "Luxury Resort Maldives",
+      "subtitle": "Complete Technology Infrastructure",
+      "description": "Full telecommunications and AV systems implementation for a 150-villa luxury resort, including underwater fiber optic networks and smart room automation.",
+      "image": "/src/assets/maldives-project.jpg",
+      "stats": [
+        { "number": "150", "label": "Villas Connected" },
+        { "number": "99.9%", "label": "Uptime Achieved" },
+        { "number": "6", "label": "Months Delivery" }
+      ],
+      "technologies": ["Fiber Optics", "Smart Automation", "Wireless Networks", "AV Systems"],
+      "client": "Confidential 5-Star Resort Chain"
+    },
+    {
+      "title": "Historic Hotel London",
+      "subtitle": "Heritage Building Technology Integration", 
+      "description": "Seamless integration of modern technology systems while preserving the architectural integrity of a 200-year-old historic hotel.",
+      "image": "/src/assets/hero-background.jpg",
+      "stats": [
+        { "number": "180", "label": "Rooms Upgraded" },
+        { "number": "Zero", "label": "Heritage Damage" },
+        { "number": "4", "label": "Awards Won" }
+      ],
+      "technologies": ["Discrete Cabling", "Heritage Integration", "Wireless Solutions", "Smart Controls"],
+      "client": "Historic Luxury Hotel Group"
+    }
+  ]
+}
