@@ -1,6 +1,6 @@
 {
-  "title": "Connecting Luxury Hospitality with the Future",
-  "subtitle": "Advanced telecommunications engineering and technology solutions for world-class luxury hotels that demand excellence in every detail.",
+  "title": "Connecting Luxury Hospitality & Real Estate with the Future",
+  "subtitle": "Advanced telecommunications engineering and technology solutions for world-class Hotels, residences, retail & corporate buildings that demand excellence in every detail.",
   "backgroundImage": "/images/hero-background.jpg",
   "buttons": [
     {
@@ -20,12 +20,12 @@
       "label": "Years of Excellence"
     },
     {
-      "number": "500+", 
-      "label": "Hotels Connected"
+      "number": "+60,000", 
+      "label": "guestrooms connected"
     },
     {
-      "number": "50+",
-      "label": "Countries Served"
+      "number": "11",
+      "label": "countries"
     }
   ]
 }

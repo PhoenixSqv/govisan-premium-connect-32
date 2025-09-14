@@ -108,18 +108,6 @@ const ContactSection = () => {
                   </div>
                 </div>
               ))}
-              
-              <div className="bg-white p-6 rounded-2xl shadow-lg">
-                <div className="flex items-center space-x-3 mb-2">
-                  <Clock className="h-5 w-5 text-govisan-gold" />
-                  <h4 className="text-lg font-semibold text-govisan-navy">Business Hours</h4>
-                </div>
-                <p className="text-muted-foreground ml-8">
-                  Monday - Friday: 9:00 AM - 6:00 PM (CET)<br />
-                  Saturday: 10:00 AM - 2:00 PM (CET)<br />
-                  Sunday: Closed
-                </p>
-              </div>
             </div>
           </div>
 

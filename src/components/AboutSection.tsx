@@ -58,15 +58,6 @@ const AboutSection = () => {
             <blockquote className="text-lg italic text-govisan-navy font-medium mb-8 pl-6 border-l-4 border-govisan-gold">
               "{content.quote}"
             </blockquote>
-            
-            <Button
-              onClick={() => handleNavClick('#contact')}
-              size="lg"
-              className="bg-govisan-gold hover:bg-govisan-gold/90 text-white font-semibold group"
-            >
-              Learn More About Us
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
-            </Button>
           </div>
           
           {/* Right Content - Value Props */}

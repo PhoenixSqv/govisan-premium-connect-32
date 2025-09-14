@@ -2,12 +2,12 @@ import React from 'react';
 
 const TrustedBrands = () => {
   const brands = [
-    { name: 'Hilton', logo: 'HILTON' },
-    { name: 'Marriott', logo: 'MARRIOTT' },
-    { name: 'Mandarin Oriental', logo: 'MANDARIN' },
+    { name: 'ASG Iberia', logo: 'ASG IBERIA' },
     { name: 'Six Senses', logo: 'SIX SENSES' },
-    { name: 'Fairmont', logo: 'FAIRMONT' },
+    { name: 'Bovis', logo: 'BOVIS' },
+    { name: 'Mandarin Oriental', logo: 'MANDARIN ORIENTAL' },
     { name: 'Hard Rock', logo: 'HARD ROCK' },
+    { name: 'KKH Property Investors', logo: 'KKH PROPERTY' },
   ];
 
   return (
@@ -15,7 +15,7 @@ const TrustedBrands = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <p className="text-lg text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-            Trusted by iconic hospitality brands: Mandarin Oriental, Six Senses, Fairmont, Hilton, Marriott, Hard Rock Hotels
+            Trusted by leading hospitality & real estate brands
           </p>
         </div>
         
