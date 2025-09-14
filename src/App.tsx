@@ -15,6 +15,10 @@ import ContentEditor from "./admin/components/ContentEditor";
 import MediaLibraryPage from "./admin/pages/MediaLibraryPage";
 import LinksAuditPage from "./admin/pages/LinksAuditPage";
 import SettingsPage from "./admin/pages/SettingsPage";
+import CasesPage from "./admin/pages/CasesPage";
+import AboutPage from "./admin/pages/AboutPage";
+import InsightsPage from "./admin/pages/InsightsPage";
+import ContactPage from "./admin/pages/ContactPage";
 
 const queryClient = new QueryClient();
 
@@ -32,10 +36,10 @@ const App = () => (
             <Route path="/admin" element={<AdminLayout><DashboardPage /></AdminLayout>} />
             <Route path="/admin/home" element={<AdminLayout><HomePage /></AdminLayout>} />
             <Route path="/admin/solutions" element={<AdminLayout><SolutionsPage /></AdminLayout>} />
-            <Route path="/admin/cases" element={<AdminLayout><div>Case Studies Page - Coming Soon</div></AdminLayout>} />
-            <Route path="/admin/about" element={<AdminLayout><div>About Page - Coming Soon</div></AdminLayout>} />
-            <Route path="/admin/insights" element={<AdminLayout><div>Insights Page - Coming Soon</div></AdminLayout>} />
-            <Route path="/admin/contact" element={<AdminLayout><div>Contact Page - Coming Soon</div></AdminLayout>} />
+            <Route path="/admin/cases" element={<AdminLayout><CasesPage /></AdminLayout>} />
+            <Route path="/admin/about" element={<AdminLayout><AboutPage /></AdminLayout>} />
+            <Route path="/admin/insights" element={<AdminLayout><InsightsPage /></AdminLayout>} />
+            <Route path="/admin/contact" element={<AdminLayout><ContactPage /></AdminLayout>} />
             <Route path="/admin/content" element={<AdminLayout><ContentEditor type="page" onSave={() => {}} /></AdminLayout>} />
             <Route path="/admin/media" element={<AdminLayout><MediaLibraryPage /></AdminLayout>} />
             <Route path="/admin/links-audit" element={<AdminLayout><LinksAuditPage /></AdminLayout>} />

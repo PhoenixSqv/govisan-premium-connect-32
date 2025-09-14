@@ -1,14 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, Award, Globe, Users } from 'lucide-react';
+import * as LucideIcons from 'lucide-react';
+
+interface AboutValue {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+interface AboutContent {
+  badge: string;
+  title: string;
+  description: string;
+  quote: string;
+  values: AboutValue[];
+}
 
 const AboutSection = () => {
+  const [content, setContent] = useState<AboutContent | null>(null);
+
+  useEffect(() => {
+    fetch('/content/about/main.json')
+      .then(res => res.json())
+      .then(data => setContent(data))
+      .catch(err => console.error('Failed to load about content:', err));
+  }, []);
+
   const handleNavClick = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
+  
+  if (!content) return <div>Loading...</div>;
+  
   return (
     <section id="about" className="section--wm wm--about py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -17,19 +44,19 @@ const AboutSection = () => {
           <div>
             <div className="inline-flex items-center bg-govisan-gold/10 text-govisan-gold px-4 py-2 rounded-full text-sm font-medium mb-6">
               <Award className="h-4 w-4 mr-2" />
-              25+ Years Creating Technological Experiences
+              {content.badge}
             </div>
             
             <h2 className="text-4xl lg:text-5xl font-bold text-govisan-navy mb-6 leading-tight">
-              Over 25 years creating technological experiences for world-class hospitality
+              {content.title}
             </h2>
             
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-              At GOVISAN Solutions, we are more than engineers: we are strategic partners of luxury hotels. With an international track record of prestigious projects, we bring trust, innovation, and bespoke service to properties that seek true distinction.
+              {content.description}
             </p>
             
             <blockquote className="text-lg italic text-govisan-navy font-medium mb-8 pl-6 border-l-4 border-govisan-gold">
-              "We design and execute integrated technology ecosystems that guarantee security, efficiency, and elegance in every detail."
+              "{content.quote}"
             </blockquote>
             
             <Button
@@ -44,41 +71,22 @@ const AboutSection = () => {
           
           {/* Right Content - Value Props */}
           <div className="space-y-8">
-            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <Globe className="h-8 w-8 text-govisan-gold" />
+            {content.values.map((value, index) => {
+              const IconComponent = (LucideIcons as any)[value.icon] || Globe;
+              return (
+                <div key={index} className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                  <div className="flex items-start space-x-4">
+                    <div className="flex-shrink-0">
+                      <IconComponent className="h-8 w-8 text-govisan-gold" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-govisan-navy mb-2">{value.title}</h3>
+                      <p className="text-muted-foreground">{value.description}</p>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-govisan-navy mb-2">Global Experience</h3>
-                  <p className="text-muted-foreground">Two decades supporting leading hospitality brands with international standards of excellence.</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <Award className="h-8 w-8 text-govisan-gold" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-govisan-navy mb-2">Commitment to Excellence</h3>
-                  <p className="text-muted-foreground">Quality across every phase, from design to operation, ensuring perfection in every project.</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <Users className="h-8 w-8 text-govisan-gold" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-govisan-navy mb-2">Customer-Centric</h3>
-                  <p className="text-muted-foreground">Exclusive solutions tailored to every space and every guest for truly personalized experiences.</p>
-                </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </div>

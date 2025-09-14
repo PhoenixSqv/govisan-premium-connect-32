@@ -1,0 +1,31 @@
+{
+  "title": "Connecting Luxury Hospitality with the Future",
+  "subtitle": "Advanced telecommunications engineering and technology solutions for world-class luxury hotels that demand excellence in every detail.",
+  "backgroundImage": "/src/assets/hero-background.jpg",
+  "buttons": [
+    {
+      "text": "Discover Our Solutions",
+      "link": "#solutions",
+      "type": "primary"
+    },
+    {
+      "text": "Our Expertise", 
+      "link": "#about",
+      "type": "secondary"
+    }
+  ],
+  "stats": [
+    {
+      "number": "25+",
+      "label": "Years of Excellence"
+    },
+    {
+      "number": "500+", 
+      "label": "Hotels Connected"
+    },
+    {
+      "number": "50+",
+      "label": "Countries Served"
+    }
+  ]
+}

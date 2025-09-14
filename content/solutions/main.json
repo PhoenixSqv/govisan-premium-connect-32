@@ -1,0 +1,47 @@
+{
+  "badge": "Our Services",
+  "title": "Integrated Technology Ecosystems",
+  "description": "At GOVISAN Solutions, we design and execute integrated technology ecosystems that guarantee security, efficiency, and elegance in every detail.",
+  "solutions": [
+    {
+      "icon": "Wifi",
+      "title": "Strategic Consulting",
+      "description": "Tailored telecom and IT solutions for luxury hospitality with expert guidance and strategic planning.",
+      "features": [
+        "Premium Connectivity",
+        "Secure, fast, and reliable WiFi", 
+        "Smart Rooms"
+      ]
+    },
+    {
+      "icon": "Smartphone",
+      "title": "Project Engineering",
+      "description": "End-to-end management, from concept to commissioning, ensuring flawless execution of every project.",
+      "features": [
+        "Intelligent rooms blending comfort",
+        "Next-Gen Audiovisuals",
+        "Digital conference rooms & entertainment"
+      ]
+    },
+    {
+      "icon": "Shield", 
+      "title": "On-Site Supervision",
+      "description": "Ensuring flawless quality during every installation with dedicated on-site technical supervision.",
+      "features": [
+        "Advanced Security",
+        "CCTV, access control, protection systems",
+        "Payments & POS"
+      ]
+    },
+    {
+      "icon": "Settings",
+      "title": "Smart Integration", 
+      "description": "Coordinating providers and systems for seamless results and unified technological solutions.",
+      "features": [
+        "Reliable, frictionless payment solutions",
+        "Telco Coordination",
+        "Smooth integration with global providers"
+      ]
+    }
+  ]
+}
