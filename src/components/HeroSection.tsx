@@ -67,11 +67,11 @@ const HeroSection = () => {
                   onClick={() => handleNavClick(button.link)}
                   variant={button.type === 'primary' ? 'default' : 'outline'}
                   className={button.type === 'primary' 
-                    ? "bg-govisan-gold hover:bg-govisan-gold/90 text-white font-semibold px-8 py-4 text-lg group"
-                    : "border-white text-white hover:bg-white hover:text-govisan-navy font-semibold px-8 py-4 text-lg group"
+                    ? "bg-govisan-gold hover:bg-govisan-gold/90 text-white border-govisan-gold font-semibold px-8 py-4 text-lg group"
+                    : "bg-transparent border-2 border-white text-white hover:bg-white hover:text-govisan-navy font-semibold px-8 py-4 text-lg group transition-all duration-300"
                   }
                 >
-                  {button.type === 'secondary' && <Play className="mr-2 h-5 w-5" />}
+                  {button.type === 'secondary' && <Play className="mr-2 h-5 w-5 text-white group-hover:text-govisan-navy" />}
                   {button.text}
                   {button.type === 'primary' && <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />}
                 </Button>
