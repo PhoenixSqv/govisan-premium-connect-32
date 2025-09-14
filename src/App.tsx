@@ -9,6 +9,12 @@ import NotFound from "./pages/NotFound";
 import AdminLayout from "./admin/layout/AdminLayout";
 import DashboardPage from "./admin/pages/DashboardPage";
 import LoginPage from "./admin/pages/LoginPage";
+import HomePage from "./admin/pages/HomePage";
+import SolutionsPage from "./admin/pages/SolutionsPage";
+import ContentEditor from "./admin/components/ContentEditor";
+import MediaLibraryPage from "./admin/pages/MediaLibraryPage";
+import LinksAuditPage from "./admin/pages/LinksAuditPage";
+import SettingsPage from "./admin/pages/SettingsPage";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +30,16 @@ const App = () => (
             {/* Admin Routes */}
             <Route path="/admin/login" element={<LoginPage />} />
             <Route path="/admin" element={<AdminLayout><DashboardPage /></AdminLayout>} />
+            <Route path="/admin/home" element={<AdminLayout><HomePage /></AdminLayout>} />
+            <Route path="/admin/solutions" element={<AdminLayout><SolutionsPage /></AdminLayout>} />
+            <Route path="/admin/cases" element={<AdminLayout><div>Case Studies Page - Coming Soon</div></AdminLayout>} />
+            <Route path="/admin/about" element={<AdminLayout><div>About Page - Coming Soon</div></AdminLayout>} />
+            <Route path="/admin/insights" element={<AdminLayout><div>Insights Page - Coming Soon</div></AdminLayout>} />
+            <Route path="/admin/contact" element={<AdminLayout><div>Contact Page - Coming Soon</div></AdminLayout>} />
+            <Route path="/admin/content" element={<AdminLayout><ContentEditor type="page" onSave={() => {}} /></AdminLayout>} />
+            <Route path="/admin/media" element={<AdminLayout><MediaLibraryPage /></AdminLayout>} />
+            <Route path="/admin/links-audit" element={<AdminLayout><LinksAuditPage /></AdminLayout>} />
+            <Route path="/admin/settings" element={<AdminLayout><SettingsPage /></AdminLayout>} />
             <Route path="/admin/*" element={<AdminLayout><DashboardPage /></AdminLayout>} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

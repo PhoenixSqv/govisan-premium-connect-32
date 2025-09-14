@@ -216,7 +216,7 @@ const ContentEditor: React.FC<ContentEditorProps> = ({
                     <div 
                       className="mt-2 p-4 border rounded-md prose prose-sm max-w-none"
                       dangerouslySetInnerHTML={{ 
-                        __html: marked(formData.content) 
+                        __html: marked.parse(formData.content) as string
                       }}
                     />
                   </div>

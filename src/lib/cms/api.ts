@@ -24,12 +24,46 @@ class CMSApi {
     return response.json();
   }
 
-  // Auth endpoints
+  // Auth endpoints - Mock implementation for development
   async login(email: string, password: string): Promise<{ token: string; user: Omit<User, 'passwordHash'> }> {
-    return this.request('/auth/login', {
-      method: 'POST',
-      body: JSON.stringify({ email, password }),
-    });
+    // Mock authentication for development
+    const mockUsers = [
+      {
+        id: "admin-001",
+        email: "admin@govisan.com", 
+        passwordHash: "hashed_admin123",
+        role: "admin" as const,
+        name: "Administrator",
+        createdAt: "2024-01-01T00:00:00Z",
+        lastLogin: null,
+        twoFactorEnabled: false
+      }
+    ];
+
+    const user = mockUsers.find(u => u.email === email);
+    if (!user || `hashed_${password}` !== user.passwordHash) {
+      throw new Error('Invalid credentials');
+    }
+
+    const { passwordHash, ...userWithoutPassword } = user;
+    const token = this.generateMockToken(userWithoutPassword);
+    
+    return { token, user: userWithoutPassword };
+  }
+
+  private generateMockToken(user: Omit<User, 'passwordHash'>): string {
+    const payload = {
+      userId: user.id,
+      email: user.email,
+      role: user.role,
+      iat: Math.floor(Date.now() / 1000),
+      exp: Math.floor(Date.now() / 1000) + (7 * 24 * 60 * 60) // 7 days
+    };
+    
+    // Mock JWT token for development
+    const header = btoa(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
+    const payloadEncoded = btoa(JSON.stringify(payload));
+    return `${header}.${payloadEncoded}.mock_signature`;
   }
 
   async getProfile(): Promise<Omit<User, 'passwordHash'>> {

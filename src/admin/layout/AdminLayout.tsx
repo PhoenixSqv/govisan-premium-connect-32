@@ -58,39 +58,39 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
     },
     {
       name: 'Home',
-      href: '/admin/content/home',
+      href: '/admin/home',
       icon: Home,
-      current: location.pathname.includes('/admin/content/home')
-    },
-    {
-      name: 'About',
-      href: '/admin/content/about',
-      icon: Building2,
-      current: location.pathname.includes('/admin/content/about')
+      current: location.pathname.includes('/admin/home')
     },
     {
       name: 'Solutions',
-      href: '/admin/content/solutions',
-      icon: FolderOpen,
-      current: location.pathname.includes('/admin/content/solutions')
+      href: '/admin/solutions',
+      icon: Lightbulb,
+      current: location.pathname.includes('/admin/solutions')
     },
     {
       name: 'Case Studies',
-      href: '/admin/content/cases',
+      href: '/admin/cases',
       icon: Trophy,
-      current: location.pathname.includes('/admin/content/cases')
+      current: location.pathname.includes('/admin/cases')
+    },
+    {
+      name: 'About',
+      href: '/admin/about',
+      icon: Building2,
+      current: location.pathname.includes('/admin/about')
     },
     {
       name: 'Insights',
-      href: '/admin/content/insights',
-      icon: Lightbulb,
-      current: location.pathname.includes('/admin/content/insights')
+      href: '/admin/insights',
+      icon: FolderOpen,
+      current: location.pathname.includes('/admin/insights')
     },
     {
       name: 'Contact',
-      href: '/admin/content/contact',
+      href: '/admin/contact',
       icon: Mail,
-      current: location.pathname.includes('/admin/content/contact')
+      current: location.pathname.includes('/admin/contact')
     },
     {
       name: 'Media Library',
@@ -100,9 +100,9 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
     },
     {
       name: 'Links Audit',
-      href: '/admin/links',
+      href: '/admin/links-audit',
       icon: LinkIcon,
-      current: location.pathname.includes('/admin/links')
+      current: location.pathname.includes('/admin/links-audit')
     },
     {
       name: 'Settings',
