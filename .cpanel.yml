@@ -1,0 +1,20 @@
+---
+deployment:
+  tasks:
+    - export REPO_DIR=/home/govisanc/repositories/govisan
+    - export PUBLIC_DIR=/home/govisanc/public_html
+    - cd $REPO_DIR
+    - git reset --hard
+    - git clean -fd
+    - git pull origin main
+    # Intentar usar NodeJS si está disponible
+    - if command -v npm >/dev/null 2>&1; then npm install && npm run build; fi
+    # Copiar el build al public_html
+    - /bin/rsync -av --delete $REPO_DIR/dist/ $PUBLIC_DIR/
+    # Crear .htaccess si no existe (para apps React/Vite SPA)
+    - if [ ! -f $PUBLIC_DIR/.htaccess ]; then echo "Options -MultiViews
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]" > $PUBLIC_DIR/.htaccess; fi
