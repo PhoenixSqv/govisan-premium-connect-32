@@ -1,0 +1,16 @@
+---
+deployment:
+  tasks:
+    - export REPO_DIR=/home/govisanc/repositories/govisan
+    - export PUBLIC_DIR=/home/govisanc/public_html
+    - cd "$REPO_DIR"
+    - git reset --hard
+    - git clean -fd
+    - git pull origin deploy
+    - /bin/rsync -av --delete "$REPO_DIR/" "$PUBLIC_DIR/"
+    - if [ ! -f "$PUBLIC_DIR/.htaccess" ]; then echo "Options -MultiViews
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]" > "$PUBLIC_DIR/.htaccess"; fi
