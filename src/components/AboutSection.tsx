@@ -4,6 +4,14 @@ import { ArrowRight, Award, Globe, Users } from 'lucide-react';
 import * as LucideIcons from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
+
+// Import logos
+import asgLogo from '../assets/logos/asg.png';
+import hardRockLogo from '../assets/logos/hardrock.png';
+import kkhLogo from '../assets/logos/kkh.png';
+import bovisLogo from '../assets/logos/bovis.png';
+import mandarinLogo from '../assets/logos/mandarin.png';
+import sixSensesLogo from '../assets/logos/sixsenses.png';
 interface AboutValue {
   icon: string;
   title: string;
@@ -38,22 +46,22 @@ const AboutSection = () => {
   })]);
   const brands = [{
     name: 'ASG Iberia',
-    logo: 'ASG IBERIA'
+    logo: asgLogo
   }, {
     name: 'Six Senses',
-    logo: 'SIX SENSES'
+    logo: sixSensesLogo
   }, {
     name: 'Bovis',
-    logo: 'BOVIS'
+    logo: bovisLogo
   }, {
     name: 'Mandarin Oriental',
-    logo: 'MANDARIN ORIENTAL'
+    logo: mandarinLogo
   }, {
     name: 'Hard Rock',
-    logo: 'HARD ROCK'
+    logo: hardRockLogo
   }, {
     name: 'KKH Property Investors',
-    logo: 'KKH PROPERTY'
+    logo: kkhLogo
   }];
   useEffect(() => {
     fetch('/content/about/main.json').then(res => res.json()).then(data => setContent(data)).catch(err => console.error('Failed to load about content:', err));
@@ -117,17 +125,21 @@ const AboutSection = () => {
             <div className="flex">
               {brands.map((brand, index) => <div key={brand.name} className="flex-[0_0_50%] min-w-0 md:flex-[0_0_33.333%] lg:flex-[0_0_20%] pl-4">
                   <div className="flex items-center justify-center p-8 h-24 w-full grayscale hover:grayscale-0 transition-all duration-300 group cursor-pointer bg-white border border-gray-100 rounded-lg mx-2">
-                    <div className="text-lg font-semibold text-muted-foreground group-hover:text-govisan-navy transition-colors duration-300 text-center">
-                      {brand.logo}
-                    </div>
+                    <img 
+                      src={brand.logo} 
+                      alt={brand.name}
+                      className="max-h-12 max-w-full object-contain"
+                    />
                   </div>
                 </div>)}
               {/* Duplicate brands for seamless loop */}
               {brands.map((brand, index) => <div key={`duplicate-${brand.name}`} className="flex-[0_0_50%] min-w-0 md:flex-[0_0_33.333%] lg:flex-[0_0_20%] pl-4">
                   <div className="flex items-center justify-center p-8 h-24 w-full grayscale hover:grayscale-0 transition-all duration-300 group cursor-pointer bg-white border border-gray-100 rounded-lg mx-2">
-                    <div className="text-lg font-semibold text-muted-foreground group-hover:text-govisan-navy transition-colors duration-300 text-center">
-                      {brand.logo}
-                    </div>
+                    <img 
+                      src={brand.logo} 
+                      alt={brand.name}
+                      className="max-h-12 max-w-full object-contain"
+                    />
                   </div>
                 </div>)}
             </div>
