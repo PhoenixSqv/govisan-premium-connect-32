@@ -6,7 +6,7 @@ on:
     paths:
       - "src/**"
       - "public/**"
-      - "content/**"                 # <-- importante
+      - "content/**"                 # ← dispara cuando cambia el CMS
       - "package.json"
       - "package-lock.json"
       - "vite.config.*"
@@ -40,44 +40,32 @@ jobs:
         run: |
           if [ -f public/.htaccess ]; then cp public/.htaccess dist/.; fi
 
+      # ↓↓↓ CLAVE: empaquetar el contenido del CMS dentro del build
+      - name: Bundle CMS content into build
+        run: |
+          mkdir -p dist/content
+          cp -R content/* dist/content/ 2>/dev/null || true
+
       - name: Validate FTPS secrets
         run: |
           test -n "${{ secrets.FTPS_SERVER }}"   || { echo "Falta FTPS_SERVER"; exit 1; }
           test -n "${{ secrets.FTPS_USERNAME }}" || { echo "Falta FTPS_USERNAME"; exit 1; }
           test -n "${{ secrets.FTPS_PASSWORD }}" || { echo "Falta FTPS_PASSWORD"; exit 1; }
 
-      # 1) Subir build estático
-      - name: Deploy app (dist/)
+      - name: Deploy (FTPS)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTPS_SERVER }}
           username: ${{ secrets.FTPS_USERNAME }}
           password: ${{ secrets.FTPS_PASSWORD }}
           protocol: ftps
-          local-dir: dist/
-          server-dir: /public_html/
+          local-dir: dist/                 # ← sube TODO el build (incluye content/)
+          server-dir: /public_html/        # si tu FTP entra directo en docroot, usa "./"
           exclude: |
             **/.git*/**
             **/node_modules/**
             **/.DS_Store
             **/Thumbs.db
-            .well-known/**                # conserva certificados/ACME
+            .well-known/**                 # conserva ACME/SSL
           log-level: verbose
-          # dangerous-clean-slate: true   # solo si quieres borrar todo cada vez
-
-      # 2) Subir contenido editable (JSON/images) generado por Lovable
-      - name: Deploy content (content/ → /public_html/content/)
-        if: always()                      # sube aunque no haya cambiado dist
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-        with:
-          server: ${{ secrets.FTPS_SERVER }}
-          username: ${{ secrets.FTPS_USERNAME }}
-          password: ${{ secrets.FTPS_PASSWORD }}
-          protocol: ftps
-          local-dir: content/
-          server-dir: /public_html/content/
-          exclude: |
-            **/.git*/**
-            **/.DS_Store
-            **/Thumbs.db
-          log-level: verbose
+          # dangerous-clean-slate: true    # solo si quieres borrar todo cada deploy
