@@ -32,7 +32,7 @@ const SettingsPage = () => {
     siteDescription: 'Technology solutions for luxury hospitality',
     contactEmail: 'info@govisan.com',
     contactPhone: '+34 91 123 45 67',
-    address: 'Madrid, Spain',
+    address: 'Barcelona, Spain',
     
     // Design settings
     primaryColor: '#0A1A2F',

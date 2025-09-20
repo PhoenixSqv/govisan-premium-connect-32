@@ -66,7 +66,7 @@ const Footer = () => {
   }];
   const offices = [{
     region: 'Europe (HQ)',
-    address: 'Madrid, Spain',
+    address: 'Barcelona, Spain',
     phone: '+34 91 XXX XXXX',
     email: 'europe@govisan.com'
   }, {

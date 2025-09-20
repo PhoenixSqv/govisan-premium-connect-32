@@ -217,7 +217,7 @@ const ContactPage = () => {
                     <Input
                       value={office.city}
                       onChange={(e) => updateOffice(index, 'city', e.target.value)}
-                      placeholder="Madrid"
+                      placeholder="Barcelona"
                     />
                   </div>
                   
