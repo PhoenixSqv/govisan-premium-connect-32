@@ -13,19 +13,21 @@ jobs:
       - run: npm run build
       - name: Ensure .htaccess in dist
         run: if [ -f public/.htaccess ]; then cp public/.htaccess dist/.; fi
-      - name: Deploy (FTPS)
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-        with:
-          server: ${{ secrets.FTPS_SERVER }}
-          username: ${{ secrets.FTPS_USERNAME }}
-          password: ${{ secrets.FTPS_PASSWORD }}
-          protocol: ftps
-          port: ${{ secrets.FTPS_PORT || 21 }}
-          local-dir: dist/
-          server-dir: /public_html/
-          exclude: |
-            **/.git*/**
-            **/node_modules/**
-            .well-known/**
-          log-level: verbose
-          # dangerous-clean-slate: true   # (opcional)
+     - name: Deploy (FTPS)
+  uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+  with:
+    server: ${{ secrets.FTPS_SERVER }}
+    username: ${{ secrets.FTPS_USERNAME }}
+    password: ${{ secrets.FTPS_PASSWORD }}
+    protocol: ftps
+    port: ${{ secrets.FTPS_PORT || 21 }}
+    local-dir: dist/
+    server-dir: /public_html/
+    exclude: |
+      **/.git*/**
+      **/node_modules/**
+      **/.DS_Store
+      **/Thumbs.db
+      .well-known/**
+    log-level: verbose
+    # dangerous-clean-slate: true   # <-- solo si quieres borrar antes
