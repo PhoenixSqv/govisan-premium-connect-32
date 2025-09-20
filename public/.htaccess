@@ -39,7 +39,7 @@
   Header set Referrer-Policy "strict-origin-when-cross-origin"
   Header set Permissions-Policy "camera=(), geolocation=(), microphone=()"
   # HSTS inicial (7 días). Verifica todo y luego cambia al bloque de "Producción".
-  Header always set Strict-Transport-Security "max-age=604800"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
 </IfModule>
 
 # 6) Extras
