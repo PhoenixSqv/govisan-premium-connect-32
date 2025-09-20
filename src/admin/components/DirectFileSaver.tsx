@@ -55,7 +55,7 @@ export const DirectFileSaver: React.FC<DirectFileSaverProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <Card className="max-w-4xl max-h-[80vh] overflow-hidden">
+      <Card className="max-w-4xl max-h-[90vh] flex flex-col overflow-hidden">
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
@@ -73,7 +73,7 @@ export const DirectFileSaver: React.FC<DirectFileSaverProps> = ({
             </Badge>
           </div>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4 overflow-y-auto flex-1">
           <div className="bg-muted p-3 rounded-lg">
             <div className="text-sm font-medium text-muted-foreground mb-1">File Path:</div>
             <code className="text-sm font-mono bg-background px-2 py-1 rounded">

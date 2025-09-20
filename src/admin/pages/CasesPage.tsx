@@ -5,7 +5,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Plus, Edit, Trash2, Save } from 'lucide-react';
 import { toast } from 'sonner';
-import { FileUpdateTool } from '@/admin/components/FileUpdateTool';
+import { DirectFileSaver } from '../components/DirectFileSaver';
+import { GitHubWriter } from '@/lib/cms/githubWriter';
 
 interface CaseStat {
   number: string;
@@ -62,28 +63,28 @@ const CasesPage = () => {
   const saveContent = async () => {
     setSaving(true);
     try {
-      // Write directly to the file - this will create a GitHub commit
-      const jsonContent = JSON.stringify(content, null, 2);
-      
-      // This will be replaced with actual file writing
-      await updateContentFile(jsonContent);
-      
-      toast.success('Content saved successfully! Changes deployed to production.');
+      // Try direct save first
+      await GitHubWriter.saveCasesContent(content);
+      toast.success('Content saved successfully! Changes committed to GitHub.');
     } catch (error) {
-      console.error('Save error:', error);
-      toast.error('Failed to save content: ' + (error instanceof Error ? error.message : 'Unknown error'));
-      // Show the file update tool as fallback
+      console.error('Direct save failed:', error);
+      // Fallback to file update tool
       setShowFileUpdate(true);
+      toast.error('Direct save failed. Please use the manual update tool.');
     } finally {
       setSaving(false);
     }
   };
 
-  // Function to simulate file writing - this will be replaced with real implementation
-  const updateContentFile = async (jsonContent: string) => {
-    // For now, we'll show the FileUpdateTool to let user manually update
-    setShowFileUpdate(true);
-    throw new Error('Please use the file update tool below to complete the save process');
+  const updateContentFile = async (filePath: string, content: string) => {
+    try {
+      await GitHubWriter.writeFile(filePath, content);
+      console.log('✅ Cases content updated successfully via GitHub');
+      setShowFileUpdate(false);
+    } catch (error) {
+      console.error('❌ Failed to update cases content:', error);
+      throw error;
+    }
   };
 
   const addStory = () => {
@@ -392,10 +393,11 @@ const CasesPage = () => {
     </div>
 
       {showFileUpdate && (
-        <FileUpdateTool
+        <DirectFileSaver
           filePath="public/content/cases/main.json"
           content={content}
           onClose={() => setShowFileUpdate(false)}
+          onSave={updateContentFile}
         />
       )}
     </>

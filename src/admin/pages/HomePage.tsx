@@ -8,7 +8,8 @@ import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
 import { Save, Eye, Plus, Trash2, GripVertical } from 'lucide-react';
 import { toast } from 'sonner';
-import { FileUpdateTool } from '@/admin/components/FileUpdateTool';
+import { DirectFileSaver } from '../components/DirectFileSaver';
+import { GitHubWriter } from '@/lib/cms/githubWriter';
 
 interface HeroButton {
   text: string;
@@ -62,26 +63,28 @@ const HomePage = () => {
   const handleSave = async () => {
     setSaving(true);
     try {
-      // Write directly to the file - this will create a GitHub commit
-      const jsonContent = JSON.stringify(content, null, 2);
-      
-      // This will be replaced with actual file writing
-      await updateContentFile(jsonContent);
-      
-      toast.success('Content saved successfully! Changes deployed to production.');
+      // Try direct save first
+      await GitHubWriter.saveHomeContent(content);
+      toast.success('Content saved successfully! Changes committed to GitHub.');
     } catch (error) {
-      console.error('Save error:', error);
-      toast.error('Failed to save content: ' + (error instanceof Error ? error.message : 'Unknown error'));
+      console.error('Direct save failed:', error);
+      // Fallback to file update tool
+      setShowFileUpdate(true);
+      toast.error('Direct save failed. Please use the manual update tool.');
     } finally {
       setSaving(false);
     }
   };
 
-  // Function to simulate file writing - this will be replaced with real implementation
-  const updateContentFile = async (jsonContent: string) => {
-    // For now, we'll show the FileUpdateTool to let user manually update
-    setShowFileUpdate(true);
-    throw new Error('Please use the file update tool below to complete the save process');
+  const updateContentFile = async (filePath: string, content: string) => {
+    try {
+      await GitHubWriter.writeFile(filePath, content);
+      console.log('✅ Content updated successfully via GitHub');
+      setShowFileUpdate(false);
+    } catch (error) {
+      console.error('❌ Failed to update content:', error);
+      throw error;
+    }
   };
 
   const addButton = () => {
@@ -149,7 +152,7 @@ const HomePage = () => {
             </Button>
             <Button onClick={handleSave} disabled={saving}>
               <Save className="h-4 w-4 mr-2" />
-              {saving ? 'Preparing...' : 'Update File'}
+              {saving ? 'Saving...' : 'Save & Deploy'}
             </Button>
           </div>
         </div>
@@ -293,10 +296,11 @@ const HomePage = () => {
       </div>
 
       {showFileUpdate && (
-        <FileUpdateTool
+        <DirectFileSaver
           filePath="public/content/home/hero.json"
           content={content}
           onClose={() => setShowFileUpdate(false)}
+          onSave={updateContentFile}
         />
       )}
     </>
