@@ -37,6 +37,13 @@ jobs:
           mkdir -p ~/.ssh
           timeout 15s ssh-keyscan -p ${{ secrets.CPANEL_PORT }} ${{ secrets.CPANEL_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
 
+- name: Probe common SSH ports
+  run: |
+    HOST=${{ secrets.CPANEL_HOST }}
+    for p in 22 2222 2200 22222 1988 8022; do
+      timeout 3 bash -c "echo > /dev/tcp/$HOST/$p" && echo "OPEN $p" || echo "closed $p"
+    done
+
       - name: Check SSH connectivity
         uses: appleboy/ssh-action@v1.0.3
         with:
