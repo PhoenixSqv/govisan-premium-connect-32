@@ -5,32 +5,36 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Plus, Edit, Trash2, Save } from 'lucide-react';
 import { toast } from 'sonner';
+import { FileUpdateTool } from '@/admin/components/FileUpdateTool';
+
+interface CaseStat {
+  number: string;
+  label: string;
+}
 
 interface CaseStory {
-  id: number;
   title: string;
-  location: string;
-  guests: string;
-  rating: string;
-  image: string;
+  subtitle: string;
   description: string;
-  achievements: string[];
+  image: string;
+  stats: CaseStat[];
+  technologies: string[];
+  client: string;
 }
 
 interface CasesContent {
-  badge: string;
   title: string;
   description: string;
-  stories: CaseStory[];
+  cases: CaseStory[];
 }
 
 const CasesPage = () => {
   const [content, setContent] = useState<CasesContent>({
-    badge: '',
     title: '',
     description: '',
-    stories: []
+    cases: []
   });
+  const [showFileUpdate, setShowFileUpdate] = useState(false);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
@@ -44,8 +48,11 @@ const CasesPage = () => {
       if (response.ok) {
         const data = await response.json();
         setContent(data);
+      } else {
+        throw new Error(`HTTP ${response.status}`);
       }
     } catch (error) {
+      console.error('Failed to load cases content:', error);
       toast.error('Failed to load cases content');
     } finally {
       setLoading(false);
@@ -55,37 +62,50 @@ const CasesPage = () => {
   const saveContent = async () => {
     setSaving(true);
     try {
-      // In a real implementation, this would call an API endpoint
-      console.log('Saving cases content:', content);
-      toast.success('Cases content saved successfully');
+      // Write directly to the file - this will create a GitHub commit
+      const jsonContent = JSON.stringify(content, null, 2);
+      
+      // This will be replaced with actual file writing
+      await updateContentFile(jsonContent);
+      
+      toast.success('Content saved successfully! Changes deployed to production.');
     } catch (error) {
-      toast.error('Failed to save cases content');
+      console.error('Save error:', error);
+      toast.error('Failed to save content: ' + (error instanceof Error ? error.message : 'Unknown error'));
+      // Show the file update tool as fallback
+      setShowFileUpdate(true);
     } finally {
       setSaving(false);
     }
   };
 
+  // Function to simulate file writing - this will be replaced with real implementation
+  const updateContentFile = async (jsonContent: string) => {
+    // For now, we'll show the FileUpdateTool to let user manually update
+    setShowFileUpdate(true);
+    throw new Error('Please use the file update tool below to complete the save process');
+  };
+
   const addStory = () => {
     const newStory: CaseStory = {
-      id: Date.now(),
       title: '',
-      location: '',
-      guests: '',
-      rating: '',
-      image: '',
+      subtitle: '',
       description: '',
-      achievements: ['']
+      image: '',
+      stats: [{ number: '', label: '' }],
+      technologies: [''],
+      client: ''
     };
     setContent(prev => ({
       ...prev,
-      stories: [...prev.stories, newStory]
+      cases: [...prev.cases, newStory]
     }));
   };
 
   const updateStory = (index: number, field: keyof CaseStory, value: any) => {
     setContent(prev => ({
       ...prev,
-      stories: prev.stories.map((story, i) => 
+      cases: prev.cases.map((story, i) => 
         i === index ? { ...story, [field]: value } : story
       )
     }));
@@ -94,30 +114,30 @@ const CasesPage = () => {
   const deleteStory = (index: number) => {
     setContent(prev => ({
       ...prev,
-      stories: prev.stories.filter((_, i) => i !== index)
+      cases: prev.cases.filter((_, i) => i !== index)
     }));
   };
 
-  const addAchievement = (storyIndex: number) => {
+  const addStat = (storyIndex: number) => {
     setContent(prev => ({
       ...prev,
-      stories: prev.stories.map((story, i) => 
+      cases: prev.cases.map((story, i) => 
         i === storyIndex 
-          ? { ...story, achievements: [...story.achievements, ''] }
+          ? { ...story, stats: [...story.stats, { number: '', label: '' }] }
           : story
       )
     }));
   };
 
-  const updateAchievement = (storyIndex: number, achievementIndex: number, value: string) => {
+  const updateStat = (storyIndex: number, statIndex: number, field: keyof CaseStat, value: string) => {
     setContent(prev => ({
       ...prev,
-      stories: prev.stories.map((story, i) => 
+      cases: prev.cases.map((story, i) => 
         i === storyIndex 
           ? { 
               ...story, 
-              achievements: story.achievements.map((achievement, j) => 
-                j === achievementIndex ? value : achievement
+              stats: story.stats.map((stat, j) => 
+                j === statIndex ? { ...stat, [field]: value } : stat
               )
             }
           : story
@@ -125,14 +145,55 @@ const CasesPage = () => {
     }));
   };
 
-  const removeAchievement = (storyIndex: number, achievementIndex: number) => {
+  const removeStat = (storyIndex: number, statIndex: number) => {
     setContent(prev => ({
       ...prev,
-      stories: prev.stories.map((story, i) => 
+      cases: prev.cases.map((story, i) => 
         i === storyIndex 
           ? { 
               ...story, 
-              achievements: story.achievements.filter((_, j) => j !== achievementIndex)
+              stats: story.stats.filter((_, j) => j !== statIndex)
+            }
+          : story
+      )
+    }));
+  };
+
+  const addTechnology = (storyIndex: number) => {
+    setContent(prev => ({
+      ...prev,
+      cases: prev.cases.map((story, i) => 
+        i === storyIndex 
+          ? { ...story, technologies: [...story.technologies, ''] }
+          : story
+      )
+    }));
+  };
+
+  const updateTechnology = (storyIndex: number, techIndex: number, value: string) => {
+    setContent(prev => ({
+      ...prev,
+      cases: prev.cases.map((story, i) => 
+        i === storyIndex 
+          ? { 
+              ...story, 
+              technologies: story.technologies.map((tech, j) => 
+                j === techIndex ? value : tech
+              )
+            }
+          : story
+      )
+    }));
+  };
+
+  const removeTechnology = (storyIndex: number, techIndex: number) => {
+    setContent(prev => ({
+      ...prev,
+      cases: prev.cases.map((story, i) => 
+        i === storyIndex 
+          ? { 
+              ...story, 
+              technologies: story.technologies.filter((_, j) => j !== techIndex)
             }
           : story
       )
@@ -144,7 +205,8 @@ const CasesPage = () => {
   }
 
   return (
-    <div className="p-6 space-y-6">
+    <>
+      <div className="p-6 space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Case Studies</h1>
         <Button onClick={saveContent} disabled={saving}>
@@ -160,20 +222,11 @@ const CasesPage = () => {
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <label className="text-sm font-medium">Badge Text</label>
-            <Input
-              value={content.badge}
-              onChange={(e) => setContent(prev => ({ ...prev, badge: e.target.value }))}
-              placeholder="Case Studies"
-            />
-          </div>
-          
-          <div>
             <label className="text-sm font-medium">Title</label>
             <Input
               value={content.title}
               onChange={(e) => setContent(prev => ({ ...prev, title: e.target.value }))}
-              placeholder="Section title"
+              placeholder="Success Stories from World-Class Hotels"
             />
           </div>
           
@@ -182,7 +235,7 @@ const CasesPage = () => {
             <Textarea
               value={content.description}
               onChange={(e) => setContent(prev => ({ ...prev, description: e.target.value }))}
-              placeholder="Section description"
+              placeholder="Discover how we've transformed luxury hospitality experiences..."
               rows={3}
             />
           </div>
@@ -199,11 +252,11 @@ const CasesPage = () => {
           </Button>
         </div>
 
-        {content.stories.map((story, index) => (
-          <Card key={story.id}>
+        {content.cases.map((story, index) => (
+          <Card key={index}>
             <CardHeader>
               <div className="flex items-center justify-between">
-                <CardTitle className="text-lg">Story {index + 1}</CardTitle>
+                <CardTitle className="text-lg">Case {index + 1}</CardTitle>
                 <Button
                   onClick={() => deleteStory(index)}
                   variant="destructive"
@@ -220,36 +273,27 @@ const CasesPage = () => {
                   <Input
                     value={story.title}
                     onChange={(e) => updateStory(index, 'title', e.target.value)}
-                    placeholder="Case study title"
+                    placeholder="Luxury Resort Maldives"
                   />
                 </div>
                 
                 <div>
-                  <label className="text-sm font-medium">Location</label>
+                  <label className="text-sm font-medium">Subtitle</label>
                   <Input
-                    value={story.location}
-                    onChange={(e) => updateStory(index, 'location', e.target.value)}
-                    placeholder="Location"
+                    value={story.subtitle}
+                    onChange={(e) => updateStory(index, 'subtitle', e.target.value)}
+                    placeholder="Complete Technology Infrastructure"
                   />
                 </div>
-                
-                <div>
-                  <label className="text-sm font-medium">Guests</label>
-                  <Input
-                    value={story.guests}
-                    onChange={(e) => updateStory(index, 'guests', e.target.value)}
-                    placeholder="Number of guests"
-                  />
-                </div>
-                
-                <div>
-                  <label className="text-sm font-medium">Rating</label>
-                  <Input
-                    value={story.rating}
-                    onChange={(e) => updateStory(index, 'rating', e.target.value)}
-                    placeholder="4.9"
-                  />
-                </div>
+              </div>
+              
+              <div>
+                <label className="text-sm font-medium">Client</label>
+                <Input
+                  value={story.client}
+                  onChange={(e) => updateStory(index, 'client', e.target.value)}
+                  placeholder="Confidential 5-Star Resort Chain"
+                />
               </div>
               
               <div>
@@ -257,7 +301,7 @@ const CasesPage = () => {
                 <Input
                   value={story.image}
                   onChange={(e) => updateStory(index, 'image', e.target.value)}
-                  placeholder="/src/assets/image.jpg"
+                  placeholder="/src/assets/maldives-project.jpg"
                 />
               </div>
               
@@ -266,33 +310,72 @@ const CasesPage = () => {
                 <Textarea
                   value={story.description}
                   onChange={(e) => updateStory(index, 'description', e.target.value)}
-                  placeholder="Story description"
+                  placeholder="Full telecommunications and AV systems implementation..."
                   rows={3}
                 />
               </div>
               
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <label className="text-sm font-medium">Achievements</label>
+                  <label className="text-sm font-medium">Statistics</label>
                   <Button
-                    onClick={() => addAchievement(index)}
+                    onClick={() => addStat(index)}
                     variant="outline"
                     size="sm"
                   >
                     <Plus className="h-3 w-3 mr-1" />
-                    Add
+                    Add Stat
                   </Button>
                 </div>
                 <div className="space-y-2">
-                  {story.achievements.map((achievement, achievementIndex) => (
-                    <div key={achievementIndex} className="flex gap-2">
+                  {story.stats.map((stat, statIndex) => (
+                    <div key={statIndex} className="flex gap-2">
                       <Input
-                        value={achievement}
-                        onChange={(e) => updateAchievement(index, achievementIndex, e.target.value)}
-                        placeholder="Achievement description"
+                        value={stat.number}
+                        onChange={(e) => updateStat(index, statIndex, 'number', e.target.value)}
+                        placeholder="150"
+                        className="w-24"
+                      />
+                      <Input
+                        value={stat.label}
+                        onChange={(e) => updateStat(index, statIndex, 'label', e.target.value)}
+                        placeholder="Villas Connected"
+                        className="flex-1"
                       />
                       <Button
-                        onClick={() => removeAchievement(index, achievementIndex)}
+                        onClick={() => removeStat(index, statIndex)}
+                        variant="outline"
+                        size="sm"
+                      >
+                        <Trash2 className="h-3 w-3" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-sm font-medium">Technologies</label>
+                  <Button
+                    onClick={() => addTechnology(index)}
+                    variant="outline"
+                    size="sm"
+                  >
+                    <Plus className="h-3 w-3 mr-1" />
+                    Add Technology
+                  </Button>
+                </div>
+                <div className="space-y-2">
+                  {story.technologies.map((tech, techIndex) => (
+                    <div key={techIndex} className="flex gap-2">
+                      <Input
+                        value={tech}
+                        onChange={(e) => updateTechnology(index, techIndex, e.target.value)}
+                        placeholder="Fiber Optics"
+                      />
+                      <Button
+                        onClick={() => removeTechnology(index, techIndex)}
                         variant="outline"
                         size="sm"
                       >
@@ -307,6 +390,15 @@ const CasesPage = () => {
         ))}
       </div>
     </div>
+
+      {showFileUpdate && (
+        <FileUpdateTool
+          filePath="public/content/cases/main.json"
+          content={content}
+          onClose={() => setShowFileUpdate(false)}
+        />
+      )}
+    </>
   );
 };
 

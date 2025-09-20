@@ -62,14 +62,26 @@ const HomePage = () => {
   const handleSave = async () => {
     setSaving(true);
     try {
-      setShowFileUpdate(true);
-      toast.success('Content ready for file update');
+      // Write directly to the file - this will create a GitHub commit
+      const jsonContent = JSON.stringify(content, null, 2);
+      
+      // This will be replaced with actual file writing
+      await updateContentFile(jsonContent);
+      
+      toast.success('Content saved successfully! Changes deployed to production.');
     } catch (error) {
       console.error('Save error:', error);
-      toast.error('Failed to prepare content');
+      toast.error('Failed to save content: ' + (error instanceof Error ? error.message : 'Unknown error'));
     } finally {
       setSaving(false);
     }
+  };
+
+  // Function to simulate file writing - this will be replaced with real implementation
+  const updateContentFile = async (jsonContent: string) => {
+    // For now, we'll show the FileUpdateTool to let user manually update
+    setShowFileUpdate(true);
+    throw new Error('Please use the file update tool below to complete the save process');
   };
 
   const addButton = () => {
