@@ -20,15 +20,19 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
           cache: 'npm'
 
       - name: Install deps
-        run: npm ci
+        run: npm install
 
       - name: Build
         run: npm run build
-
+      
+      - name: Ensure .htaccess in dist
+        run: |
+        if [ -f public/.htaccess ]; then cp public/.htaccess dist/.; fi
+    
       # Sube SOLO la carpeta de salida (ajusta dist/ o build/)
       - name: Deploy to cPanel via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2
@@ -37,7 +41,7 @@ jobs:
           port: ${{ secrets.CPANEL_PORT }} # usa 22 si no sabes
           username: ${{ secrets.CPANEL_USER }}
           password: ${{ secrets.CPANEL_PASS }}
-          local_path: "dist/*"
+          local_path: "dist*"
           remote_path: "/home/govisanc/public_html/"
           delete_remote_files: true     # limpia antes de subir
           sftp_only: true
