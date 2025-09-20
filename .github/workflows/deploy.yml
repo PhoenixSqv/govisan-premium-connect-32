@@ -1,56 +1,31 @@
 name: Build & Deploy to cPanel (FTPS)
-
 on:
-  push:
-    branches: [ "main" ]
+  push: { branches: ["main"] }
   workflow_dispatch: {}
-
-concurrency:
-  group: deploy-prod
-  cancel-in-progress: true
-
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install deps
-        run: npm install
-
-      - name: Build
-        run: npm run build
-
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20', cache: 'npm' }
+      - run: npm install
+      - run: npm run build
       - name: Ensure .htaccess in dist
-        run: |
-          if [ -f public/.htaccess ]; then cp public/.htaccess dist/.; fi
-
+        run: if [ -f public/.htaccess ]; then cp public/.htaccess dist/.; fi
       - name: Deploy (FTPS)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTPS_SERVER }}
           username: ${{ secrets.FTPS_USERNAME }}
           password: ${{ secrets.FTPS_PASSWORD }}
-          protocol: ftps                  # FTPS explícito (TLS)
+          protocol: ftps
           port: ${{ secrets.FTPS_PORT || 21 }}
-          local-dir: dist/                # sube la carpeta completa (incluye .htaccess)
+          local-dir: dist/
           server-dir: /public_html/
-          log-level: verbose
-          timeout: 600000                 # 10 min, por si pesa
-          # ¡CUIDADO! si quieres limpiar remoto en cada deploy, descomenta:
-          # dangerous-clean-slate: true
-          # y si quieres conservar .well-known aunque limpies:
           exclude: |
             **/.git*/**
             **/node_modules/**
-            **/.DS_Store
-            **/Thumbs.db
             .well-known/**
+          log-level: verbose
+          # dangerous-clean-slate: true   # (opcional)
