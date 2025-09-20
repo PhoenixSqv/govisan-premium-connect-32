@@ -1,0 +1,52 @@
+name: Deploy via FTPS to Govisan
+on:
+  push:
+    branches: [ main ]      # despliega al hacer push a main
+  workflow_dispatch:         # permite lanzarlo manualmente desde Actions
+
+concurrency:
+  group: deploy-govisan
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node (npm)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install deps
+        run: npm ci || npm install
+
+      - name: Build (Vite)
+        run: npm run build      # genera dist/
+
+      - name: Deploy (FTPS)
+        uses: SamKirkland/FTP-Deploy-Action@v4
+        with:
+          server:   ${{ secrets.SFTP_HOST }}   
+          username: ${{ secrets.SFTP_USER }}   
+          password: ${{ secrets.SFTP_PASS }}
+          port:     ${{ secrets.SFTP_PORT }}   
+          protocol: ftps
+
+          # === DÓNDE SUBIR ===
+          # Si tu cuenta FTP apunta a /home/USER/public_html como raíz:
+          server-dir: /public_html/
+          # Si tu cuenta FTP tiene como raíz la carpeta "github" (staging):
+          # server-dir: /
+
+          # === QUÉ SUBIR ===
+          local-dir: dist/
+
+          # === OPCIONES ===
+          exclude: |
+            **/.git*
+            **/.github/**
+            **/node_modules/**
+          dangerous-clean-slate: true   # limpia destino antes de subir
