@@ -28,20 +28,19 @@ jobs:
 
       - name: Build
         run: npm run build
-      
+
       - name: Ensure .htaccess in dist
         run: |
-        if [ -f public/.htaccess ]; then cp public/.htaccess dist/.; fi
-    
-      # Sube SOLO la carpeta de salida (ajusta dist/ o build/)
+          if [ -f public/.htaccess ]; then cp public/.htaccess dist/.; fi
+
       - name: Deploy to cPanel via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2
         with:
           server: ${{ secrets.CPANEL_HOST }}
-          port: ${{ secrets.CPANEL_PORT }} # usa 22 si no sabes
+          port: ${{ secrets.CPANEL_PORT }}      # 22 si no tienes otro
           username: ${{ secrets.CPANEL_USER }}
           password: ${{ secrets.CPANEL_PASS }}
-          local_path: "dist*"
+          local_path: "dist"                    # <-- incluye .htaccess
           remote_path: "/home/govisanc/public_html/"
-          delete_remote_files: true     # limpia antes de subir
+          delete_remote_files: true
           sftp_only: true
