@@ -33,14 +33,30 @@ jobs:
         run: |
           if [ -f public/.htaccess ]; then cp public/.htaccess dist/.; fi
 
+      # Acepta la huella del servidor para evitar el prompt interactivo
+      - name: Trust server host key
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -p ${{ secrets.CPANEL_PORT }} ${{ secrets.CPANEL_HOST }} >> ~/.ssh/known_hosts
+
+      # (Opcional) Limpia el remoto antes de subir (¡borra todo!)
+      - name: Clean remote public_html
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.CPANEL_HOST }}
+          port: ${{ secrets.CPANEL_PORT }}
+          username: ${{ secrets.CPANEL_USER }}
+          key: ${{ secrets.CPANEL_SSH_KEY }}
+          script: |
+            rm -rf /home/govisanc/public_html/*
+
       - name: Deploy to cPanel via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2
         with:
           server: ${{ secrets.CPANEL_HOST }}
-          port: ${{ secrets.CPANEL_PORT }}      # 22 si no tienes otro
+          port: ${{ secrets.CPANEL_PORT }}          # 22 si no tienes otro
           username: ${{ secrets.CPANEL_USER }}
-          password: ${{ secrets.CPANEL_PASS }}
-          local_path: "dist"                    # <-- incluye .htaccess
+          ssh_private_key: ${{ secrets.CPANEL_SSH_KEY }}  # <-- usar clave, no password
+          local_path: "dist"                         # sube la carpeta completa (incluye .htaccess)
           remote_path: "/home/govisanc/public_html/"
-          delete_remote_files: true
-          sftp_only: true
+          args: "-o StrictHostKeyChecking=no"
