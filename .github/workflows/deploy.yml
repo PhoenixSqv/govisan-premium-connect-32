@@ -3,6 +3,14 @@ name: Build & Deploy to cPanel (FTPS)
 on:
   push:
     branches: ["main"]
+    paths:
+      - "src/**"
+      - "public/**"
+      - "content/**"                 # <-- importante
+      - "package.json"
+      - "package-lock.json"
+      - "vite.config.*"
+      - ".github/workflows/deploy.yml"
   workflow_dispatch: {}
 
 concurrency:
@@ -12,7 +20,6 @@ concurrency:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -39,21 +46,38 @@ jobs:
           test -n "${{ secrets.FTPS_USERNAME }}" || { echo "Falta FTPS_USERNAME"; exit 1; }
           test -n "${{ secrets.FTPS_PASSWORD }}" || { echo "Falta FTPS_PASSWORD"; exit 1; }
 
-      - name: Deploy (FTPS)
+      # 1) Subir build estático
+      - name: Deploy app (dist/)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTPS_SERVER }}
           username: ${{ secrets.FTPS_USERNAME }}
           password: ${{ secrets.FTPS_PASSWORD }}
           protocol: ftps
-          # port: ${{ secrets.FTPS_PORT }}   # opcional; si no lo pones usa 21
-          local-dir: dist/                   # sube todo dist (incluye .htaccess)
-          server-dir: /public_html/          # si tu FTP entra directo en public_html usa "./"
+          local-dir: dist/
+          server-dir: /public_html/
           exclude: |
             **/.git*/**
             **/node_modules/**
             **/.DS_Store
             **/Thumbs.db
-            .well-known/**                    # conserva certificados/ACME si limpias
+            .well-known/**                # conserva certificados/ACME
           log-level: verbose
-          # dangerous-clean-slate: true       # BORRA TODO antes de subir (úsalo solo si lo quieres)
+          # dangerous-clean-slate: true   # solo si quieres borrar todo cada vez
+
+      # 2) Subir contenido editable (JSON/images) generado por Lovable
+      - name: Deploy content (content/ → /public_html/content/)
+        if: always()                      # sube aunque no haya cambiado dist
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTPS_SERVER }}
+          username: ${{ secrets.FTPS_USERNAME }}
+          password: ${{ secrets.FTPS_PASSWORD }}
+          protocol: ftps
+          local-dir: content/
+          server-dir: /public_html/content/
+          exclude: |
+            **/.git*/**
+            **/.DS_Store
+            **/Thumbs.db
+          log-level: verbose
