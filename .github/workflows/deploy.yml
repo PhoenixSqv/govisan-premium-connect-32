@@ -2,7 +2,7 @@ name: Build & Deploy to cPanel (FTPS)
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch: {}
 
 concurrency:
@@ -20,8 +20,8 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
       - name: Install deps
         run: npm install
@@ -33,30 +33,27 @@ jobs:
         run: |
           if [ -f public/.htaccess ]; then cp public/.htaccess dist/.; fi
 
- - name: Validate FTPS secrets
-  run: |
-    if [ -z "${{ secrets.FTPS_SERVER }}" ] || [ -z "${{ secrets.FTPS_USERNAME }}" ] || [ -z "${{ secrets.FTPS_PASSWORD }}" ]; then
-      echo "Faltan secrets FTPS_SERVER / FTPS_USERNAME / FTPS_PASSWORD"; exit 1;
-    fi
+      - name: Validate FTPS secrets
+        run: |
+          test -n "${{ secrets.FTPS_SERVER }}"   || { echo "Falta FTPS_SERVER"; exit 1; }
+          test -n "${{ secrets.FTPS_USERNAME }}" || { echo "Falta FTPS_USERNAME"; exit 1; }
+          test -n "${{ secrets.FTPS_PASSWORD }}" || { echo "Falta FTPS_PASSWORD"; exit 1; }
 
-- name: Deploy (FTPS)
-  uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-  with:
-    server: ${{ secrets.FTPS_SERVER }}
-    username: ${{ secrets.FTPS_USERNAME }}
-    password: ${{ secrets.FTPS_PASSWORD }}
-    protocol: ftps
-    port: ${{ secrets.FTPS_PORT || 21 }}
-    local-dir: dist/               # sube todo dist (incluye .htaccess)
-    # OJO con el directorio remoto:
-    # - si el usuario FTP entra DIRECTO en public_html -> usa "./" o "/"
-    # - si entra en el home -> usa "/public_html/"
-    server-dir: /public_html/
-    exclude: |
-      **/.git*/**
-      **/node_modules/**
-      **/.DS_Store
-      **/Thumbs.db
-    log-level: verbose
-    # quita esta línea si NO quieres borrar antes:
-    dangerous-clean-slate: true
+      - name: Deploy (FTPS)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTPS_SERVER }}
+          username: ${{ secrets.FTPS_USERNAME }}
+          password: ${{ secrets.FTPS_PASSWORD }}
+          protocol: ftps
+          # port: ${{ secrets.FTPS_PORT }}   # opcional; si no lo pones usa 21
+          local-dir: dist/                   # sube todo dist (incluye .htaccess)
+          server-dir: /public_html/          # si tu FTP entra directo en public_html usa "./"
+          exclude: |
+            **/.git*/**
+            **/node_modules/**
+            **/.DS_Store
+            **/Thumbs.db
+            .well-known/**                    # conserva certificados/ACME si limpias
+          log-level: verbose
+          # dangerous-clean-slate: true       # BORRA TODO antes de subir (úsalo solo si lo quieres)
