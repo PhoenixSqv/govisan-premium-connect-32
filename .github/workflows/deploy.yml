@@ -33,7 +33,13 @@ jobs:
         run: |
           if [ -f public/.htaccess ]; then cp public/.htaccess dist/.; fi
 
-     - name: Deploy (FTPS)
+ - name: Validate FTPS secrets
+  run: |
+    if [ -z "${{ secrets.FTPS_SERVER }}" ] || [ -z "${{ secrets.FTPS_USERNAME }}" ] || [ -z "${{ secrets.FTPS_PASSWORD }}" ]; then
+      echo "Faltan secrets FTPS_SERVER / FTPS_USERNAME / FTPS_PASSWORD"; exit 1;
+    fi
+
+- name: Deploy (FTPS)
   uses: SamKirkland/FTP-Deploy-Action@v4.3.4
   with:
     server: ${{ secrets.FTPS_SERVER }}
@@ -41,13 +47,16 @@ jobs:
     password: ${{ secrets.FTPS_PASSWORD }}
     protocol: ftps
     port: ${{ secrets.FTPS_PORT || 21 }}
-    local-dir: dist/
+    local-dir: dist/               # sube todo dist (incluye .htaccess)
+    # OJO con el directorio remoto:
+    # - si el usuario FTP entra DIRECTO en public_html -> usa "./" o "/"
+    # - si entra en el home -> usa "/public_html/"
     server-dir: /public_html/
     exclude: |
       **/.git*/**
       **/node_modules/**
       **/.DS_Store
       **/Thumbs.db
-      .well-known/**
     log-level: verbose
-    # dangerous-clean-slate: true   # <-- solo si quieres borrar antes
+    # quita esta línea si NO quieres borrar antes:
+    dangerous-clean-slate: true
