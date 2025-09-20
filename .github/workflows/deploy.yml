@@ -42,7 +42,7 @@ jobs:
           protocol: ftps                  # FTPS explícito (TLS)
           port: ${{ secrets.FTPS_PORT || 21 }}
           local-dir: dist/                # sube la carpeta completa (incluye .htaccess)
-          server-dir: /home/govisanc/public_html/
+          server-dir: /public_html/
           log-level: verbose
           timeout: 600000                 # 10 min, por si pesa
           # ¡CUIDADO! si quieres limpiar remoto en cada deploy, descomenta:
