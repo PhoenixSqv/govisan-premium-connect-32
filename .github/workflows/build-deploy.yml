@@ -1,13 +1,10 @@
-name: Build dist to deploy branch
+name: Deploy via FTPS to Govisan
 on:
   push:
-    branches: [ main ]
-
-permissions:
-  contents: write
+    branches: [ main ]   # despliega al hacer push a main
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -22,15 +19,22 @@ jobs:
         run: npm ci || npm install
 
       - name: Build
-        run: npm run build
+        run: npm run build   # genera dist/ (o out/ si Next export)
 
-      - name: Push dist to deploy branch (content-only)
-        run: |
-          cd dist
-          git init
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git checkout -b deploy
-          git add .
-          git commit -m "Deploy $(date -u +'%Y-%m-%d %H:%M:%S')"
-          git push -f https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git deploy
+      - name: Deploy (FTPS)
+        uses: SamKirkland/FTP-Deploy-Action@v4
+        with:
+          server: ${{ secrets.SFTP_HOST }}     # 
+          username: ${{ secrets.SFTP_USER }}   # 
+          password: ${{ secrets.SFTP_PASS }}
+          port: ${{ secrets.SFTP_PORT }}       # 21 si es FTPS
+          protocol: ftps
+          # ==== RUTAS ====
+          server-dir: /public_html/            # publica en la web principal
+          local-dir: dist/                     # cambia a out/ si usas Next export
+          # ==== OPCIONES ====
+          exclude: |
+            **/.git*
+            **/.github/**
+            **/node_modules/**
+          dangerous-clean-slate: true          # borra antes de subir (cuidado)
