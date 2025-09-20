@@ -1,4 +1,4 @@
-name: Build & Deploy to cPanel
+name: Build & Deploy to cPanel (FTPS)
 
 on:
   push:
@@ -12,6 +12,7 @@ concurrency:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,43 +33,24 @@ jobs:
         run: |
           if [ -f public/.htaccess ]; then cp public/.htaccess dist/.; fi
 
-      - name: Trust server host key
-        run: |
-          mkdir -p ~/.ssh
-          timeout 15s ssh-keyscan -p ${{ secrets.CPANEL_PORT }} ${{ secrets.CPANEL_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
-
-- name: Probe common SSH ports
-  run: |
-    HOST=${{ secrets.CPANEL_HOST }}
-    for p in 22 2222 2200 22222 1988 8022; do
-      timeout 3 bash -c "echo > /dev/tcp/$HOST/$p" && echo "OPEN $p" || echo "closed $p"
-    done
-
-      - name: Check SSH connectivity
-        uses: appleboy/ssh-action@v1.0.3
+      - name: Deploy (FTPS)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          host: ${{ secrets.CPANEL_HOST }}
-          port: ${{ secrets.CPANEL_PORT }}
-          username: ${{ secrets.CPANEL_USER }}
-          key: ${{ secrets.CPANEL_SSH_KEY }}
-          script: "echo Connected OK"
-
-      - name: Clean remote public_html
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.CPANEL_HOST }}
-          port: ${{ secrets.CPANEL_PORT }}
-          username: ${{ secrets.CPANEL_USER }}
-          key: ${{ secrets.CPANEL_SSH_KEY }}
-          script: "rm -rf /home/govisanc/public_html/*"
-
-      - name: Deploy to cPanel via SFTP
-        uses: wlixcc/SFTP-Deploy-Action@v1.2
-        with:
-          server: ${{ secrets.CPANEL_HOST }}
-          port: ${{ secrets.CPANEL_PORT }}
-          username: ${{ secrets.CPANEL_USER }}
-          ssh_private_key: ${{ secrets.CPANEL_SSH_KEY }}
-          local_path: "dist"
-          remote_path: "/home/govisanc/public_html/"
-          args: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+          server: ${{ secrets.FTPS_SERVER }}
+          username: ${{ secrets.FTPS_USERNAME }}
+          password: ${{ secrets.FTPS_PASSWORD }}
+          protocol: ftps                  # FTPS explícito (TLS)
+          port: ${{ secrets.FTPS_PORT || 21 }}
+          local-dir: dist/                # sube la carpeta completa (incluye .htaccess)
+          server-dir: /home/govisanc/public_html/
+          log-level: verbose
+          timeout: 600000                 # 10 min, por si pesa
+          # ¡CUIDADO! si quieres limpiar remoto en cada deploy, descomenta:
+          # dangerous-clean-slate: true
+          # y si quieres conservar .well-known aunque limpies:
+          exclude: |
+            **/.git*/**
+            **/node_modules/**
+            **/.DS_Store
+            **/Thumbs.db
+            .well-known/**
