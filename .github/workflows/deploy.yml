@@ -38,6 +38,14 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           ssh-keyscan -p ${{ secrets.CPANEL_PORT }} ${{ secrets.CPANEL_HOST }} >> ~/.ssh/known_hosts
+- name: Check SSH connectivity
+  uses: appleboy/ssh-action@v1.0.3
+  with:
+    host: ${{ secrets.CPANEL_HOST }}
+    port: ${{ secrets.CPANEL_PORT }}
+    username: ${{ secrets.CPANEL_USER }}
+    key: ${{ secrets.CPANEL_SSH_KEY }}
+    script: "echo Connected OK && uname -a"
 
       # (Opcional) Limpia el remoto antes de subir (¡borra todo!)
       - name: Clean remote public_html
