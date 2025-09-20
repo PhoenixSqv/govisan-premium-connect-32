@@ -1,4 +1,4 @@
-name: Build &  Deploy to cPanel
+name: Build & Deploy to cPanel
 
 on:
   push:
@@ -12,7 +12,6 @@ concurrency:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,21 +32,20 @@ jobs:
         run: |
           if [ -f public/.htaccess ]; then cp public/.htaccess dist/.; fi
 
-      # Acepta la huella del servidor para evitar el prompt interactivo
       - name: Trust server host key
         run: |
           mkdir -p ~/.ssh
-          ssh-keyscan -p ${{ secrets.CPANEL_PORT }} ${{ secrets.CPANEL_HOST }} >> ~/.ssh/known_hosts
-- name: Check SSH connectivity
-  uses: appleboy/ssh-action@v1.0.3
-  with:
-    host: ${{ secrets.CPANEL_HOST }}
-    port: ${{ secrets.CPANEL_PORT }}
-    username: ${{ secrets.CPANEL_USER }}
-    key: ${{ secrets.CPANEL_SSH_KEY }}
-    script: "echo Connected OK && uname -a"
+          timeout 15s ssh-keyscan -p ${{ secrets.CPANEL_PORT }} ${{ secrets.CPANEL_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
 
-      # (Opcional) Limpia el remoto antes de subir (¡borra todo!)
+      - name: Check SSH connectivity
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.CPANEL_HOST }}
+          port: ${{ secrets.CPANEL_PORT }}
+          username: ${{ secrets.CPANEL_USER }}
+          key: ${{ secrets.CPANEL_SSH_KEY }}
+          script: "echo Connected OK"
+
       - name: Clean remote public_html
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -55,16 +53,15 @@ jobs:
           port: ${{ secrets.CPANEL_PORT }}
           username: ${{ secrets.CPANEL_USER }}
           key: ${{ secrets.CPANEL_SSH_KEY }}
-          script: |
-            rm -rf /home/govisanc/public_html/*
+          script: "rm -rf /home/govisanc/public_html/*"
 
       - name: Deploy to cPanel via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2
         with:
           server: ${{ secrets.CPANEL_HOST }}
-          port: ${{ secrets.CPANEL_PORT }}          # 22 si no tienes otro
+          port: ${{ secrets.CPANEL_PORT }}
           username: ${{ secrets.CPANEL_USER }}
-          ssh_private_key: ${{ secrets.CPANEL_SSH_KEY }}  # <-- usar clave, no password
-          local_path: "dist"                         # sube la carpeta completa (incluye .htaccess)
+          ssh_private_key: ${{ secrets.CPANEL_SSH_KEY }}
+          local_path: "dist"
           remote_path: "/home/govisanc/public_html/"
-          args: "-o StrictHostKeyChecking=no"
+          args: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
