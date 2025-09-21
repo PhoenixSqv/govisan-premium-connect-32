@@ -6,7 +6,8 @@ import SolutionsSection from '@/components/SolutionsSection';
 import SpecializationSection from '@/components/SpecializationSection';
 import SuccessStories from '@/components/SuccessStories';
 import InsightsSection from '@/components/InsightsSection';
-import ContactSection from '@/components/ContactSection';
+import EnhancedContactForm from '@/components/EnhancedContactForm';
+import InteractiveCaseStudies from '@/components/InteractiveCaseStudies';
 
 import FinalCTA from '@/components/FinalCTA';
 import Footer from '@/components/Footer';
@@ -20,9 +21,9 @@ const Index = () => {
         <AboutSection />
         <SolutionsSection />
         <SpecializationSection />
-        <SuccessStories />
+        <InteractiveCaseStudies />
         <InsightsSection />
-        <ContactSection />
+        <EnhancedContactForm />
         <FinalCTA />
       </main>
       <Footer />

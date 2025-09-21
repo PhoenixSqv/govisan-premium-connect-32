@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, Play } from 'lucide-react';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import AnimatedCounter from './AnimatedCounter';
 
 interface HeroContent {
   title: string;
@@ -19,6 +21,7 @@ interface HeroContent {
 
 const HeroSection = () => {
   const [content, setContent] = useState<HeroContent | null>(null);
+  const { ref: statsRef, isVisible: statsVisible } = useScrollAnimation({ threshold: 0.3 });
 
   useEffect(() => {
     fetch('/content/home/hero.json')
@@ -38,9 +41,9 @@ const HeroSection = () => {
   
   return (
     <section id="hero" className="section--wm wm--home relative min-h-screen flex items-center pt-24 overflow-hidden">
-      {/* Background Image */}
+      {/* Background Image with Parallax */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat parallax-bg"
         style={{ backgroundImage: `url(${content.backgroundImage})` }}
       >
         <div className="absolute inset-0 gradient-overlay"></div>
@@ -78,11 +81,34 @@ const HeroSection = () => {
               ))}
             </div>
             
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-8">
+            {/* Animated Stats */}
+            <div 
+              ref={statsRef}
+              className={`grid grid-cols-3 gap-8 transition-all duration-700 ${
+                statsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+            >
               {content.stats.map((stat, index) => (
-                <div key={index} className="text-center lg:text-left">
-                  <div className="text-3xl lg:text-4xl font-bold text-govisan-gold mb-2">{stat.number}</div>
+                <div 
+                  key={index} 
+                  className="text-center lg:text-left"
+                  style={{ animationDelay: `${index * 0.2}s` }}
+                >
+                  <div className="text-3xl lg:text-4xl font-bold text-govisan-gold mb-2">
+                    {stat.number.includes('+') ? (
+                      <AnimatedCounter 
+                        end={parseInt(stat.number.replace(/[^\d]/g, ''))} 
+                        suffix="+" 
+                      />
+                    ) : stat.number.includes(',') ? (
+                      <AnimatedCounter 
+                        end={parseInt(stat.number.replace(/[^\d]/g, ''))} 
+                        prefix="+" 
+                      />
+                    ) : (
+                      stat.number
+                    )}
+                  </div>
                   <div className="text-white/80 text-sm lg:text-base">{stat.label}</div>
                 </div>
               ))}

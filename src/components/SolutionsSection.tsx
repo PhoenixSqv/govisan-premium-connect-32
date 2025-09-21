@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from './ui/button';
 import { Wifi, Smartphone, Shield, Settings, Award, Star } from 'lucide-react';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 interface SolutionItem {
   icon: string;
@@ -21,6 +22,7 @@ interface SolutionsContent {
 
 const SolutionsSection = () => {
   const [content, setContent] = useState<SolutionsContent | null>(null);
+  const { ref: gridRef, isVisible: gridVisible } = useScrollAnimation({ threshold: 0.1 });
 
   useEffect(() => {
     fetch('/content/solutions/main.json')
@@ -73,13 +75,18 @@ const SolutionsSection = () => {
 
 
         {/* Solutions Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div 
+          ref={gridRef}
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 transition-all duration-700 ${
+            gridVisible ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
           {content.solutions.map((solution, index) => {
             const IconComponent = getIcon(solution.icon);
             return (
               <div
                 key={solution.title}
-                className="group bg-white rounded-2xl p-8 shadow-premium hover:shadow-gold transition-all duration-500 hover:-translate-y-2"
+                className={`group bg-white rounded-2xl p-8 shadow-premium hover:shadow-gold hover-lift hover-glow transition-all duration-500 animate-fade-in-up`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="w-16 h-16 bg-govisan-gold/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-govisan-gold/20 transition-colors">
