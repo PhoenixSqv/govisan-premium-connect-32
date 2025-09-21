@@ -43,7 +43,7 @@ const InteractiveCaseStudies = () => {
   const { ref: gridRef, isVisible: gridVisible } = useScrollAnimation({ threshold: 0.1 });
 
   useEffect(() => {
-    fetch('/public/content/cases/main.json')
+    fetch('/content/cases/main.json')
       .then(res => res.json())
       .then(data => {
         // Enhance data with additional properties
@@ -78,7 +78,21 @@ const InteractiveCaseStudies = () => {
   const types = ['all', ...new Set(content?.stories.map(s => s.type))];
   const years = ['all', ...new Set(content?.stories.map(s => s.year))];
 
-  if (!content) return <div>Loading...</div>;
+  if (!content) return (
+    <section id="cases" className="section--wm wm--cases py-20 bg-background">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center">
+          <div className="inline-flex items-center bg-govisan-gold/10 text-govisan-gold px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <Star className="h-4 w-4 mr-2" />
+            Success Stories
+          </div>
+          <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
+            Loading Case Studies...
+          </h2>
+        </div>
+      </div>
+    </section>
+  );
 
   return (
     <section id="cases" className="section--wm wm--cases py-20 bg-background">
