@@ -8,8 +8,10 @@ import { Switch } from '@/components/ui/switch';
 import { Badge } from '@/components/ui/badge';
 import { Save, Eye, Plus, Trash2, GripVertical } from 'lucide-react';
 import { toast } from 'sonner';
-import { DirectFileSaver } from '../components/DirectFileSaver';
-import { GitHubWriter } from '@/lib/cms/githubWriter';
+import { ResponsiveModal } from '@/admin/components/ResponsiveModal';
+import { SaveIndicator } from '@/admin/components/SaveIndicator';
+import { useAutoSave } from '@/hooks/useAutoSave';
+import { DirectSaver } from '@/lib/cms/directSaver';
 
 interface HeroButton {
   text: string;
@@ -40,7 +42,14 @@ const HomePage = () => {
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [showFileUpdate, setShowFileUpdate] = useState(false);
+  const [showSaveModal, setShowSaveModal] = useState(false);
+
+  // Auto-save hook
+  const { hasUnsavedChanges, isAutoSaving, lastSaved, manualSave } = useAutoSave({
+    data: content,
+    filePath: 'public/content/home/hero.json',
+    enabled: true
+  });
 
   useEffect(() => {
     loadContent();
@@ -63,28 +72,21 @@ const HomePage = () => {
   const handleSave = async () => {
     setSaving(true);
     try {
-      // Try direct save first
-      await GitHubWriter.saveHomeContent(content);
-      toast.success('Content saved successfully! Changes committed to GitHub.');
+      const result = await DirectSaver.saveHomeContent(content);
+      if (result.success) {
+        toast.success('¡Contenido guardado exitosamente!');
+      } else {
+        toast.error(result.message);
+      }
     } catch (error) {
-      console.error('Direct save failed:', error);
-      // Fallback to file update tool
-      setShowFileUpdate(true);
-      toast.error('Direct save failed. Please use the manual update tool.');
+      toast.error('Error al guardar el contenido');
     } finally {
       setSaving(false);
     }
   };
 
-  const updateContentFile = async (filePath: string, content: string) => {
-    try {
-      await GitHubWriter.writeFile(filePath, content);
-      console.log('✅ Content updated successfully via GitHub');
-      setShowFileUpdate(false);
-    } catch (error) {
-      console.error('❌ Failed to update content:', error);
-      throw error;
-    }
+  const handleShowModal = () => {
+    setShowSaveModal(true);
   };
 
   const addButton = () => {
@@ -146,14 +148,31 @@ const HomePage = () => {
             <p className="text-muted-foreground">Manage your homepage hero section</p>
           </div>
           <div className="flex items-center gap-2">
+            <SaveIndicator 
+              hasUnsavedChanges={hasUnsavedChanges}
+              isAutoSaving={isAutoSaving}
+              lastSaved={lastSaved}
+            />
             <Button variant="outline" size="sm">
               <Eye className="h-4 w-4 mr-2" />
               Preview
             </Button>
-            <Button onClick={handleSave} disabled={saving}>
-              <Save className="h-4 w-4 mr-2" />
-              {saving ? 'Saving...' : 'Save & Deploy'}
-            </Button>
+            <div className="flex gap-2">
+              <Button 
+                onClick={handleSave} 
+                disabled={saving || isAutoSaving}
+              >
+                <Save className="h-4 w-4 mr-2" />
+                {saving ? 'Guardando...' : 'Guardar Ahora'}
+              </Button>
+              <Button 
+                onClick={handleShowModal} 
+                variant="outline"
+                disabled={saving || isAutoSaving}
+              >
+                Ver Cambios
+              </Button>
+            </div>
           </div>
         </div>
 
@@ -295,12 +314,15 @@ const HomePage = () => {
         </Card>
       </div>
 
-      {showFileUpdate && (
-        <DirectFileSaver
-          filePath="public/content/home/hero.json"
+      {showSaveModal && (
+        <ResponsiveModal
+          title="Guardar Cambios - Home Page"
           content={content}
-          onClose={() => setShowFileUpdate(false)}
-          onSave={updateContentFile}
+          filePath="public/content/home/hero.json"
+          onClose={() => setShowSaveModal(false)}
+          onSuccess={() => {
+            toast.success('¡Contenido guardado exitosamente!');
+          }}
         />
       )}
     </>

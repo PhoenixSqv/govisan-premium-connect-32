@@ -5,8 +5,10 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Plus, Edit, Trash2, Save } from 'lucide-react';
 import { toast } from 'sonner';
-import { DirectFileSaver } from '../components/DirectFileSaver';
-import { GitHubWriter } from '@/lib/cms/githubWriter';
+import { ResponsiveModal } from '@/admin/components/ResponsiveModal';
+import { SaveIndicator } from '@/admin/components/SaveIndicator';
+import { useAutoSave } from '@/hooks/useAutoSave';
+import { DirectSaver } from '@/lib/cms/directSaver';
 
 interface CaseStat {
   number: string;
@@ -35,9 +37,16 @@ const CasesPage = () => {
     description: '',
     cases: []
   });
-  const [showFileUpdate, setShowFileUpdate] = useState(false);
+  const [showSaveModal, setShowSaveModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+
+  // Auto-save hook
+  const { hasUnsavedChanges, isAutoSaving, lastSaved, manualSave } = useAutoSave({
+    data: content,
+    filePath: 'public/content/cases/main.json',
+    enabled: true
+  });
 
   useEffect(() => {
     loadContent();
@@ -60,31 +69,24 @@ const CasesPage = () => {
     }
   };
 
-  const saveContent = async () => {
+  const handleSave = async () => {
     setSaving(true);
     try {
-      // Try direct save first
-      await GitHubWriter.saveCasesContent(content);
-      toast.success('Content saved successfully! Changes committed to GitHub.');
+      const result = await DirectSaver.saveCasesContent(content);
+      if (result.success) {
+        toast.success('¡Casos guardados exitosamente!');
+      } else {
+        toast.error(result.message);
+      }
     } catch (error) {
-      console.error('Direct save failed:', error);
-      // Fallback to file update tool
-      setShowFileUpdate(true);
-      toast.error('Direct save failed. Please use the manual update tool.');
+      toast.error('Error al guardar los casos');
     } finally {
       setSaving(false);
     }
   };
 
-  const updateContentFile = async (filePath: string, content: string) => {
-    try {
-      await GitHubWriter.writeFile(filePath, content);
-      console.log('✅ Cases content updated successfully via GitHub');
-      setShowFileUpdate(false);
-    } catch (error) {
-      console.error('❌ Failed to update cases content:', error);
-      throw error;
-    }
+  const handleShowModal = () => {
+    setShowSaveModal(true);
   };
 
   const addStory = () => {
@@ -209,11 +211,33 @@ const CasesPage = () => {
     <>
       <div className="p-6 space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Case Studies</h1>
-        <Button onClick={saveContent} disabled={saving}>
-          <Save className="h-4 w-4 mr-2" />
-          {saving ? 'Saving...' : 'Save Changes'}
-        </Button>
+        <div>
+          <h1 className="text-2xl font-bold">Case Studies</h1>
+          <p className="text-muted-foreground">Gestiona los casos de éxito</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <SaveIndicator 
+            hasUnsavedChanges={hasUnsavedChanges}
+            isAutoSaving={isAutoSaving}
+            lastSaved={lastSaved}
+          />
+          <div className="flex gap-2">
+            <Button 
+              onClick={handleSave} 
+              disabled={saving || isAutoSaving}
+            >
+              <Save className="h-4 w-4 mr-2" />
+              {saving ? 'Guardando...' : 'Guardar Ahora'}
+            </Button>
+            <Button 
+              onClick={handleShowModal} 
+              variant="outline"
+              disabled={saving || isAutoSaving}
+            >
+              Ver Cambios
+            </Button>
+          </div>
+        </div>
       </div>
 
       {/* Header Content */}
@@ -392,12 +416,15 @@ const CasesPage = () => {
       </div>
     </div>
 
-      {showFileUpdate && (
-        <DirectFileSaver
-          filePath="public/content/cases/main.json"
+      {showSaveModal && (
+        <ResponsiveModal
+          title="Guardar Cambios - Casos"
           content={content}
-          onClose={() => setShowFileUpdate(false)}
-          onSave={updateContentFile}
+          filePath="public/content/cases/main.json"
+          onClose={() => setShowSaveModal(false)}
+          onSuccess={() => {
+            toast.success('¡Casos guardados exitosamente!');
+          }}
         />
       )}
     </>
