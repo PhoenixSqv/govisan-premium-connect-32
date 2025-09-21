@@ -43,7 +43,7 @@ const InteractiveCaseStudies = () => {
   const { ref: gridRef, isVisible: gridVisible } = useScrollAnimation({ threshold: 0.1 });
 
   useEffect(() => {
-    fetch('/content/cases/main.json')
+    fetch('/public/content/cases/main.json')
       .then(res => res.json())
       .then(data => {
         // Enhance data with additional properties
