@@ -49,4 +49,16 @@ export class DirectSaver {
   static async saveCasesContent(content: any) {
     return this.saveFile('public/content/cases/main.json', content);
   }
+
+  static async saveInsightsContent(content: any) {
+    return this.saveFile('public/content/insights/main.json', content);
+  }
+
+  static async saveSettingsContent(content: any) {
+    return this.saveFile('public/content/settings/global.json', content);
+  }
+
+  static async saveMediaContent(content: any) {
+    return this.saveFile('public/content/media/library.json', content);
+  }
 }

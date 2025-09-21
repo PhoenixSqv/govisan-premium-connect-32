@@ -21,6 +21,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { getCurrentUser, logout, isAuthenticated } from '@/lib/cms/auth';
 import type { AuthToken } from '@/lib/cms/auth';
+import { useSessionTimeout } from '@/hooks/useSessionTimeout';
+import SessionTimeoutWarning from '@/components/SessionTimeoutWarning';
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -30,6 +32,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   const location = useLocation();
   const [user, setUser] = useState<AuthToken | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const { showWarning, timeLeft, formatTime, extendSession } = useSessionTimeout(120);
 
   useEffect(() => {
     const currentUser = getCurrentUser();
@@ -212,6 +215,15 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
           </div>
         </main>
       </div>
+
+      {/* Session Timeout Warning */}
+      {showWarning && timeLeft && (
+        <SessionTimeoutWarning
+          timeLeft={timeLeft}
+          formatTime={formatTime}
+          extendSession={extendSession}
+        />
+      )}
     </div>
   );
 };

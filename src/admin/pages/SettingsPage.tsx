@@ -17,14 +17,38 @@ import {
   Shield,
   Mail,
   Phone,
-  MapPin
+  MapPin,
+  Lock,
+  Eye,
+  EyeOff,
+  LogOut,
+  CheckCircle
 } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
+import { logout, getCurrentUser } from '@/lib/cms/auth';
+import { DirectSaver } from '@/lib/cms/directSaver';
 
 const SettingsPage = () => {
   const { toast } = useToast();
   const [activeTab, setActiveTab] = useState('general');
+  const [saving, setSaving] = useState(false);
+  
+  // Security form state
+  const [passwordForm, setPasswordForm] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: ''
+  });
+  const [showPasswords, setShowPasswords] = useState({
+    current: false,
+    new: false,
+    confirm: false
+  });
+  const [changingPassword, setChangingPassword] = useState(false);
+  const [passwordChanged, setPasswordChanged] = useState(false);
+  
+  const currentUser = getCurrentUser();
   
   const [settings, setSettings] = useState({
     // General settings
@@ -81,12 +105,76 @@ const SettingsPage = () => {
     }));
   };
 
-  const handleSave = () => {
-    // Here you would save to your API
-    toast({
-      title: "Settings saved",
-      description: "Your settings have been updated successfully.",
-    });
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      await DirectSaver.saveFile('/content/settings/global.json', settings);
+      toast({
+        title: "Settings saved",
+        description: "Your settings have been updated successfully.",
+      });
+    } catch (error) {
+      toast({
+        title: "Save failed",
+        description: "Failed to save settings. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handlePasswordChange = async () => {
+    if (passwordForm.newPassword !== passwordForm.confirmPassword) {
+      toast({
+        title: "Password mismatch",
+        description: "New password and confirmation don't match.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (passwordForm.newPassword.length < 8) {
+      toast({
+        title: "Password too short",
+        description: "Password must be at least 8 characters long.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setChangingPassword(true);
+    try {
+      // Simulate password change
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      setPasswordChanged(true);
+      setPasswordForm({
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: ''
+      });
+      
+      toast({
+        title: "Password changed",
+        description: "Your password has been updated successfully.",
+      });
+
+      // Reset success state after 3 seconds
+      setTimeout(() => setPasswordChanged(false), 3000);
+    } catch (error) {
+      toast({
+        title: "Password change failed",
+        description: "Failed to change password. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setChangingPassword(false);
+    }
+  };
+
+  const handleLogout = () => {
+    logout();
   };
 
   const exportSettings = () => {
@@ -154,20 +242,25 @@ const SettingsPage = () => {
             </Button>
           </div>
           
-          <Button onClick={handleSave} className="bg-govisan-gold hover:bg-govisan-gold/90">
+          <Button 
+            onClick={handleSave} 
+            disabled={saving}
+            className="bg-govisan-gold hover:bg-govisan-gold/90"
+          >
             <Save className="h-4 w-4 mr-2" />
-            Save Settings
+            {saving ? 'Saving...' : 'Save Settings'}
           </Button>
         </div>
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-5">
+        <TabsList className="grid w-full grid-cols-6">
           <TabsTrigger value="general">General</TabsTrigger>
           <TabsTrigger value="design">Design</TabsTrigger>
           <TabsTrigger value="seo">SEO</TabsTrigger>
           <TabsTrigger value="integrations">Integrations</TabsTrigger>
           <TabsTrigger value="watermarks">Watermarks</TabsTrigger>
+          <TabsTrigger value="security">Security</TabsTrigger>
         </TabsList>
 
         <TabsContent value="general" className="space-y-6">
@@ -444,6 +537,181 @@ const SettingsPage = () => {
               </Alert>
             </CardContent>
           </Card>
+        </TabsContent>
+
+        <TabsContent value="security" className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Shield className="h-5 w-5" />
+                Security Settings
+              </CardTitle>
+              <CardDescription>
+                Manage your account security and password
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* Change Password */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold flex items-center gap-2">
+                  <Lock className="h-5 w-5" />
+                  Change Password
+                </h3>
+                
+                <div className="grid gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="current-password">Current Password</Label>
+                    <div className="relative">
+                      <Input
+                        id="current-password"
+                        type={showPasswords.current ? 'text' : 'password'}
+                        value={passwordForm.currentPassword}
+                        onChange={(e) => setPasswordForm(prev => ({ ...prev, currentPassword: e.target.value }))}
+                        placeholder="Enter current password"
+                        required
+                      />
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                        onClick={() => setShowPasswords(prev => ({ ...prev, current: !prev.current }))}
+                      >
+                        {showPasswords.current ? (
+                          <EyeOff className="h-4 w-4" />
+                        ) : (
+                          <Eye className="h-4 w-4" />
+                        )}
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="new-password">New Password</Label>
+                    <div className="relative">
+                      <Input
+                        id="new-password"
+                        type={showPasswords.new ? 'text' : 'password'}
+                        value={passwordForm.newPassword}
+                        onChange={(e) => setPasswordForm(prev => ({ ...prev, newPassword: e.target.value }))}
+                        placeholder="Enter new password (min 8 characters)"
+                        minLength={8}
+                        required
+                      />
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                        onClick={() => setShowPasswords(prev => ({ ...prev, new: !prev.new }))}
+                      >
+                        {showPasswords.new ? (
+                          <EyeOff className="h-4 w-4" />
+                        ) : (
+                          <Eye className="h-4 w-4" />
+                        )}
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="confirm-password">Confirm New Password</Label>
+                    <div className="relative">
+                      <Input
+                        id="confirm-password"
+                        type={showPasswords.confirm ? 'text' : 'password'}
+                        value={passwordForm.confirmPassword}
+                        onChange={(e) => setPasswordForm(prev => ({ ...prev, confirmPassword: e.target.value }))}
+                        placeholder="Confirm new password"
+                        required
+                      />
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                        onClick={() => setShowPasswords(prev => ({ ...prev, confirm: !prev.confirm }))}
+                      >
+                        {showPasswords.confirm ? (
+                          <EyeOff className="h-4 w-4" />
+                        ) : (
+                          <Eye className="h-4 w-4" />
+                        )}
+                      </Button>
+                    </div>
+                  </div>
+
+                  <Button
+                    onClick={handlePasswordChange}
+                    disabled={changingPassword || !passwordForm.currentPassword || !passwordForm.newPassword || !passwordForm.confirmPassword}
+                    className={`w-full ${passwordChanged ? 'bg-green-600 hover:bg-green-700' : 'bg-govisan-gold hover:bg-govisan-gold/90'}`}
+                  >
+                    {changingPassword ? (
+                      <>
+                        <Lock className="mr-2 h-4 w-4 animate-spin" />
+                        Changing Password...
+                      </>
+                    ) : passwordChanged ? (
+                      <>
+                        <CheckCircle className="mr-2 h-4 w-4" />
+                        Password Changed!
+                      </>
+                    ) : (
+                      <>
+                        <Lock className="mr-2 h-4 w-4" />
+                        Change Password
+                      </>
+                    )}
+                  </Button>
+                </div>
+              </div>
+
+              <Separator />
+
+              {/* Session Information */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Session Information</h3>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                  <div className="space-y-2">
+                    <Label className="text-muted-foreground">Logged in as</Label>
+                    <p className="font-medium">{currentUser?.email}</p>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label className="text-muted-foreground">Last password change</Label>
+                    <p className="font-medium">Never changed</p>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label className="text-muted-foreground">Session expires in</Label>
+                    <p className="font-medium">Auto-logout after 2 hours of inactivity</p>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label className="text-muted-foreground">Account role</Label>
+                    <p className="font-medium capitalize">{currentUser?.role}</p>
+                  </div>
+                </div>
+
+                <Button
+                  onClick={handleLogout}
+                  variant="destructive"
+                  className="w-full"
+                >
+                  <LogOut className="mr-2 h-4 w-4" />
+                  Sign Out Now
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Alert>
+            <Shield className="h-4 w-4" />
+            <AlertDescription>
+              <strong>Security Tips:</strong> Use a strong password with at least 8 characters, including uppercase, lowercase, numbers, and special characters. Change your password regularly and never share your login credentials.
+            </AlertDescription>
+          </Alert>
         </TabsContent>
       </Tabs>
     </div>

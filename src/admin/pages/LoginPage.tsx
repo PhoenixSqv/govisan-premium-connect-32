@@ -84,7 +84,7 @@ const LoginPage = () => {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="admin@govisan.com"
+                  placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -121,6 +121,17 @@ const LoginPage = () => {
                 </div>
               </div>
 
+              <div className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  id="remember"
+                  className="rounded border-gray-300"
+                />
+                <Label htmlFor="remember" className="text-sm">
+                  Keep me signed in
+                </Label>
+              </div>
+
               <Button
                 type="submit"
                 className="w-full bg-govisan-gold hover:bg-govisan-gold/90 text-white"
@@ -145,12 +156,6 @@ const LoginPage = () => {
                 </p>
               )}
             </form>
-
-            <div className="mt-6 pt-4 border-t border-gray-200">
-              <p className="text-xs text-center text-muted-foreground">
-                Default credentials: admin@govisan.com / admin123
-              </p>
-            </div>
           </CardContent>
         </Card>
       </div>

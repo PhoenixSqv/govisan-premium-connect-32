@@ -5,7 +5,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Plus, Trash2, Save } from 'lucide-react';
 import { toast } from 'sonner';
-import { FileUpdateTool } from '@/admin/components/FileUpdateTool';
+import { DirectSaver } from '@/lib/cms/directSaver';
 
 interface AboutValue {
   icon: string;
@@ -31,7 +31,6 @@ const AboutPage = () => {
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [showFileUpdate, setShowFileUpdate] = useState(false);
 
   useEffect(() => {
     loadContent();
@@ -54,11 +53,15 @@ const AboutPage = () => {
   const saveContent = async () => {
     setSaving(true);
     try {
-      setShowFileUpdate(true);
-      toast.success('Content ready for file update');
+      const result = await DirectSaver.saveFile('/content/about/main.json', content);
+      if (result.success) {
+        toast.success('About content saved successfully!');
+      } else {
+        toast.error(result.message);
+      }
     } catch (error) {
       console.error('Save error:', error);
-      toast.error('Failed to prepare content');
+      toast.error('Failed to save about content');
     } finally {
       setSaving(false);
     }
@@ -98,7 +101,7 @@ const AboutPage = () => {
           <h1 className="text-2xl font-bold">About Section</h1>
           <Button onClick={saveContent} disabled={saving}>
             <Save className="h-4 w-4 mr-2" />
-            {saving ? 'Preparing...' : 'Update File'}
+            {saving ? 'Saving...' : 'Save Changes'}
           </Button>
         </div>
 
@@ -209,14 +212,6 @@ const AboutPage = () => {
           ))}
         </div>
       </div>
-
-      {showFileUpdate && (
-        <FileUpdateTool
-          filePath="public/content/about/main.json"
-          content={content}
-          onClose={() => setShowFileUpdate(false)}
-        />
-      )}
     </>
   );
 };

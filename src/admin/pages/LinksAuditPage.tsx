@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
+import { DirectSaver } from '@/lib/cms/directSaver';
 
 interface LinkAuditResult {
   url: string;
@@ -95,7 +96,7 @@ const LinksAuditPage = () => {
     setCurrentAudit(newAudit);
 
     // Simulate audit progress
-    const simulateProgress = () => {
+    const simulateProgress = async () => {
       let checked = 0;
       const interval = setInterval(() => {
         checked += Math.floor(Math.random() * 3) + 1;
@@ -135,6 +136,17 @@ const LinksAuditPage = () => {
           setCurrentAudit(completedAudit);
           setAuditHistory(prev => [completedAudit, ...prev]);
           setIsRunning(false);
+          
+          // Save audit results immediately
+          (async () => {
+            try {
+              await DirectSaver.saveFile('/content/audits/links.json', {
+                audits: [completedAudit, ...auditHistory]
+              });
+            } catch (error) {
+              console.error('Failed to save audit results:', error);
+            }
+          })();
           
           toast({
             title: "Audit completed",

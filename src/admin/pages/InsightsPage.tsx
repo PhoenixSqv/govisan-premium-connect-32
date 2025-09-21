@@ -5,6 +5,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Plus, Edit, Trash2, Save, Calendar } from 'lucide-react';
 import { toast } from 'sonner';
+import { DirectSaver } from '@/lib/cms/directSaver';
 
 interface InsightPost {
   id: string;
@@ -87,12 +88,23 @@ const InsightsPage = () => {
     
     setSaving(true);
     try {
+      let updatedPosts;
       const existingIndex = posts.findIndex(p => p.id === editingPost.id);
       if (existingIndex >= 0) {
-        setPosts(prev => prev.map(p => p.id === editingPost.id ? editingPost : p));
+        updatedPosts = posts.map(p => p.id === editingPost.id ? editingPost : p);
       } else {
-        setPosts(prev => [...prev, editingPost]);
+        updatedPosts = [...posts, editingPost];
       }
+      
+      setPosts(updatedPosts);
+      
+      // Save to files immediately
+      await DirectSaver.saveFile('/content/insights/main.json', {
+        title: "Latest Insights & Industry News",
+        description: "Stay updated with the latest trends and insights in hospitality technology",
+        posts: updatedPosts
+      });
+      
       setEditingPost(null);
       toast.success('Post saved successfully');
     } catch (error) {
@@ -102,15 +114,43 @@ const InsightsPage = () => {
     }
   };
 
-  const deletePost = (id: string) => {
-    setPosts(prev => prev.filter(p => p.id !== id));
-    toast.success('Post deleted successfully');
+  const deletePost = async (id: string) => {
+    try {
+      const updatedPosts = posts.filter(p => p.id !== id);
+      setPosts(updatedPosts);
+      
+      // Save to files immediately
+      await DirectSaver.saveFile('/content/insights/main.json', {
+        title: "Latest Insights & Industry News",
+        description: "Stay updated with the latest trends and insights in hospitality technology",
+        posts: updatedPosts
+      });
+      
+      toast.success('Post deleted successfully');
+    } catch (error) {
+      toast.error('Failed to delete post. Please try again.');
+    }
   };
 
-  const togglePublished = (id: string) => {
-    setPosts(prev => prev.map(p => 
-      p.id === id ? { ...p, published: !p.published } : p
-    ));
+  const togglePublished = async (id: string) => {
+    try {
+      const updatedPosts = posts.map(p => 
+        p.id === id ? { ...p, published: !p.published } : p
+      );
+      setPosts(updatedPosts);
+      
+      // Save to files immediately
+      await DirectSaver.saveFile('/content/insights/main.json', {
+        title: "Latest Insights & Industry News",
+        description: "Stay updated with the latest trends and insights in hospitality technology",
+        posts: updatedPosts
+      });
+      
+      const post = updatedPosts.find(p => p.id === id);
+      toast.success(`Post ${post?.published ? 'published' : 'unpublished'} successfully`);
+    } catch (error) {
+      toast.error('Failed to update post status. Please try again.');
+    }
   };
 
   if (loading) {
