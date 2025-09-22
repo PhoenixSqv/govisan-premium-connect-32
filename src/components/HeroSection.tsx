@@ -1,135 +1,102 @@
-import React, { useState, useEffect } from 'react';
-import { Button } from './ui/button';
-import { ArrowRight, Play } from 'lucide-react';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import AnimatedCounter from './AnimatedCounter';
+import React, { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { AnimatedCounter } from "@/components/AnimatedCounter";
 
-interface HeroContent {
-  title: string;
-  subtitle: string;
-  backgroundImage: string;
-  buttons: Array<{
-    text: string;
-    link: string;
-    type: string;
-  }>;
-  stats: Array<{
-    number: string;
-    label: string;
-  }>;
+interface HeroStats {
+  years: string;
+  guestrooms: string;
+  countries: string;
 }
 
-const HeroSection = () => {
-  const [content, setContent] = useState<HeroContent | null>(null);
-  const { ref: statsRef, isVisible: statsVisible } = useScrollAnimation({ threshold: 0.3 });
+export const HeroSection = () => {
+  const [stats, setStats] = useState<HeroStats>({
+    years: "25+",
+    guestrooms: "+60,000", 
+    countries: "11"
+  });
 
   useEffect(() => {
+    // Cargar estadísticas desde el CMS
     fetch('/content/home/hero.json')
       .then(res => res.json())
-      .then(data => setContent(data))
-      .catch(err => console.error('Failed to load hero content:', err));
+      .then(data => {
+        if (data.stats) {
+          setStats(data.stats);
+        }
+      })
+      .catch(err => console.log('Using default stats'));
   }, []);
 
-  const handleNavClick = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-  
-  if (!content) return <div>Loading...</div>;
-  
   return (
-    <section id="hero" className="section--wm wm--home relative min-h-screen flex items-center pt-24 overflow-hidden">
-      {/* Background Image with Parallax */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat parallax-bg"
-        style={{ backgroundImage: `url(${content.backgroundImage})` }}
-      >
-        <div className="absolute inset-0 gradient-overlay"></div>
-      </div>
-      
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Column - Main Content */}
-          <div className="text-white">
-            <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6">
-              {content.title}
-            </h1>
-            
-            <p className="text-xl lg:text-2xl text-white/90 mb-8 leading-relaxed">
-              {content.subtitle}
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              {content.buttons.map((button, index) => (
-                <Button
-                  key={index}
-                  size="lg"
-                  onClick={() => handleNavClick(button.link)}
-                  variant={button.type === 'primary' ? 'default' : 'outline'}
-                  className={button.type === 'primary' 
-                    ? "bg-govisan-gold hover:bg-govisan-gold/90 text-white border-govisan-gold font-semibold px-8 py-4 text-lg group"
-                    : "bg-transparent border-2 border-white text-white hover:bg-white hover:text-govisan-navy font-semibold px-8 py-4 text-lg group transition-all duration-300"
-                  }
-                >
-                  {button.type === 'secondary' && <Play className="mr-2 h-5 w-5 text-white group-hover:text-govisan-navy" />}
-                  {button.text}
-                  {button.type === 'primary' && <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />}
-                </Button>
-              ))}
-            </div>
-            
-            {/* Animated Stats */}
-            <div 
-              ref={statsRef}
-              className={`grid grid-cols-3 gap-8 transition-all duration-700 ${
-                statsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-              }`}
-            >
-              {content.stats.map((stat, index) => (
-                <div 
-                  key={index} 
-                  className="text-center lg:text-left"
-                  style={{ animationDelay: `${index * 0.2}s` }}
-                >
-                  <div className="text-3xl lg:text-4xl font-bold text-govisan-gold mb-2">
-                    {stat.number.includes('+') ? (
-                      <AnimatedCounter 
-                        end={parseInt(stat.number.replace(/[^\d]/g, ''))} 
-                        suffix="+" 
-                      />
-                    ) : stat.number.includes(',') ? (
-                      <AnimatedCounter 
-                        end={parseInt(stat.number.replace(/[^\d]/g, ''))} 
-                        prefix="+" 
-                      />
-                    ) : (
-                      stat.number
-                    )}
-                  </div>
-                  <div className="text-white/80 text-sm lg:text-base">{stat.label}</div>
-                </div>
-              ))}
-            </div>
+    <section className="relative bg-gradient-to-br from-slate-50 via-white to-blue-50 py-20 overflow-hidden">
+      <div className="container mx-auto flex flex-col items-center text-center px-4 relative z-10">
+        <div className="animate-fade-in-up">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 bg-gradient-to-r from-slate-800 via-blue-900 to-slate-700 bg-clip-text text-transparent">
+            Connecting Luxury Hospitality & Real Estate with the Future
+          </h1>
+        </div>
+
+        <div className="animate-fade-in-up animation-delay-200">
+          <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-4xl leading-relaxed">
+            Advanced telecommunications engineering and technology solutions for world-class Hotels, 
+            residences, retail & corporate buildings that demand excellence in every detail.
+          </p>
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-fade-in-up animation-delay-400">
+          <Button 
+            size="lg" 
+            className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold px-8 py-4 rounded-lg transform hover:scale-105 transition-all duration-300 shadow-lg"
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+          >
+            Start Your Project
+          </Button>
+          <Button 
+            variant="outline" 
+            size="lg"
+            className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold px-8 py-4 rounded-lg transform hover:scale-105 transition-all duration-300"
+            onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}
+          >
+            Explore Solutions
+          </Button>
+        </div>
+
+        {/* Estadísticas Animadas Editables desde CMS */}
+        <div className="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16 animate-fade-in-up animation-delay-600">
+          <div className="text-center group">
+            <AnimatedCounter 
+              end={parseInt(stats.years)} 
+              suffix="+" 
+              className="text-5xl md:text-6xl font-bold text-blue-600 mb-2 group-hover:text-blue-700 transition-colors duration-300"
+            />
+            <p className="text-gray-700 font-medium">Years of Excellence</p>
           </div>
-          
-          {/* Right Column - Additional Visual Elements or Space */}
-          <div className="hidden lg:block"></div>
+          <div className="text-center group">
+            <AnimatedCounter 
+              end={60000} 
+              prefix="+" 
+              className="text-5xl md:text-6xl font-bold text-blue-600 mb-2 group-hover:text-blue-700 transition-colors duration-300"
+            />
+            <p className="text-gray-700 font-medium">Guestrooms Connected</p>
+          </div>
+          <div className="text-center group">
+            <AnimatedCounter 
+              end={parseInt(stats.countries)} 
+              className="text-5xl md:text-6xl font-bold text-blue-600 mb-2 group-hover:text-blue-700 transition-colors duration-300"
+            />
+            <p className="text-gray-700 font-medium">Countries</p>
+          </div>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-        <div className="animate-bounce">
-          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse"></div>
-          </div>
+      {/* Fondo decorativo con animaciones */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-200 rounded-full opacity-20 animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-100 rounded-full opacity-30 animate-pulse animation-delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full">
+          <div className="w-full h-full bg-gradient-to-r from-transparent via-blue-50/30 to-transparent"></div>
         </div>
       </div>
     </section>
   );
 };
-
-export default HeroSection;
