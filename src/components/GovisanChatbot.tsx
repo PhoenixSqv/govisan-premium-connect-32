@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { X, MessageCircle, Phone, Calendar, Wifi, Building2, MapPin, Network, Router } from 'lucide-react';
+import { X, MessageCircle, Phone, Calendar, Wifi, Building2, MapPin } from 'lucide-react';
 
 interface ChatMessage {
   id: string;
@@ -12,10 +12,10 @@ interface ChatMessage {
   options?: string[];
 }
 
-interface TelecomProject {
+interface HotelProject {
   type: string;
   location: string;
-  scope?: string;
+  rooms?: number;
   timeline: string;
 }
 
@@ -23,19 +23,19 @@ export const GovisanChatbot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isTyping, setIsTyping] = useState(false);
-  const [userProject, setUserProject] = useState<Partial<TelecomProject>>({});
+  const [userProject, setUserProject] = useState<Partial<HotelProject>>({});
 
   const initialMessage: ChatMessage = {
     id: '1',
-    text: '¡Hola! Soy el asistente especializado de GOVISAN. ¿Cómo puedo ayudarte con tu proyecto de telecomunicaciones?',
+    text: 'Hello! I\'m GOVISAN\'s specialized assistant. How can I help you with your hotel project today?',
     isBot: true,
     timestamp: new Date(),
     options: [
-      'Auditoría de red existente',
-      'Presupuesto para fibra óptica',
-      'Migración a VoIP',
-      'Red inalámbrica empresarial',
-      'Consultoría técnica especializada'
+      'I need a technical audit',
+      'I want a quote for my hotel',
+      'I have a construction project',
+      'I need to upgrade my WiFi network',
+      'Wiredscore certification inquiry'
     ]
   };
 
@@ -45,61 +45,61 @@ export const GovisanChatbot: React.FC = () => {
     }
   }, [isOpen]);
 
-  const telecomKnowledge = {
-    'auditoría': {
-      response: `🔍 Perfecto! Nuestras auditorías de red incluyen:
+  const hotelKnowledge = {
+    'technical audit': {
+      response: `🔍 Perfect! Our technical audits include:
 
-• Análisis completo de infraestructura actual
-• Evaluación de rendimiento y seguridad  
-• Identificación de cuellos de botella
-• Plan de mejoras y optimización
+• Complete current infrastructure assessment
+• WiFi and connectivity performance analysis  
+• Improvement recommendations
+• Implementation roadmap
 
-¿Qué tipo de red necesitas auditar?`,
-      options: ['Red corporativa', 'Fibra óptica', 'Sistemas VoIP', 'Red inalámbrica']
+What type of property is it?`,
+      options: ['Luxury Hotel', 'Resort', 'Apartments', 'Corporate Building']
     },
-    'presupuesto': {
-      response: `💰 Te ayudo con el presupuesto! Para cotizar correctamente necesito:
+    'quote': {
+      response: `💰 I'll help you with the quote! To give you an accurate estimate I need to know:
 
-• Ubicación del proyecto
-• Metros lineales aproximados
-• Número de puntos de red
-• Servicios adicionales requeridos
+• Property type
+• Number of rooms
+• Location
+• Required services
 
-¿Empezamos?`,
-      options: ['Sí, empezamos', 'Necesito más información', 'Hablar con especialista']
+Shall we start?`,
+      options: ['Yes, let\'s start', 'I want more info first', 'Speak with an expert']
     },
-    'voip': {
-      response: `📞 Excelente elección! La migración VoIP ofrece:
+    'construction': {
+      response: `🏗️ Excellent timing! For new projects we can:
 
-• Reducción de costos del 40-60%
-• Comunicaciones unificadas
-• Escalabilidad total
-• Integración con sistemas empresariales
+• Design infrastructure from scratch
+• Guarantee international certifications
+• Optimize implementation costs
+• Prepare for future technologies
 
-¿Cuántas líneas telefónicas tienes actualmente?`,
-      options: ['Menos de 50', '50-100 líneas', '100-200 líneas', 'Más de 200']
+What phase is the project in?`,
+      options: ['Initial design', 'Pre-construction', 'Under construction', 'Pre-opening']
     },
-    'inalámbrica': {
-      response: `📶 Las redes inalámbricas empresariales requieren:
+    'wifi': {
+      response: `📶 Hotel WiFi networks require:
 
-• Diseño de cobertura profesional
-• WiFi 6/6E para máximo rendimiento
-• Gestión centralizada de accesos
-• Seguridad empresarial avanzada
+• WiFi 6E for maximum performance
+• Total coverage with no dead zones
+• Bandwidth management per guest
+• Enterprise security
 
-¿Qué superficie necesitas cubrir?`,
-      options: ['Menos de 1,000 m²', '1,000-5,000 m²', '5,000-10,000 m²', 'Más de 10,000 m²']
+What's the main current issue?`,
+      options: ['Slow speed', 'Coverage gaps', 'Frequent disconnections', 'Insufficient security']
     },
-    'consultoría': {
-      response: `👨‍💼 GOVISAN ofrece consultoría especializada en:
+    'wiredscore': {
+      response: `🏅 GOVISAN is expert in Wiredscore certifications:
 
-• Planificación de infraestructura
-• Selección de tecnologías
-• Gestión de proyectos
-• Cumplimiento normativo
+• Free preliminary assessment
+• Design for maximum score
+• Complete process management
+• Certification guarantee
 
-¿En qué área necesitas consultoría?`,
-      options: ['Red corporativa', 'Centro de datos', 'Comunicaciones', 'Normativas técnicas']
+What type of building?`,
+      options: ['Hotel', 'Offices', 'Residential', 'Mixed-use']
     }
   };
 
@@ -131,42 +131,42 @@ export const GovisanChatbot: React.FC = () => {
     // Process intelligent response
     const lowerOption = option.toLowerCase();
 
-    if (lowerOption.includes('auditoría') || lowerOption.includes('auditoria')) {
-      addBotMessage(telecomKnowledge['auditoría'].response, telecomKnowledge['auditoría'].options);
-    } else if (lowerOption.includes('presupuesto') || lowerOption.includes('fibra')) {
-      addBotMessage(telecomKnowledge['presupuesto'].response, telecomKnowledge['presupuesto'].options);
-    } else if (lowerOption.includes('voip') || lowerOption.includes('migración')) {
-      addBotMessage(telecomKnowledge['voip'].response, telecomKnowledge['voip'].options);
-    } else if (lowerOption.includes('inalámbrica') || lowerOption.includes('wifi') || lowerOption.includes('wireless')) {
-      addBotMessage(telecomKnowledge['inalámbrica'].response, telecomKnowledge['inalámbrica'].options);
-    } else if (lowerOption.includes('consultoría') || lowerOption.includes('consultoria')) {
-      addBotMessage(telecomKnowledge['consultoría'].response, telecomKnowledge['consultoría'].options);
-    } else if (lowerOption.includes('especialista') || lowerOption.includes('hablar')) {
+    if (lowerOption.includes('audit') || lowerOption.includes('technical')) {
+      addBotMessage(hotelKnowledge['technical audit'].response, hotelKnowledge['technical audit'].options);
+    } else if (lowerOption.includes('quote') || lowerOption.includes('budget')) {
+      addBotMessage(hotelKnowledge['quote'].response, hotelKnowledge['quote'].options);
+    } else if (lowerOption.includes('construction') || lowerOption.includes('building')) {
+      addBotMessage(hotelKnowledge['construction'].response, hotelKnowledge['construction'].options);
+    } else if (lowerOption.includes('wifi') || lowerOption.includes('network')) {
+      addBotMessage(hotelKnowledge['wifi'].response, hotelKnowledge['wifi'].options);
+    } else if (lowerOption.includes('wiredscore')) {
+      addBotMessage(hotelKnowledge['wiredscore'].response, hotelKnowledge['wiredscore'].options);
+    } else if (lowerOption.includes('expert') || lowerOption.includes('call')) {
       addBotMessage(
-        `📞 Te conecto con nuestro equipo especializado:
+        `📞 I'll connect you with our expert team:
 
-• Consulta técnica gratuita (30 min)
-• Análisis personalizado  
-• Propuesta específica
+• Free 15-minute technical call
+• Personalized analysis  
+• Specific proposal
 
-¿Prefieres llamada o WhatsApp?`,
-        ['Programar llamada', 'WhatsApp ahora', 'Email de contacto']
+Do you prefer a call or WhatsApp?`,
+        ['Schedule call', 'WhatsApp now', 'Email contact']
       );
-    } else if (lowerOption.includes('programar') || lowerOption.includes('llamada')) {
-      window.open('https://calendly.com/govisan-telecomunicaciones', '_blank');
-      addBotMessage('✅ Te he redirigido al calendario. ¡Selecciona el horario que mejor te convenga!');
+    } else if (lowerOption.includes('schedule') || lowerOption.includes('call')) {
+      window.open('https://calendly.com/govisan-consultoria', '_blank');
+      addBotMessage('✅ I\'ve redirected you to the calendar. Select the time that works best for you!');
     } else if (lowerOption.includes('whatsapp')) {
-      window.open('https://wa.me/34911234567?text=Hola, vengo del chatbot de GOVISAN. Necesito consultoría en telecomunicaciones.', '_blank');
-      addBotMessage('✅ He abierto WhatsApp. ¡Nuestro equipo te responderá inmediatamente!');
+      window.open('https://wa.me/34911234567?text=Hello, I come from GOVISAN\'s chatbot. I need technical consultancy for my hotel.', '_blank');
+      addBotMessage('✅ I\'ve opened WhatsApp for you. Our team will respond immediately!');
     } else {
       // Intelligent generic response
       addBotMessage(
-        `👨‍💻 Entiendo tu consulta. Para darte el mejor asesoramiento personalizado, ¿prefieres:
+        `👨‍💻 I understand your inquiry. To give you the best personalized advice, do you prefer:
 
-• Llamada técnica gratuita (30 min)
-• Consulta por WhatsApp
-• Recibir documentación específica`,
-        ['Llamada gratuita', 'WhatsApp Business', 'Enviar documentación']
+• Free technical call (15 min)
+• WhatsApp consultation
+• Receive specific documentation`,
+        ['Free call', 'WhatsApp Business', 'Send documentation']
       );
     }
   };
@@ -176,13 +176,13 @@ export const GovisanChatbot: React.FC = () => {
       <div className="fixed bottom-6 right-6 z-50">
         <Button
           onClick={() => setIsOpen(true)}
-          className="bg-primary hover:bg-primary/90 text-white rounded-full p-4 shadow-2xl animate-bounce"
+          className="bg-govisan-gold hover:bg-govisan-gold/90 text-white rounded-full p-4 shadow-2xl animate-bounce"
           size="lg"
         >
           <MessageCircle className="w-6 h-6" />
         </Button>
-        <div className="absolute -top-12 right-0 bg-primary text-white px-3 py-1 rounded-lg text-sm whitespace-nowrap animate-pulse">
-          ¿Necesitas asesoría técnica?
+        <div className="absolute -top-12 right-0 bg-black text-white px-3 py-1 rounded-lg text-sm whitespace-nowrap animate-pulse">
+          Need hotel consultancy?
         </div>
       </div>
     );
@@ -190,17 +190,17 @@ export const GovisanChatbot: React.FC = () => {
 
   return (
     <div className="fixed bottom-6 right-6 w-96 h-[500px] z-50">
-      <Card className="w-full h-full flex flex-col shadow-2xl border-2 border-primary/20">
+      <Card className="w-full h-full flex flex-col shadow-2xl border-2 border-govisan-gold/20">
         {/* Header */}
-        <div className="bg-gradient-to-r from-primary to-primary/80 text-white p-4 rounded-t-lg">
+        <div className="bg-gradient-to-r from-govisan-gold to-yellow-600 text-white p-4 rounded-t-lg">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                <Network className="w-5 h-5" />
+                <Building2 className="w-5 h-5" />
               </div>
               <div>
                 <h3 className="font-semibold">GOVISAN Assistant</h3>
-                <p className="text-xs opacity-90">Especialista en Telecomunicaciones</p>
+                <p className="text-xs opacity-90">Hotel Technology Specialist</p>
               </div>
             </div>
             <Button
@@ -215,7 +215,7 @@ export const GovisanChatbot: React.FC = () => {
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-secondary/30">
+        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
           {messages.map((message) => (
             <div
               key={message.id}
@@ -224,8 +224,8 @@ export const GovisanChatbot: React.FC = () => {
               <div
                 className={`max-w-[80%] p-3 rounded-lg ${
                   message.isBot
-                    ? 'bg-white border border-border text-foreground'
-                    : 'bg-primary text-white'
+                    ? 'bg-white border border-gray-200 text-gray-800'
+                    : 'bg-govisan-gold text-white'
                 }`}
               >
                 <p className="text-sm whitespace-pre-line">{message.text}</p>
@@ -237,7 +237,7 @@ export const GovisanChatbot: React.FC = () => {
                         variant="outline"
                         size="sm"
                         onClick={() => handleOptionClick(option)}
-                        className="w-full text-left justify-start text-xs hover:bg-primary hover:text-white border-primary/30"
+                        className="w-full text-left justify-start text-xs hover:bg-govisan-gold hover:text-white border-govisan-gold/30"
                       >
                         {option}
                       </Button>
@@ -250,11 +250,11 @@ export const GovisanChatbot: React.FC = () => {
 
           {isTyping && (
             <div className="flex justify-start">
-              <div className="bg-white border border-border rounded-lg p-3">
+              <div className="bg-white border border-gray-200 rounded-lg p-3">
                 <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-primary/60 rounded-full animate-bounce"></div>
-                  <div className="w-2 h-2 bg-primary/60 rounded-full animate-bounce animation-delay-200"></div>
-                  <div className="w-2 h-2 bg-primary/60 rounded-full animate-bounce animation-delay-400"></div>
+                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce animation-delay-200"></div>
+                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce animation-delay-400"></div>
                 </div>
               </div>
             </div>
@@ -262,10 +262,10 @@ export const GovisanChatbot: React.FC = () => {
         </div>
 
         {/* Footer */}
-        <div className="p-3 border-t border-border bg-white rounded-b-lg">
-          <div className="flex justify-between items-center text-xs text-muted-foreground">
-            <span>🔒 Conversación segura</span>
-            <span>🌐 Disponible 24/7</span>
+        <div className="p-3 border-t border-gray-200 bg-white rounded-b-lg">
+          <div className="flex justify-between items-center text-xs text-gray-500">
+            <span>🔒 Secure conversation</span>
+            <span>🌐 24/7 available</span>
           </div>
         </div>
       </Card>

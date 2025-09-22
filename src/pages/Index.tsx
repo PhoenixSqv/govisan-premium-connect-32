@@ -10,9 +10,6 @@ import SuccessStories from '@/components/SuccessStories';
 import InteractiveCaseStudies from '@/components/InteractiveCaseStudies';
 import InsightsSection from '@/components/InsightsSection';
 import ContactSection from '@/components/ContactSection';
-import TestimonialsSection from '@/components/TestimonialsSection';
-import GovisanChatbot from '@/components/GovisanChatbot';
-import BookingSystem from '@/components/BookingSystem';
 import FinalCTA from '@/components/FinalCTA';
 import Footer from '@/components/Footer';
 
@@ -29,16 +26,11 @@ const Index = () => {
         <SpecializationSection />
         <SuccessStories />
         <InteractiveCaseStudies />
-        <TestimonialsSection />
         <InsightsSection />
         <ContactSection />
         <FinalCTA />
       </main>
       <Footer />
-      
-      {/* Floating Components */}
-      <GovisanChatbot />
-      <BookingSystem />
     </div>
   );
 };
