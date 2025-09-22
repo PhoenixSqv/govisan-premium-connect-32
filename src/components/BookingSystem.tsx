@@ -30,28 +30,32 @@ export const BookingSystem: React.FC = () => {
     projectType: '',
     message: ''
   });
-  const bookingTypes: BookingType[] = [{
-    id: 'consultation',
-    title: 'Consulta Técnica Inicial',
-    duration: '30 minutos',
-    description: 'Evaluación gratuita de tu proyecto hotelero. Análisis de necesidades y recomendaciones iniciales.',
-    icon: <Phone className="w-5 h-5" />,
-    color: 'bg-blue-500'
-  }, {
-    id: 'audit',
-    title: 'Auditoría Técnica Completa',
-    duration: '60 minutos',
-    description: 'Revisión exhaustiva de infraestructura actual. Diagnóstico detallado y roadmap de mejoras.',
-    icon: <CheckCircle className="w-5 h-5" />,
-    color: 'bg-green-500'
-  }, {
-    id: 'project-review',
-    title: 'Revisión de Proyecto',
-    duration: '45 minutos',
-    description: 'Análisis de planos y especificaciones técnicas. Optimización de diseño y costos.',
-    icon: <MapPin className="w-5 h-5" />,
-    color: 'bg-purple-500'
-  }];
+    const bookingTypes: BookingType[] = [
+      {
+        id: 'consultation',
+        title: 'Consulta Técnica Inicial',
+        duration: '30 minutos',
+        description: 'Evaluación gratuita de tu infraestructura de red. Análisis de necesidades y recomendaciones técnicas.',
+        icon: <Phone className="w-5 h-5" />,
+        color: 'bg-primary'
+      },
+      {
+        id: 'audit',
+        title: 'Auditoría de Red Completa',
+        duration: '60 minutos',
+        description: 'Revisión exhaustiva de tu infraestructura de telecomunicaciones. Diagnóstico detallado y roadmap.',
+        icon: <CheckCircle className="w-5 h-5" />,
+        color: 'bg-green-500'
+      },
+      {
+        id: 'project-review',
+        title: 'Revisión de Proyecto',
+        duration: '45 minutos',
+        description: 'Análisis de especificaciones técnicas y planos. Optimización de diseño y presupuestos.',
+        icon: <MapPin className="w-5 h-5" />,
+        color: 'bg-accent'
+      }
+    ];
   const generateTimeSlots = (): TimeSlot[] => {
     const slots: TimeSlot[] = [];
     const startHour = 9;

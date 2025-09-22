@@ -1,31 +1,31 @@
 {
-  "title": "Connecting Luxury Hospitality & Real Estate with the Future",
-  "subtitle": "Advanced telecommunications engineering and technology solutions for world-class Hotels, residences, retail & corporate buildings that demand excellence in every detail.",
-  "backgroundImage": "/images/hero-background.jpg",
+  "title": "Transformando las Telecomunicaciones Empresariales",
+  "subtitle": "Soluciones avanzadas de infraestructura de red, fibra óptica y comunicaciones para empresas que buscan la excelencia tecnológica en España e India.",
+  "backgroundImage": "/src/assets/telecom-hero-background.jpg",
   "buttons": [
     {
-      "text": "Discover Our Solutions",
-      "link": "#solutions",
+      "text": "Agendar Consulta Técnica",
+      "link": "#contact",
       "type": "primary"
     },
     {
-      "text": "Our Expertise", 
-      "link": "#about",
+      "text": "Ver Casos de Éxito", 
+      "link": "#cases",
       "type": "secondary"
     }
   ],
   "stats": [
     {
-      "number": "25+",
-      "label": "Years of Excellence"
+      "number": "15+",
+      "label": "Años de Experiencia"
     },
     {
-      "number": "+60,000", 
-      "label": "guestrooms connected"
+      "number": "500+", 
+      "label": "Proyectos Completados"
     },
     {
-      "number": "11",
-      "label": "countries"
+      "number": "2",
+      "label": "Países (España & India)"
     }
   ]
 }
