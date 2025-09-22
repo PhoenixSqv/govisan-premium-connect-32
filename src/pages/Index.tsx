@@ -9,7 +9,7 @@ import SpecializationSection from '@/components/SpecializationSection';
 import SuccessStories from '@/components/SuccessStories';
 import InteractiveCaseStudies from '@/components/InteractiveCaseStudies';
 import InsightsSection from '@/components/InsightsSection';
-import EnhancedContactForm from '@/components/EnhancedContactForm';
+import ContactSection from '@/components/ContactSection';
 import FinalCTA from '@/components/FinalCTA';
 import Footer from '@/components/Footer';
 
@@ -27,7 +27,7 @@ const Index = () => {
         <SuccessStories />
         <InteractiveCaseStudies />
         <InsightsSection />
-        <EnhancedContactForm />
+        <ContactSection />
         <FinalCTA />
       </main>
       <Footer />
