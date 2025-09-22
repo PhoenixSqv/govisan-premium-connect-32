@@ -47,58 +47,58 @@ export const GovisanChatbot: React.FC = () => {
 
   const hotelKnowledge = {
     'auditoría técnica': {
-      response: '🔍 Perfecto! Nuestras auditorías técnicas incluyen:
+      response: `🔍 Perfecto! Nuestras auditorías técnicas incluyen:
 
 • Evaluación completa de infraestructura actual
-• Análisis de rendimiento WiFi y conectividad
+• Análisis de rendimiento WiFi y conectividad  
 • Recomendaciones de mejora
 • Roadmap de implementación
 
-¿Qué tipo de propiedad es?',
+¿Qué tipo de propiedad es?`,
       options: ['Hotel de lujo', 'Resort', 'Apartamentos', 'Edificio corporativo']
     },
     'presupuesto': {
-      response: '💰 Te ayudo con el presupuesto! Para darte una estimación precisa necesito conocer:
+      response: `💰 Te ayudo con el presupuesto! Para darte una estimación precisa necesito conocer:
 
 • Tipo de propiedad
 • Número de habitaciones
 • Ubicación
 • Servicios requeridos
 
-¿Empezamos?',
+¿Empezamos?`,
       options: ['Sí, empezemos', 'Primero quiero más info', 'Hablar con un experto']
     },
     'construcción': {
-      response: '🏗️ ¡Excelente timing! En proyectos nuevos podemos:
+      response: `🏗️ ¡Excelente timing! En proyectos nuevos podemos:
 
 • Diseñar la infraestructura desde cero
 • Garantizar certificaciones internacionales
 • Optimizar costos de implementación
 • Preparar para tecnologías futuras
 
-¿En qué fase está el proyecto?',
+¿En qué fase está el proyecto?`,
       options: ['Diseño inicial', 'Pre-construcción', 'En construcción', 'Pre-apertura']
     },
     'wifi': {
-      response: '📶 Las redes WiFi hoteleras requieren:
+      response: `📶 Las redes WiFi hoteleras requieren:
 
 • WiFi 6E para máximo rendimiento
 • Cobertura total sin zonas muertas
 • Gestión de ancho de banda por huésped
 • Seguridad empresarial
 
-¿Cuál es el problema principal actual?',
+¿Cuál es el problema principal actual?`,
       options: ['Velocidad lenta', 'Zonas sin cobertura', 'Muchas desconexiones', 'Seguridad insuficiente']
     },
     'wiredscore': {
-      response: '🏅 GOVISAN es experto en certificaciones Wiredscore:
+      response: `🏅 GOVISAN es experto en certificaciones Wiredscore:
 
 • Evaluación previa gratuita
 • Diseño para máxima puntuación
 • Gestión completa del proceso
 • Garantía de certificación
 
-¿Para qué tipo de edificio?',
+¿Para qué tipo de edificio?`,
       options: ['Hotel', 'Oficinas', 'Residencial', 'Mixto']
     }
   };
@@ -143,13 +143,13 @@ export const GovisanChatbot: React.FC = () => {
       addBotMessage(hotelKnowledge['wiredscore'].response, hotelKnowledge['wiredscore'].options);
     } else if (lowerOption.includes('experto') || lowerOption.includes('llamada')) {
       addBotMessage(
-        '📞 Te conecto con nuestro equipo de expertos:
+        `📞 Te conecto con nuestro equipo de expertos:
 
 • Llamada técnica gratuita de 15 min
-• Análisis personalizado
+• Análisis personalizado  
 • Propuesta específica
 
-¿Prefieres llamada o WhatsApp?',
+¿Prefieres llamada o WhatsApp?`,
         ['Agendar llamada', 'WhatsApp ahora', 'Email de contacto']
       );
     } else if (lowerOption.includes('agendar') || lowerOption.includes('llamada')) {
@@ -161,11 +161,11 @@ export const GovisanChatbot: React.FC = () => {
     } else {
       // Respuesta genérica inteligente
       addBotMessage(
-        '👨‍💻 Entiendo tu consulta. Para darte la mejor asesoría personalizada, ¿prefieres:
+        `👨‍💻 Entiendo tu consulta. Para darte la mejor asesoría personalizada, ¿prefieres:
 
 • Llamada técnica gratuita (15 min)
 • Consulta por WhatsApp
-• Recibir documentación específica',
+• Recibir documentación específica`,
         ['Llamada gratuita', 'WhatsApp Business', 'Enviar documentación']
       );
     }

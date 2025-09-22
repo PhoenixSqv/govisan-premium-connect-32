@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { AnimatedCounter } from "@/components/AnimatedCounter";
+import AnimatedCounter from "@/components/AnimatedCounter";
 
 interface HeroStats {
   years: string;
@@ -8,7 +8,7 @@ interface HeroStats {
   countries: string;
 }
 
-export const HeroSection = () => {
+const HeroSection = () => {
   const [stats, setStats] = useState<HeroStats>({
     years: "25+",
     guestrooms: "+60,000", 
@@ -100,3 +100,5 @@ export const HeroSection = () => {
     </section>
   );
 };
+
+export default HeroSection;
