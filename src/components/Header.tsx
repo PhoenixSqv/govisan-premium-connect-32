@@ -59,7 +59,7 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden lg:flex items-center space-x-4">
-            <Button onClick={() => handleNavClick('#contact')} className="bg-govisan-gold hover:bg-govisan-gold/90 text-white font-medium text-lg mx-[10px] px-0">
+            <Button onClick={() => handleNavClick('#contact')} className="bg-govisan-gold hover:bg-govisan-gold/90 text-white font-medium text-lg px-[10px] mx-[6px]">
               Request Proposal
             </Button>
           </div>
