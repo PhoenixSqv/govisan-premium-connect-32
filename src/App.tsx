@@ -19,6 +19,8 @@ import CasesPage from "./admin/pages/CasesPage";
 import AboutPage from "./admin/pages/AboutPage";
 import InsightsPage from "./admin/pages/InsightsPage";
 import ContactPage from "./admin/pages/ContactPage";
+import GovisanChatbot from "@/components/GovisanChatbot";
+import BookingSystem from "@/components/BookingSystem";
 
 const queryClient = new QueryClient();
 
@@ -50,6 +52,28 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
+       import GovisanChatbot from "@/components/GovisanChatbot";
+ import BookingSystem from "@/components/BookingSystem";
+
+ const App = () => (
+   <QueryClientProvider client={queryClient}>
+     <TooltipProvider>
+-        <BrowserRouter>
++        <BrowserRouter>
+           <Routes>
+             <Route path="/" element={<Index />} />
+             {/* ...tus rutas admin y páginas... */}
+             <Route path="*" element={<NotFound />} />
+           </Routes>
+         </BrowserRouter>
++
++        {/* COMPONENTES GLOBALES */}
++        <GovisanChatbot />
++        <BookingSystem />
+     </TooltipProvider>
+   </QueryClientProvider>
+ );
+
     </TooltipProvider>
   </QueryClientProvider>
 );
