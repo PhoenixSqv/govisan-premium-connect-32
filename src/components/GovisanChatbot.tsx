@@ -27,15 +27,15 @@ export const GovisanChatbot: React.FC = () => {
 
   const initialMessage: ChatMessage = {
     id: '1',
-    text: '¡Hola! Soy el asistente especializado de GOVISAN. ¿En qué proyecto hotelero te puedo ayudar hoy?',
+    text: 'Hello! I\'m GOVISAN\'s specialized assistant. How can I help you with your hotel project today?',
     isBot: true,
     timestamp: new Date(),
     options: [
-      'Necesito auditoría técnica',
-      'Quiero presupuesto para mi hotel',
-      'Tengo un proyecto en construcción',
-      'Necesito actualizar mi red WiFi',
-      'Consulta sobre certificación Wiredscore'
+      'I need a technical audit',
+      'I want a quote for my hotel',
+      'I have a construction project',
+      'I need to upgrade my WiFi network',
+      'Wiredscore certification inquiry'
     ]
   };
 
@@ -46,60 +46,60 @@ export const GovisanChatbot: React.FC = () => {
   }, [isOpen]);
 
   const hotelKnowledge = {
-    'auditoría técnica': {
-      response: `🔍 Perfecto! Nuestras auditorías técnicas incluyen:
+    'technical audit': {
+      response: `🔍 Perfect! Our technical audits include:
 
-• Evaluación completa de infraestructura actual
-• Análisis de rendimiento WiFi y conectividad  
-• Recomendaciones de mejora
-• Roadmap de implementación
+• Complete current infrastructure assessment
+• WiFi and connectivity performance analysis  
+• Improvement recommendations
+• Implementation roadmap
 
-¿Qué tipo de propiedad es?`,
-      options: ['Hotel de lujo', 'Resort', 'Apartamentos', 'Edificio corporativo']
+What type of property is it?`,
+      options: ['Luxury Hotel', 'Resort', 'Apartments', 'Corporate Building']
     },
-    'presupuesto': {
-      response: `💰 Te ayudo con el presupuesto! Para darte una estimación precisa necesito conocer:
+    'quote': {
+      response: `💰 I'll help you with the quote! To give you an accurate estimate I need to know:
 
-• Tipo de propiedad
-• Número de habitaciones
-• Ubicación
-• Servicios requeridos
+• Property type
+• Number of rooms
+• Location
+• Required services
 
-¿Empezamos?`,
-      options: ['Sí, empezemos', 'Primero quiero más info', 'Hablar con un experto']
+Shall we start?`,
+      options: ['Yes, let\'s start', 'I want more info first', 'Speak with an expert']
     },
-    'construcción': {
-      response: `🏗️ ¡Excelente timing! En proyectos nuevos podemos:
+    'construction': {
+      response: `🏗️ Excellent timing! For new projects we can:
 
-• Diseñar la infraestructura desde cero
-• Garantizar certificaciones internacionales
-• Optimizar costos de implementación
-• Preparar para tecnologías futuras
+• Design infrastructure from scratch
+• Guarantee international certifications
+• Optimize implementation costs
+• Prepare for future technologies
 
-¿En qué fase está el proyecto?`,
-      options: ['Diseño inicial', 'Pre-construcción', 'En construcción', 'Pre-apertura']
+What phase is the project in?`,
+      options: ['Initial design', 'Pre-construction', 'Under construction', 'Pre-opening']
     },
     'wifi': {
-      response: `📶 Las redes WiFi hoteleras requieren:
+      response: `📶 Hotel WiFi networks require:
 
-• WiFi 6E para máximo rendimiento
-• Cobertura total sin zonas muertas
-• Gestión de ancho de banda por huésped
-• Seguridad empresarial
+• WiFi 6E for maximum performance
+• Total coverage with no dead zones
+• Bandwidth management per guest
+• Enterprise security
 
-¿Cuál es el problema principal actual?`,
-      options: ['Velocidad lenta', 'Zonas sin cobertura', 'Muchas desconexiones', 'Seguridad insuficiente']
+What's the main current issue?`,
+      options: ['Slow speed', 'Coverage gaps', 'Frequent disconnections', 'Insufficient security']
     },
     'wiredscore': {
-      response: `🏅 GOVISAN es experto en certificaciones Wiredscore:
+      response: `🏅 GOVISAN is expert in Wiredscore certifications:
 
-• Evaluación previa gratuita
-• Diseño para máxima puntuación
-• Gestión completa del proceso
-• Garantía de certificación
+• Free preliminary assessment
+• Design for maximum score
+• Complete process management
+• Certification guarantee
 
-¿Para qué tipo de edificio?`,
-      options: ['Hotel', 'Oficinas', 'Residencial', 'Mixto']
+What type of building?`,
+      options: ['Hotel', 'Offices', 'Residential', 'Mixed-use']
     }
   };
 
@@ -128,45 +128,45 @@ export const GovisanChatbot: React.FC = () => {
     };
     setMessages(prev => [...prev, userMessage]);
 
-    // Procesar respuesta inteligente
+    // Process intelligent response
     const lowerOption = option.toLowerCase();
 
-    if (lowerOption.includes('auditoría') || lowerOption.includes('auditoria')) {
-      addBotMessage(hotelKnowledge['auditoría técnica'].response, hotelKnowledge['auditoría técnica'].options);
-    } else if (lowerOption.includes('presupuesto')) {
-      addBotMessage(hotelKnowledge['presupuesto'].response, hotelKnowledge['presupuesto'].options);
-    } else if (lowerOption.includes('construcción')) {
-      addBotMessage(hotelKnowledge['construcción'].response, hotelKnowledge['construcción'].options);
-    } else if (lowerOption.includes('wifi') || lowerOption.includes('red')) {
+    if (lowerOption.includes('audit') || lowerOption.includes('technical')) {
+      addBotMessage(hotelKnowledge['technical audit'].response, hotelKnowledge['technical audit'].options);
+    } else if (lowerOption.includes('quote') || lowerOption.includes('budget')) {
+      addBotMessage(hotelKnowledge['quote'].response, hotelKnowledge['quote'].options);
+    } else if (lowerOption.includes('construction') || lowerOption.includes('building')) {
+      addBotMessage(hotelKnowledge['construction'].response, hotelKnowledge['construction'].options);
+    } else if (lowerOption.includes('wifi') || lowerOption.includes('network')) {
       addBotMessage(hotelKnowledge['wifi'].response, hotelKnowledge['wifi'].options);
     } else if (lowerOption.includes('wiredscore')) {
       addBotMessage(hotelKnowledge['wiredscore'].response, hotelKnowledge['wiredscore'].options);
-    } else if (lowerOption.includes('experto') || lowerOption.includes('llamada')) {
+    } else if (lowerOption.includes('expert') || lowerOption.includes('call')) {
       addBotMessage(
-        `📞 Te conecto con nuestro equipo de expertos:
+        `📞 I'll connect you with our expert team:
 
-• Llamada técnica gratuita de 15 min
-• Análisis personalizado  
-• Propuesta específica
+• Free 15-minute technical call
+• Personalized analysis  
+• Specific proposal
 
-¿Prefieres llamada o WhatsApp?`,
-        ['Agendar llamada', 'WhatsApp ahora', 'Email de contacto']
+Do you prefer a call or WhatsApp?`,
+        ['Schedule call', 'WhatsApp now', 'Email contact']
       );
-    } else if (lowerOption.includes('agendar') || lowerOption.includes('llamada')) {
+    } else if (lowerOption.includes('schedule') || lowerOption.includes('call')) {
       window.open('https://calendly.com/govisan-consultoria', '_blank');
-      addBotMessage('✅ Te he redirigido al calendario. ¡Selecciona el horario que mejor te convenga!');
+      addBotMessage('✅ I\'ve redirected you to the calendar. Select the time that works best for you!');
     } else if (lowerOption.includes('whatsapp')) {
-      window.open('https://wa.me/34911234567?text=Hola, vengo del chatbot de GOVISAN. Necesito consultoría técnica para mi hotel.', '_blank');
-      addBotMessage('✅ Te he abierto WhatsApp. ¡Nuestro equipo te responderá inmediatamente!');
+      window.open('https://wa.me/34911234567?text=Hello, I come from GOVISAN\'s chatbot. I need technical consultancy for my hotel.', '_blank');
+      addBotMessage('✅ I\'ve opened WhatsApp for you. Our team will respond immediately!');
     } else {
-      // Respuesta genérica inteligente
+      // Intelligent generic response
       addBotMessage(
-        `👨‍💻 Entiendo tu consulta. Para darte la mejor asesoría personalizada, ¿prefieres:
+        `👨‍💻 I understand your inquiry. To give you the best personalized advice, do you prefer:
 
-• Llamada técnica gratuita (15 min)
-• Consulta por WhatsApp
-• Recibir documentación específica`,
-        ['Llamada gratuita', 'WhatsApp Business', 'Enviar documentación']
+• Free technical call (15 min)
+• WhatsApp consultation
+• Receive specific documentation`,
+        ['Free call', 'WhatsApp Business', 'Send documentation']
       );
     }
   };
@@ -182,7 +182,7 @@ export const GovisanChatbot: React.FC = () => {
           <MessageCircle className="w-6 h-6" />
         </Button>
         <div className="absolute -top-12 right-0 bg-black text-white px-3 py-1 rounded-lg text-sm whitespace-nowrap animate-pulse">
-          ¿Necesitas asesoría hotelera?
+          Need hotel consultancy?
         </div>
       </div>
     );
@@ -200,7 +200,7 @@ export const GovisanChatbot: React.FC = () => {
               </div>
               <div>
                 <h3 className="font-semibold">GOVISAN Assistant</h3>
-                <p className="text-xs opacity-90">Especialista en Tecnología Hotelera</p>
+                <p className="text-xs opacity-90">Hotel Technology Specialist</p>
               </div>
             </div>
             <Button
@@ -264,8 +264,8 @@ export const GovisanChatbot: React.FC = () => {
         {/* Footer */}
         <div className="p-3 border-t border-gray-200 bg-white rounded-b-lg">
           <div className="flex justify-between items-center text-xs text-gray-500">
-            <span>🔒 Conversación segura</span>
-            <span>🌐 24/7 disponible</span>
+            <span>🔒 Secure conversation</span>
+            <span>🌐 24/7 available</span>
           </div>
         </div>
       </Card>
