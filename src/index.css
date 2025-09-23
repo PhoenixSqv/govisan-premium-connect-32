@@ -259,4 +259,22 @@ All colors MUST be HSL.
   .wm--about::before { background-image: url("/src/assets/watermarks/about.svg"); }
   .wm--insights::before { background-image: url("/src/assets/watermarks/insights.svg"); }
   .wm--contact::before { background-image: url("/src/assets/watermarks/contact.svg"); }
+
+  /* Scroll animation for brands carousel */
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-scroll {
+    animation: scroll 30s linear infinite;
+  }
+
+  .animate-scroll:hover {
+    animation-play-state: paused;
+  }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from './ui/button';
-import { ArrowRight, Phone } from 'lucide-react';
+import { ArrowRight, Phone, Calendar, Users, Award } from 'lucide-react';
 const FinalCTA = () => {
   const handleNavClick = (href: string) => {
     const element = document.querySelector(href);
@@ -35,14 +35,26 @@ const FinalCTA = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 text-center">
             <div className="text-white/90">
-              
-              
+              <div className="flex items-center justify-center mb-3">
+                <Calendar className="h-8 w-8 text-govisan-gold mr-3" />
+                <div className="text-3xl font-bold text-white">25+</div>
+              </div>
+              <p className="text-white/70 text-sm">Years of Excellence</p>
             </div>
             <div className="text-white/90">
-              
-              
+              <div className="flex items-center justify-center mb-3">
+                <Users className="h-8 w-8 text-govisan-gold mr-3" />
+                <div className="text-3xl font-bold text-white">60K+</div>
+              </div>
+              <p className="text-white/70 text-sm">Guestrooms Connected</p>
             </div>
-            
+            <div className="text-white/90">
+              <div className="flex items-center justify-center mb-3">
+                <Award className="h-8 w-8 text-govisan-gold mr-3" />
+                <div className="text-3xl font-bold text-white">99.9%</div>
+              </div>
+              <p className="text-white/70 text-sm">Client Satisfaction</p>
+            </div>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from './ui/button';
-import { Wifi, Smartphone, Shield, Settings, Award, Star } from 'lucide-react';
+import { Wifi, Smartphone, Shield, Settings, Award, Star, Monitor } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 interface SolutionItem {
@@ -112,6 +112,100 @@ const SolutionsSection = () => {
               </div>
             );
           })}
+        </div>
+
+        {/* Detailed Services Subsection */}
+        <div className="mt-20">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-foreground mb-4">
+              Specialized Service Areas
+            </h3>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Comprehensive solutions designed for the unique demands of luxury hospitality
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="bg-card rounded-2xl p-8 shadow-sm hover:shadow-md transition-all duration-300">
+              <div className="w-16 h-16 bg-govisan-gold/10 rounded-2xl flex items-center justify-center mb-6">
+                <Award className="h-8 w-8 text-govisan-gold" />
+              </div>
+              <h3 className="text-xl font-semibold text-foreground mb-4 leading-tight">
+                Wiredscore Certifications & Technologies
+              </h3>
+              <p className="text-muted-foreground mb-6 text-sm leading-relaxed">
+                We design and implement cutting-edge technologies for hospitality and real estate projects, delivering solutions aligned with international standards and Wiredscore certifications.
+              </p>
+              <ul className="space-y-3">
+                {["Wiredscore certification process", "International standards compliance", "Cutting-edge technology implementation", "Real estate project optimization"].map((feature, index) => (
+                  <li key={index} className="flex items-start text-sm text-muted-foreground">
+                    <div className="w-1.5 h-1.5 bg-govisan-gold rounded-full mr-3 mt-2 flex-shrink-0"></div>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="bg-card rounded-2xl p-8 shadow-sm hover:shadow-md transition-all duration-300">
+              <div className="w-16 h-16 bg-govisan-gold/10 rounded-2xl flex items-center justify-center mb-6">
+                <Wifi className="h-8 w-8 text-govisan-gold" />
+              </div>
+              <h3 className="text-xl font-semibold text-foreground mb-4 leading-tight">
+                Network Infrastructure
+              </h3>
+              <p className="text-muted-foreground mb-6 text-sm leading-relaxed">
+                Robust telecommunications and connectivity solutions designed for high-demand hospitality environments.
+              </p>
+              <ul className="space-y-3">
+                {["High-speed fiber optic networks", "Redundant connectivity systems", "Guest WiFi and enterprise networks", "Network security and monitoring"].map((feature, index) => (
+                  <li key={index} className="flex items-start text-sm text-muted-foreground">
+                    <div className="w-1.5 h-1.5 bg-govisan-gold rounded-full mr-3 mt-2 flex-shrink-0"></div>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="bg-card rounded-2xl p-8 shadow-sm hover:shadow-md transition-all duration-300">
+              <div className="w-16 h-16 bg-govisan-gold/10 rounded-2xl flex items-center justify-center mb-6">
+                <Monitor className="h-8 w-8 text-govisan-gold" />
+              </div>
+              <h3 className="text-xl font-semibold text-foreground mb-4 leading-tight">
+                Audiovisual Systems
+              </h3>
+              <p className="text-muted-foreground mb-6 text-sm leading-relaxed">
+                State-of-the-art AV solutions for meeting rooms, restaurants, and entertainment spaces.
+              </p>
+              <ul className="space-y-3">
+                {["Conference room AV systems", "Digital signage solutions", "Restaurant entertainment systems", "Outdoor display installations"].map((feature, index) => (
+                  <li key={index} className="flex items-start text-sm text-muted-foreground">
+                    <div className="w-1.5 h-1.5 bg-govisan-gold rounded-full mr-3 mt-2 flex-shrink-0"></div>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="bg-card rounded-2xl p-8 shadow-sm hover:shadow-md transition-all duration-300">
+              <div className="w-16 h-16 bg-govisan-gold/10 rounded-2xl flex items-center justify-center mb-6">
+                <Settings className="h-8 w-8 text-govisan-gold" />
+              </div>
+              <h3 className="text-xl font-semibold text-foreground mb-4 leading-tight">
+                Smart Building Integration
+              </h3>
+              <p className="text-muted-foreground mb-6 text-sm leading-relaxed">
+                Integrated building management systems that optimize operations and enhance guest comfort.
+              </p>
+              <ul className="space-y-3">
+                {["HVAC control and monitoring", "Lighting automation systems", "Energy management solutions", "Environmental monitoring"].map((feature, index) => (
+                  <li key={index} className="flex items-start text-sm text-muted-foreground">
+                    <div className="w-1.5 h-1.5 bg-govisan-gold rounded-full mr-3 mt-2 flex-shrink-0"></div>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </section>

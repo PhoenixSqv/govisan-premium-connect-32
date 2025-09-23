@@ -178,9 +178,12 @@ const InteractiveCaseStudies = () => {
             >
               <div className="relative overflow-hidden h-48">
                 <img 
-                  src={story.image} 
+                  src={`/images/project-${story.id}.jpg`} 
                   alt={story.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  onError={(e) => {
+                    e.currentTarget.src = '/images/placeholder-project.jpg';
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 
@@ -239,9 +242,12 @@ const InteractiveCaseStudies = () => {
                 {/* Image Gallery */}
                 <div className="relative h-80 overflow-hidden">
                   <img 
-                    src={selectedCase.image} 
+                    src={`/images/project-${selectedCase.id}.jpg`} 
                     alt={selectedCase.title}
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.currentTarget.src = '/images/placeholder-project.jpg';
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   
