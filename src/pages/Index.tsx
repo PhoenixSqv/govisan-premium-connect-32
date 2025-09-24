@@ -15,6 +15,14 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <Header />
+      
+      {/* Under Construction Banner */}
+      <div className="bg-accent text-accent-foreground py-3 text-center font-medium">
+        <div className="max-w-7xl mx-auto px-4">
+          🚧 Under Construction - Website in Development 🚧
+        </div>
+      </div>
+      
       <main>
         <HeroSection />
         <AboutSection />
