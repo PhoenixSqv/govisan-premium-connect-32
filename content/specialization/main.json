@@ -41,15 +41,14 @@
     },
     {
       "icon": "Shield",
-      "title": "Cybersecurity",
-      "description": "Comprehensive security solutions protecting guest data and business operations.",
+      "title": "Smart Entertainment Solutions",
+      "description": "Advanced in-room entertainment and communication systems designed to enhance guest satisfaction.",
       "features": [
-        "Data Protection",
-        "Threat Detection",
-        "Compliance Management",
-        "Security Audits",
-        "Incident Response"
-      ]
+        "IPTV & Smart TV Solutions",
+        "Casting & Streaming Services",
+        "Interactive Room Controls",
+        "Digital Signage Platforms",
+              ]
     },
     {
       "icon": "BarChart3",
@@ -65,14 +64,13 @@
     },
     {
       "icon": "Headphones",
-      "title": "24/7 Support",
-      "description": "Round-the-clock technical support ensuring continuous operation and guest satisfaction.",
+      "title": "IoT & Automation",
+      "description": "Seamless integration of smart devices to optimize efficiency and guest comfort.",
       "features": [
-        "Technical Support",
-        "System Monitoring",
-        "Preventive Maintenance",
-        "Emergency Response",
-        "Training & Documentation"
+        "Smart Room Controls",
+        "Sensor-Based Energy Saving",
+        "Automated Lighting & Climate Management",
+        "Predictive Maintenance",
       ]
     }
   ]
