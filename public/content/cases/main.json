@@ -1,48 +1,32 @@
 {
   "title": "Success Stories from World-Class Hotels",
   "description": "Discover how we've transformed luxury hospitality experiences through innovative technology solutions across the globe.",
-  "stories": [
+  "cases": [
     {
-      "id": 1,
-      "title": "Mandarin Oriental – Seamless Smart Integration",
-      "location": "Maldives",
-      "guests": "5,000",
-      "rating": "4.9",
+      "title": "Luxury Resort Maldives",
+      "subtitle": "Complete Technology Infrastructure",
+      "description": "Full telecommunications and AV systems implementation for a 150-villa luxury resort, including underwater fiber optic networks and smart room automation.",
       "image": "/src/assets/maldives-project.jpg",
-      "description": "Transforming a luxury resort in the Maldives with cutting-edge connectivity infrastructure for world-class guest experiences.",
-      "achievements": [
-        "99.9% network uptime",
-        "Zero guest connectivity complaints", 
-        "40% increase in guest satisfaction scores"
-      ]
+      "stats": [
+        { "number": "150", "label": "Villas Connected" },
+        { "number": "99.9%", "label": "Uptime Achieved" },
+        { "number": "6", "label": "Months Delivery" }
+      ],
+      "technologies": ["Fiber Optics", "Smart Automation", "Wireless Networks", "AV Systems"],
+      "client": "Confidential 5-Star Resort Chain"
     },
     {
-      "id": 2,
-      "title": "Six Senses Alpine Resort Network",
-      "location": "Switzerland", 
-      "guests": "3,200",
-      "rating": "4.8",
-      "image": "/src/assets/maldives-project.jpg",
-      "description": "Complete telecommunications overhaul for a premium mountain resort chain with seamless connectivity.",
-      "achievements": [
-        "WiFi 6E implementation",
-        "Seamless inter-resort roaming",
-        "25% faster connection speeds"
-      ]
-    },
-    {
-      "id": 3,
-      "title": "Fairmont Bangkok Smart Integration",
-      "location": "Thailand",
-      "guests": "8,500", 
-      "rating": "4.9",
-      "image": "/src/assets/maldives-project.jpg",
-      "description": "Smart city integration for a flagship hospitality development with advanced IoT systems.",
-      "achievements": [
-        "Full IoT room automation",
-        "Mobile-first guest experience",
-        "30% operational efficiency gain"
-      ]
+      "title": "Historic Hotel London",
+      "subtitle": "Heritage Building Technology Integration", 
+      "description": "Seamless integration of modern technology systems while preserving the architectural integrity of a 200-year-old historic hotel.",
+      "image": "/src/assets/hero-background.jpg",
+      "stats": [
+        { "number": "180", "label": "Rooms Upgraded" },
+        { "number": "Zero", "label": "Heritage Damage" },
+        { "number": "4", "label": "Awards Won" }
+      ],
+      "technologies": ["Discrete Cabling", "Heritage Integration", "Wireless Solutions", "Smart Controls"],
+      "client": "Historic Luxury Hotel Group"
     }
   ]
 }

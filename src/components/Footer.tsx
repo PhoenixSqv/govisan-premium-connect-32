@@ -66,7 +66,7 @@ const Footer = () => {
   }];
   const offices = [{
     region: 'Europe (HQ)',
-    address: 'Barcelona, Spain',
+    address: 'Madrid, Spain',
     phone: '+34 91 XXX XXXX',
     email: 'europe@govisan.com'
   }, {
@@ -103,24 +103,15 @@ const Footer = () => {
             
             {/* Navigation Links */}
             <div className="lg:col-span-2">
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                 <div>
                   <h3 className="text-lg font-semibold text-govisan-gold mb-4">Company</h3>
                   <ul className="space-y-3">
-                    <li>
-                      <a href="#about" className="text-white/70 hover:text-white transition-colors">
-                        About Govisan
-                      </a>
-                    </li>
-                    <li>
-                      <span className="text-white/40 text-sm">Our Team (Coming Soon)</span>
-                    </li>
-                    <li>
-                      <span className="text-white/40 text-sm">Careers (Coming Soon)</span>
-                    </li>
-                    <li>
-                      <span className="text-white/40 text-sm">News (Coming Soon)</span>
-                    </li>
+                    {navigation.company.map(item => <li key={item.name}>
+                        <a href={item.href} className="text-white/70 hover:text-white transition-colors">
+                          {item.name}
+                        </a>
+                      </li>)}
                   </ul>
                 </div>
                 
@@ -135,21 +126,16 @@ const Footer = () => {
                   </ul>
                 </div>
                 
+                
+                
                 <div>
                   <h3 className="text-lg font-semibold text-govisan-gold mb-4">Legal</h3>
                   <ul className="space-y-3">
-                    <li>
-                      <span className="text-white/40 text-sm">Privacy Policy (Coming Soon)</span>
-                    </li>
-                    <li>
-                      <span className="text-white/40 text-sm">Terms of Service (Coming Soon)</span>
-                    </li>
-                    <li>
-                      <span className="text-white/40 text-sm">Cookie Policy (Coming Soon)</span>
-                    </li>
-                    <li>
-                      <span className="text-white/40 text-sm">Compliance (Coming Soon)</span>
-                    </li>
+                    {navigation.legal.map(item => <li key={item.name}>
+                        <a href={item.href} className="text-white/70 hover:text-white transition-colors">
+                          {item.name}
+                        </a>
+                      </li>)}
                   </ul>
                 </div>
               </div>

@@ -59,7 +59,7 @@ const ContactSection = () => {
   if (!content) return <div>Loading...</div>;
 
   return (
-    <section id="contact" className="section--wm wm--contact py-16 bg-background">
+    <section id="contact" className="section--wm wm--contact py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">

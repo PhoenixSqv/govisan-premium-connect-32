@@ -10,11 +10,9 @@ import {
   TrendingUp,
   Calendar,
   Activity,
-  ExternalLink,
-  Settings,
-  LogOut
+  ExternalLink
 } from 'lucide-react';
-import { logout } from '@/lib/cms/auth';
+import { cmsApi } from '@/lib/cms/api';
 
 interface DashboardStats {
   totalContent: number;
@@ -221,57 +219,43 @@ const DashboardPage = () => {
         </Card>
       </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Settings className="h-5 w-5" />
-              Sistema CMS
-            </CardTitle>
-            <CardDescription>
-              Estado del sistema de gestión de contenidos
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
-              <div className="flex items-center space-x-3">
-                <Badge variant="outline" className="bg-green-100 text-green-800">
-                  <Activity className="mr-1 h-3 w-3" />
-                  Online
-                </Badge>
-                <span className="text-sm font-medium">Guardado directo activo</span>
-              </div>
+      {/* System Status */}
+      <Card>
+        <CardHeader>
+          <CardTitle>System Status</CardTitle>
+          <CardDescription>
+            Current system health and performance
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-4 md:grid-cols-3">
+            <div className="flex items-center space-x-2">
+              <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+                <Activity className="mr-1 h-3 w-3" />
+                CMS Online
+              </Badge>
             </div>
             
-            <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
-              <div className="flex items-center space-x-3">
-                <Badge variant="outline" className="bg-blue-100 text-blue-800">
-                  <TrendingUp className="mr-1 h-3 w-3" />
-                  Optimizado  
-                </Badge>
-                <span className="text-sm font-medium">Auto-guardado cada 30s</span>
-              </div>
+            <div className="flex items-center space-x-2">
+              <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+                <TrendingUp className="mr-1 h-3 w-3" />
+                Performance Good
+              </Badge>
             </div>
-
-            <div className="flex items-center justify-between p-3 bg-amber-50 rounded-lg">
-              <div className="flex items-center space-x-3">
-                <Badge variant="outline" className="bg-amber-100 text-amber-800">
-                  <Users className="mr-1 h-3 w-3" />
-                  Sesión activa
-                </Badge>
-                <span className="text-sm font-medium">Administrador conectado</span>
-              </div>
-              <Button 
-                variant="outline" 
-                size="sm"
-                onClick={() => logout()}
-                className="ml-2"
-              >
-                <LogOut className="h-4 w-4 mr-1" />
-                Cerrar sesión
-              </Button>
+            
+            <div className="flex items-center space-x-2">
+              <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+                <Users className="mr-1 h-3 w-3" />
+                1 User Online
+              </Badge>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+          
+          <div className="mt-4 text-sm text-muted-foreground">
+            Last updated: {new Date(stats.lastUpdated).toLocaleString()}
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };

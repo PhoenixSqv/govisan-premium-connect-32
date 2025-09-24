@@ -21,11 +21,11 @@
     },
     {
       "number": "+60,000", 
-      "label": "Guestrooms Connected"
+      "label": "guestrooms connected"
     },
     {
       "number": "11",
-      "label": "Countries"
+      "label": "countries"
     }
   ]
 }

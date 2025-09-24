@@ -17,7 +17,6 @@ import {
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
-import { DirectSaver } from '@/lib/cms/directSaver';
 
 interface MediaFile {
   id: string;
@@ -71,16 +70,16 @@ const MediaLibraryPage = () => {
     handleFileUpload(files);
   }, []);
 
-  const handleFileUpload = async (files: File[]) => {
-    // Validate and process files
-    for (const file of files) {
+  const handleFileUpload = (files: File[]) => {
+    // Simulate upload
+    files.forEach(file => {
       if (file.size > 15 * 1024 * 1024) {
         toast({
           title: "File too large",
           description: `${file.name} is larger than 15MB limit`,
           variant: "destructive",
         });
-        continue;
+        return;
       }
 
       const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml', 'application/pdf'];
@@ -90,39 +89,15 @@ const MediaLibraryPage = () => {
           description: `${file.name} type is not supported`,
           variant: "destructive",
         });
-        continue;
+        return;
       }
 
-      try {
-        // Save file information immediately
-        const newFile: MediaFile = {
-          id: Date.now().toString(),
-          name: file.name,
-          url: `/uploads/${file.name}`,
-          type: file.type,
-          size: file.size,
-          createdAt: new Date().toISOString(),
-          alt: file.name.replace(/\.[^/.]+$/, ""),
-          caption: ""
-        };
-
-        // Save to media library
-        await DirectSaver.saveMediaContent({
-          files: [...mediaFiles, newFile]
-        });
-
-        toast({
-          title: "Upload successful",
-          description: `${file.name} has been uploaded and saved`,
-        });
-      } catch (error) {
-        toast({
-          title: "Upload failed",
-          description: `Failed to save ${file.name}`,
-          variant: "destructive",
-        });
-      }
-    }
+      // Here you would normally upload to your API
+      toast({
+        title: "Upload successful",
+        description: `${file.name} has been uploaded`,
+      });
+    });
   };
 
   const copyToClipboard = (url: string) => {

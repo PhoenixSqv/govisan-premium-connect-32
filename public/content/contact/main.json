@@ -3,9 +3,9 @@
   "description": "Ready to transform your hotel with cutting-edge technology solutions? Contact our team of experts today.",
   "offices": [
     {
-      "city": "Barcelona", 
+      "city": "Madrid", 
       "country": "Spain",
-      "address": "Calle Tecnología 123\n28001 Barcelona, Spain",
+      "address": "Calle Tecnología 123\n28001 Madrid, Spain",
       "phone": "+34 91 123 45 67",
       "email": "madrid@govisan.com"
     },

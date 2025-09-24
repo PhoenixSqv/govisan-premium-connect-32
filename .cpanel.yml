@@ -1,13 +1,31 @@
 ---
 deployment:
   tasks:
-    - export APPPATH=/home/govisanc/repositories/govisan/
-    - export DEPLOYPATH=/home/govisanc/public_html/
-    # 1) Instalar deps y compilar
-    - cd $APPPATH
-    - /bin/rm -rf node_modules
-    - /bin/npm ci
-    - /bin/npm run build
-    # 2) Publicar solo la carpeta de salida (ajusta dist/build según tu caso)
-    - /bin/rsync -a --delete dist/ $DEPLOYPATH
+    - export REPO_DIR=/home/govisanc/repositories/govisan
+    - export PUBLIC_DIR=/home/govisanc/public_html
 
+    # Activa el entorno Node.js creado en cPanel
+    - source /home/govisanc/nodevenv/node-builder/20/bin/activate
+
+    - cd $REPO_DIR
+    - git reset --hard
+    - git clean -fd
+    - git pull origin main
+
+    # Instalar dependencias y compilar
+    - if [ -f package-lock.json ]; then npm ci || npm install; else npm install; fi
+    - npm run build
+
+    # Salir del virtualenv (por si acaso)
+    - deactivate || true
+
+    # Copiar el build al public_html
+    - /bin/rsync -av --delete $REPO_DIR/dist/ $PUBLIC_DIR/
+
+    # Crear .htaccess para SPA (si no existe)
+    - if [ ! -f $PUBLIC_DIR/.htaccess ]; then echo "Options -MultiViews
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]" > $PUBLIC_DIR/.htaccess; fi

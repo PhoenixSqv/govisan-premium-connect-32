@@ -8,7 +8,6 @@ import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Save, Eye, Plus, Edit, Trash2, Settings } from 'lucide-react';
 import { toast } from 'sonner';
-import { DirectSaver } from '@/lib/cms/directSaver';
 
 interface Solution {
   id: string;
@@ -75,60 +74,33 @@ const SolutionsPage = () => {
   const [editingSolution, setEditingSolution] = useState<Solution | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const handleSaveSolution = async () => {
+  const handleSaveSolution = () => {
     if (!editingSolution) return;
 
-    try {
-      let updatedSolutions;
-      if (editingSolution.id === 'new') {
-        // Add new solution
-        const newSolution = {
-          ...editingSolution,
-          id: Date.now().toString(),
-          order: solutions.length + 1
-        };
-        updatedSolutions = [...solutions, newSolution];
-        setSolutions(updatedSolutions);
-        toast.success('Solution added successfully');
-      } else {
-        // Update existing solution
-        updatedSolutions = solutions.map(s => 
-          s.id === editingSolution.id ? editingSolution : s
-        );
-        setSolutions(updatedSolutions);
-        toast.success('Solution updated successfully');
-      }
-
-      // Save to files immediately
-      await DirectSaver.saveSolutionsContent({
-        title: "Technology Solutions for Luxury Hospitality",
-        description: "Transform your hotel operations with our comprehensive technology solutions",
-        solutions: updatedSolutions
-      });
-
-      setIsDialogOpen(false);
-      setEditingSolution(null);
-    } catch (error) {
-      toast.error('Failed to save solution. Please try again.');
+    if (editingSolution.id === 'new') {
+      // Add new solution
+      const newSolution = {
+        ...editingSolution,
+        id: Date.now().toString(),
+        order: solutions.length + 1
+      };
+      setSolutions(prev => [...prev, newSolution]);
+      toast.success('Solution added successfully');
+    } else {
+      // Update existing solution
+      setSolutions(prev => prev.map(s => 
+        s.id === editingSolution.id ? editingSolution : s
+      ));
+      toast.success('Solution updated successfully');
     }
+
+    setIsDialogOpen(false);
+    setEditingSolution(null);
   };
 
-  const deleteSolution = async (id: string) => {
-    try {
-      const updatedSolutions = solutions.filter(s => s.id !== id);
-      setSolutions(updatedSolutions);
-      
-      // Save to files immediately
-      await DirectSaver.saveSolutionsContent({
-        title: "Technology Solutions for Luxury Hospitality",
-        description: "Transform your hotel operations with our comprehensive technology solutions",
-        solutions: updatedSolutions
-      });
-      
-      toast.success('Solution deleted successfully');
-    } catch (error) {
-      toast.error('Failed to delete solution. Please try again.');
-    }
+  const deleteSolution = (id: string) => {
+    setSolutions(prev => prev.filter(s => s.id !== id));
+    toast.success('Solution deleted successfully');
   };
 
   const createNewSolution = () => {
