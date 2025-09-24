@@ -5,16 +5,16 @@
     {
       "city": "Madrid", 
       "country": "Spain",
-      "address": "Calle Tecnología 123\n28001 Madrid, Spain",
-      "phone": "+34 91 123 45 67",
-      "email": "madrid@govisan.com"
+      "address": "C/ Rector Ubach 48,1º2ª\n08021 Barcelona, Spain",
+      "phone": "+34 93 414 18 20",
+      "email": "info@vcningenieria.com"
     },
     {
-      "city": "London",
-      "country": "United Kingdom", 
+      "city": "Bangalore",
+      "country": "India", 
       "address": "Tech Square 45\nLondon EC1A 1BB, UK",
       "phone": "+44 20 7123 4567",
-      "email": "london@govisan.com"
+      "email": "info@govisan.com"
     }
   ],
   "form": {

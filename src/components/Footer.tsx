@@ -66,14 +66,14 @@ const Footer = () => {
   }];
   const offices = [{
     region: 'Europe (HQ)',
-    address: 'Madrid, Spain',
-    phone: '+34 91 XXX XXXX',
-    email: 'europe@govisan.com'
+    address: 'Barcelona, Spain',
+    phone: '+34 93 414 18 20',
+    email: 'info@vcningenieria.com'
   }, {
     region: 'Asia-Pacific',
-    address: 'Singapore',
+    address: 'Bangalore',
     phone: '+65 XXXX XXXX',
-    email: 'apac@govisan.com'
+    email: 'info@govisan.com'
   }];
   return <footer id="contact" className="bg-govisan-navy text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
