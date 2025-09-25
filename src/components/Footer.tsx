@@ -71,8 +71,7 @@ const Footer = () => {
     email: 'info@vcningenieria.com'
   }, {
     region: 'Asia-Pacific',
-    address: 'Bangalore',
-    phone: '+65 XXXX XXXX',
+    address: 'Bengaluru',
     email: 'info@govisan.com'
   }];
   return <footer id="contact" className="bg-govisan-navy text-white">
