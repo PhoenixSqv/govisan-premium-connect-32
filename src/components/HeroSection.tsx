@@ -37,7 +37,12 @@ const HeroSection = () => {
   if (!content) return <div>Loading...</div>;
   
   return (
-    <section className="section--wm wm--home py-20 gradient-hero text-white relative overflow-hidden">
+    <section className="section--wm wm--home py-20 text-white relative overflow-hidden" style={{
+      backgroundImage: `linear-gradient(rgba(10, 26, 47, 0.7), rgba(10, 26, 47, 0.7)), url('/src/assets/hero-background.jpg')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat'
+    }}>
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-10 left-10 w-32 h-32 gradient-teal rounded-full animate-pulse"></div>
