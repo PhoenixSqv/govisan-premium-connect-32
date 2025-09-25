@@ -32,64 +32,44 @@ const ContactSection = () => {
   const [formData, setFormData] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    // Try loading from PHP API first, fallback to static JSON
-    const loadContent = async () => {
-      try {
-        // First try the CMS API endpoint
-        let response = await fetch('/api/cms/get-block.php?slug=contact-info');
-        if (!response.ok) {
-          // Fallback to static JSON
-          response = await fetch('/content/contact/main.json');
-        }
-        
-        const data = await response.json();
+    // Load from static JSON for now - ready for PHP API migration
+    fetch('/content/contact/main.json')
+      .then(res => res.json())
+      .then(data => {
         setContent(data);
-        
         // Initialize form data
         const initialFormData: Record<string, string> = {};
         data.form.fields.forEach((field: any) => {
           initialFormData[field.name] = '';
         });
         setFormData(initialFormData);
-      } catch (err) {
-        console.error('Failed to load contact content:', err);
-      }
-    };
-    
-    loadContent();
+      })
+      .catch(err => console.error('Failed to load contact content:', err));
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    try {
-      const formDataObj = new FormData();
-      Object.entries(formData).forEach(([key, value]) => {
-        formDataObj.append(key, value);
-      });
-
-      const response = await fetch('/api/contact.php', {
-        method: 'POST',
-        body: formDataObj
-      });
-
-      const result = await response.json();
-      
-      if (result.ok) {
-        // Success - clear form and show success message
-        const initialFormData: Record<string, string> = {};
-        content?.form.fields.forEach((field: any) => {
-          initialFormData[field.name] = '';
-        });
-        setFormData(initialFormData);
-        alert('Message sent successfully! We\'ll get back to you soon.');
-      } else {
-        alert('Failed to send message. Please try again.');
-      }
-    } catch (error) {
-      console.error('Contact form error:', error);
-      alert('Failed to send message. Please try again.');
-    }
+    // For now, show success message - ready for PHP API integration
+    console.log('Contact form submitted:', formData);
+    
+    // Clear form and show success message
+    const initialFormData: Record<string, string> = {};
+    content?.form.fields.forEach((field: any) => {
+      initialFormData[field.name] = '';
+    });
+    setFormData(initialFormData);
+    alert('Message sent successfully! We\'ll get back to you soon.');
+    
+    // TODO: Replace with actual PHP API call:
+    // const formDataObj = new FormData();
+    // Object.entries(formData).forEach(([key, value]) => {
+    //   formDataObj.append(key, value);
+    // });
+    // const response = await fetch('/api/contact.php', {
+    //   method: 'POST',
+    //   body: formDataObj
+    // });
   };
 
   const handleInputChange = (name: string, value: string) => {

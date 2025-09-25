@@ -23,24 +23,11 @@ const SolutionsSection = () => {
   const [content, setContent] = useState<SolutionsContent | null>(null);
 
   useEffect(() => {
-    // Try loading from PHP API first, fallback to static JSON
-    const loadContent = async () => {
-      try {
-        // First try the CMS API endpoint
-        let response = await fetch('/api/cms/get-block.php?slug=services-smart-entertainment');
-        if (!response.ok) {
-          // Fallback to static JSON
-          response = await fetch('/content/solutions/main.json');
-        }
-        
-        const data = await response.json();
-        setContent(data);
-      } catch (error) {
-        console.error('Error loading solutions content:', error);
-      }
-    };
-    
-    loadContent();
+    // Load from static JSON for now - ready for PHP API migration
+    fetch('/content/solutions/main.json')
+      .then(res => res.json())
+      .then(data => setContent(data))
+      .catch(error => console.error('Error loading solutions content:', error));
   }, []);
 
   const handleNavClick = (href: string) => {
