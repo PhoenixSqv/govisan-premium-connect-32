@@ -1,0 +1,32 @@
+name: Build (Vite) and Upload Artifact
+
+on:
+  workflow_dispatch:   # podrás lanzarlo manualmente
+  push:
+    branches: [ "main" ]
+    paths:
+      - "src/**"
+      - "public/**"
+      - "index.html"
+      - "package.json"
+      - "vite.config.*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Upload dist as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: govisan-dist
+          path: dist
