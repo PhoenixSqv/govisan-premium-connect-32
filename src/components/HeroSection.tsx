@@ -64,8 +64,8 @@ const HeroSection = () => {
                 size="lg"
                 className={
                   button.type === 'primary'
-                    ? 'gradient-gold hover:shadow-gold text-govisan-navy font-semibold px-8 py-4 text-lg'
-                    : 'glass text-white hover:bg-white/20 border-white/30 font-semibold px-8 py-4 text-lg'
+                    ? 'bg-govisan-gold hover:bg-govisan-gold-light text-govisan-navy border-0 font-semibold px-8 py-4 text-lg shadow-gold hover:shadow-teal transition-all duration-300'
+                    : 'bg-white/10 hover:bg-white hover:text-govisan-navy border-2 border-white text-white font-semibold px-8 py-4 text-lg backdrop-blur-sm transition-all duration-300'
                 }
               >
                 {button.text}
