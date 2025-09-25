@@ -213,7 +213,7 @@ const ContactPage = () => {
                   <Input
                     value={office.city}
                     onChange={(e) => updateOffice(index, 'city', e.target.value)}
-                    placeholder="Madrid"
+                    placeholder="Barcelona"
                   />
                 </div>
                 
@@ -243,7 +243,7 @@ const ContactPage = () => {
                   <Input
                     value={office.phone}
                     onChange={(e) => updateOffice(index, 'phone', e.target.value)}
-                    placeholder="+34 91 123 45 67"
+                    placeholder="+34 93 414 18 20"
                   />
                 </div>
                 
@@ -252,7 +252,7 @@ const ContactPage = () => {
                   <Input
                     value={office.email}
                     onChange={(e) => updateOffice(index, 'email', e.target.value)}
-                    placeholder="madrid@govisan.com"
+                    placeholder="info@govisan.com"
                   />
                 </div>
               </div>
