@@ -41,15 +41,15 @@ const Header = () => {
         : "bg-gradient-to-b from-white/10 via-white/5 to-transparent backdrop-blur-sm"
     )}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-24 py-2">
+        <div className="flex justify-between items-center h-28 py-2">
           {/* Logo */}
           <div className="flex items-center">
             <img 
               src={govisanLogo} 
               alt="GOVISAN Solutions" 
               className={cn(
-                "h-12 w-auto transition-all duration-300 object-contain",
-                isScrolled ? "opacity-100" : "opacity-90 brightness-110"
+                "h-16 w-auto transition-all duration-300 object-contain",
+                isScrolled ? "h-14 opacity-100" : "h-16 opacity-95 brightness-125 contrast-110"
               )}
             />
           </div>
