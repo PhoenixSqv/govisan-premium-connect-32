@@ -124,21 +124,21 @@ const AboutSection = () => {
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex">
               {brands.map((brand, index) => <div key={brand.name} className="flex-[0_0_50%] min-w-0 md:flex-[0_0_33.333%] lg:flex-[0_0_20%] pl-4">
-                  <div className="flex items-center justify-center p-8 h-24 w-full grayscale hover:grayscale-0 transition-all duration-300 group cursor-pointer bg-white border border-gray-100 rounded-lg mx-2">
+                  <div className="flex items-center justify-center p-8 h-32 w-full hover:scale-105 transition-all duration-300 group cursor-pointer bg-white border border-gray-100 rounded-lg mx-2">
                     <img 
                       src={brand.logo} 
                       alt={brand.name}
-                      className="max-h-12 max-w-full object-contain"
+                      className="max-h-20 max-w-full object-contain"
                     />
                   </div>
                 </div>)}
               {/* Duplicate brands for seamless loop */}
               {brands.map((brand, index) => <div key={`duplicate-${brand.name}`} className="flex-[0_0_50%] min-w-0 md:flex-[0_0_33.333%] lg:flex-[0_0_20%] pl-4">
-                  <div className="flex items-center justify-center p-8 h-24 w-full grayscale hover:grayscale-0 transition-all duration-300 group cursor-pointer bg-white border border-gray-100 rounded-lg mx-2">
+                  <div className="flex items-center justify-center p-8 h-32 w-full hover:scale-105 transition-all duration-300 group cursor-pointer bg-white border border-gray-100 rounded-lg mx-2">
                     <img 
                       src={brand.logo} 
                       alt={brand.name}
-                      className="max-h-12 max-w-full object-contain"
+                      className="max-h-20 max-w-full object-contain"
                     />
                   </div>
                 </div>)}
