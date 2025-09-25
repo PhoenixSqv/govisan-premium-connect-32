@@ -20,10 +20,24 @@ const SpecializationSection = () => {
   const [content, setContent] = useState<SpecializationContent | null>(null);
 
   useEffect(() => {
-    fetch('/content/specialization/main.json')
-      .then(res => res.json())
-      .then(data => setContent(data))
-      .catch(err => console.error('Failed to load specialization content:', err));
+    // Try loading from PHP API first, fallback to static JSON
+    const loadContent = async () => {
+      try {
+        // First try the CMS API endpoint
+        let response = await fetch('/api/cms/get-block.php?slug=services-iot-automation');
+        if (!response.ok) {
+          // Fallback to static JSON
+          response = await fetch('/content/specialization/main.json');
+        }
+        
+        const data = await response.json();
+        setContent(data);
+      } catch (error) {
+        console.error('Error loading specialization content:', error);
+      }
+    };
+    
+    loadContent();
   }, []);
 
   if (!content) return <div>Loading...</div>;

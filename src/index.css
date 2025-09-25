@@ -8,12 +8,15 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Govisan Brand Colors */
+    /* Vibrant Govisan Brand Colors */
     --govisan-navy: 212 65% 11%;        /* #0A1A2F - Primary brand navy */
-    --govisan-gold: 43 74% 52%;         /* #D4AF37 - Luxury gold accent */
-    --govisan-gold-light: 43 74% 65%;   /* Lighter gold variant */
-    --govisan-navy-light: 212 50% 20%;  /* Lighter navy for hover states */
-    --govisan-blue-accent: 212 80% 25%; /* Accent blue */
+    --govisan-gold: 43 84% 58%;         /* #E6B800 - Vibrant luxury gold */
+    --govisan-gold-light: 43 90% 70%;   /* Brighter gold variant */
+    --govisan-navy-light: 212 60% 25%;  /* Lighter navy for hover states */
+    --govisan-blue-accent: 212 90% 35%; /* Vibrant accent blue */
+    --govisan-teal: 180 100% 40%;       /* #00CCCC - Vibrant teal accent */
+    --govisan-cyan: 195 100% 50%;       /* #00BFFF - Bright cyan accent */ 
+    --govisan-amber: 43 100% 60%;       /* #FFCC00 - Bright amber */
     
     /* Semantic Color System */
     --background: 0 0% 100%;
@@ -34,7 +37,7 @@ All colors MUST be HSL.
     --muted: 212 15% 92%;
     --muted-foreground: 212 25% 45%;
 
-    --accent: 43 74% 52%;               /* Govisan Gold */
+    --accent: 43 84% 58%;               /* Vibrant Govisan Gold */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
@@ -42,19 +45,26 @@ All colors MUST be HSL.
 
     --border: 212 15% 88%;
     --input: 212 15% 88%;
-    --ring: 43 74% 52%;
+    --ring: 43 84% 58%;
 
     --radius: 0.75rem;
 
-    /* Premium gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(212 65% 11%) 0%, hsl(212 50% 20%) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(43 74% 52%) 0%, hsl(43 74% 65%) 100%);
-    --gradient-overlay: linear-gradient(135deg, hsl(212 65% 11% / 0.9) 0%, hsl(212 50% 20% / 0.7) 100%);
+    /* Vibrant Premium gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(212 65% 11%) 0%, hsl(212 60% 25%) 50%, hsl(180 100% 40%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(43 84% 58%) 0%, hsl(43 90% 70%) 100%);
+    --gradient-teal: linear-gradient(135deg, hsl(180 100% 40%) 0%, hsl(195 100% 50%) 100%);
+    --gradient-overlay: linear-gradient(135deg, hsl(212 65% 11% / 0.9) 0%, hsl(212 60% 25% / 0.7) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(212 30% 98%) 100%);
+    --gradient-accent: linear-gradient(45deg, hsl(43 84% 58%) 0%, hsl(180 100% 40%) 100%);
 
     /* Animation values */
     --transition-premium: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --shadow-premium: 0 20px 40px -12px hsl(212 65% 11% / 0.3);
-    --shadow-gold: 0 8px 32px -8px hsl(43 74% 52% / 0.3);
+    --shadow-gold: 0 8px 32px -8px hsl(43 84% 58% / 0.4);
+    --shadow-teal: 0 8px 32px -8px hsl(180 100% 40% / 0.3);
+    --shadow-glass: 0 8px 32px 0 hsl(212 65% 11% / 0.1);
+    --blur-glass: blur(10px);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 212 25% 35%;
@@ -124,8 +134,20 @@ All colors MUST be HSL.
     background: var(--gradient-gold);
   }
 
+  .gradient-teal {
+    background: var(--gradient-teal);
+  }
+
   .gradient-overlay {
     background: var(--gradient-overlay);
+  }
+
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+
+  .gradient-accent {
+    background: var(--gradient-accent);
   }
 
   .shadow-premium {
@@ -136,8 +158,34 @@ All colors MUST be HSL.
     box-shadow: var(--shadow-gold);
   }
 
+  .shadow-teal {
+    box-shadow: var(--shadow-teal);
+  }
+
+  .shadow-glass {
+    box-shadow: var(--shadow-glass);
+    backdrop-filter: var(--blur-glass);
+  }
+
   .transition-premium {
     transition: var(--transition-premium);
+  }
+
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  /* Glass morphism utility */
+  .glass {
+    background: hsl(0 0% 100% / 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(0 0% 100% / 0.2);
+  }
+
+  .glass-dark {
+    background: hsl(212 65% 11% / 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(212 65% 11% / 0.2);
   }
 
   /* Animation keyframes */

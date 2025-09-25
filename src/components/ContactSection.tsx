@@ -32,24 +32,64 @@ const ContactSection = () => {
   const [formData, setFormData] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    fetch('/content/contact/main.json')
-      .then(res => res.json())
-      .then(data => {
+    // Try loading from PHP API first, fallback to static JSON
+    const loadContent = async () => {
+      try {
+        // First try the CMS API endpoint
+        let response = await fetch('/api/cms/get-block.php?slug=contact-info');
+        if (!response.ok) {
+          // Fallback to static JSON
+          response = await fetch('/content/contact/main.json');
+        }
+        
+        const data = await response.json();
         setContent(data);
+        
         // Initialize form data
         const initialFormData: Record<string, string> = {};
         data.form.fields.forEach((field: any) => {
           initialFormData[field.name] = '';
         });
         setFormData(initialFormData);
-      })
-      .catch(err => console.error('Failed to load contact content:', err));
+      } catch (err) {
+        console.error('Failed to load contact content:', err);
+      }
+    };
+    
+    loadContent();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Contact form submitted:', formData);
-    // Handle form submission
+    
+    try {
+      const formDataObj = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        formDataObj.append(key, value);
+      });
+
+      const response = await fetch('/api/contact.php', {
+        method: 'POST',
+        body: formDataObj
+      });
+
+      const result = await response.json();
+      
+      if (result.ok) {
+        // Success - clear form and show success message
+        const initialFormData: Record<string, string> = {};
+        content?.form.fields.forEach((field: any) => {
+          initialFormData[field.name] = '';
+        });
+        setFormData(initialFormData);
+        alert('Message sent successfully! We\'ll get back to you soon.');
+      } else {
+        alert('Failed to send message. Please try again.');
+      }
+    } catch (error) {
+      console.error('Contact form error:', error);
+      alert('Failed to send message. Please try again.');
+    }
   };
 
   const handleInputChange = (name: string, value: string) => {
@@ -79,29 +119,31 @@ const ContactSection = () => {
             
             <div className="space-y-8">
               {content.offices.map((office, index) => (
-                <div key={index} className="bg-white p-6 rounded-2xl shadow-lg">
+                <div key={index} className="glass p-6 rounded-2xl shadow-teal hover:shadow-gold transition-all duration-300">
                   <h4 className="text-xl font-semibold text-govisan-navy mb-4">
                     {office.city}, {office.country}
                   </h4>
                   
                   <div className="space-y-3">
                     <div className="flex items-start space-x-3">
-                      <MapPin className="h-5 w-5 text-govisan-gold mt-1 flex-shrink-0" />
+                      <MapPin className="h-5 w-5 text-govisan-teal mt-1 flex-shrink-0" />
                       <div className="text-muted-foreground whitespace-pre-line">
                         {office.address}
                       </div>
                     </div>
                     
-                    <div className="flex items-center space-x-3">
-                      <Phone className="h-5 w-5 text-govisan-gold flex-shrink-0" />
-                      <a href={`tel:${office.phone}`} className="text-muted-foreground hover:text-govisan-gold transition-colors">
-                        {office.phone}
-                      </a>
-                    </div>
+                    {office.phone && (
+                      <div className="flex items-center space-x-3">
+                        <Phone className="h-5 w-5 text-govisan-teal flex-shrink-0" />
+                        <a href={`tel:${office.phone}`} className="text-muted-foreground hover:text-govisan-teal transition-colors">
+                          {office.phone}
+                        </a>
+                      </div>
+                    )}
                     
                     <div className="flex items-center space-x-3">
-                      <Mail className="h-5 w-5 text-govisan-gold flex-shrink-0" />
-                      <a href={`mailto:${office.email}`} className="text-muted-foreground hover:text-govisan-gold transition-colors">
+                      <Mail className="h-5 w-5 text-govisan-teal flex-shrink-0" />
+                      <a href={`mailto:${office.email}`} className="text-muted-foreground hover:text-govisan-teal transition-colors">
                         {office.email}
                       </a>
                     </div>
@@ -113,7 +155,7 @@ const ContactSection = () => {
 
           {/* Contact Form */}
           <div>
-            <div className="bg-white p-8 rounded-2xl shadow-lg">
+            <div className="glass p-8 rounded-2xl shadow-glass">
               <h3 className="text-2xl font-semibold text-govisan-navy mb-6">{content.form.title}</h3>
               
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -130,7 +172,7 @@ const ContactSection = () => {
                         onChange={(e) => handleInputChange(field.name, e.target.value)}
                         required={field.required}
                         rows={4}
-                        className="w-full"
+                        className="w-full bg-white/50 backdrop-blur-sm"
                       />
                     ) : (
                       <Input
@@ -138,7 +180,7 @@ const ContactSection = () => {
                         value={formData[field.name] || ''}
                         onChange={(e) => handleInputChange(field.name, e.target.value)}
                         required={field.required}
-                        className="w-full"
+                        className="w-full bg-white/50 backdrop-blur-sm"
                       />
                     )}
                   </div>
@@ -146,7 +188,7 @@ const ContactSection = () => {
                 
                 <Button 
                   type="submit"
-                  className="w-full bg-govisan-gold hover:bg-govisan-gold/90 text-white font-semibold py-3"
+                  className="w-full gradient-accent hover:shadow-teal text-white font-semibold py-3"
                 >
                   Send Message
                 </Button>

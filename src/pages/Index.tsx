@@ -7,7 +7,8 @@ import SpecializationSection from '@/components/SpecializationSection';
 import SuccessStories from '@/components/SuccessStories';
 import InsightsSection from '@/components/InsightsSection';
 import ContactSection from '@/components/ContactSection';
-
+import SectionDivider from '@/components/SectionDivider';
+import ChatWidget from '@/components/ChatWidget';
 import FinalCTA from '@/components/FinalCTA';
 import Footer from '@/components/Footer';
 
@@ -16,24 +17,33 @@ const Index = () => {
     <div className="min-h-screen">
       <Header />
       
-      {/* Under Construction Banner */}
-      <div className="bg-accent text-accent-foreground py-3 text-center font-medium">
-        <div className="max-w-7xl mx-auto px-4">
-          🚧 Under Construction - Website in Development 🚧
-        </div>
-      </div>
-      
       <main>
         <HeroSection />
+        <SectionDivider variant="wave" />
+        
         <AboutSection />
+        <SectionDivider variant="curve" flip />
+        
         <SolutionsSection />
+        <SectionDivider variant="wave" flip />
+        
         <SpecializationSection />
+        <SectionDivider variant="curve" />
+        
         <SuccessStories />
+        <SectionDivider variant="wave" flip />
+        
         <InsightsSection />
+        <SectionDivider variant="curve" flip />
+        
         <ContactSection />
         <FinalCTA />
       </main>
+      
       <Footer />
+      
+      {/* Floating Chat Widget */}
+      <ChatWidget />
     </div>
   );
 };

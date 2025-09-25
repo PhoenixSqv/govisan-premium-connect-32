@@ -23,10 +23,24 @@ const SolutionsSection = () => {
   const [content, setContent] = useState<SolutionsContent | null>(null);
 
   useEffect(() => {
-    fetch('/content/solutions/main.json')
-      .then(res => res.json())
-      .then(data => setContent(data))
-      .catch(error => console.error('Error loading solutions content:', error));
+    // Try loading from PHP API first, fallback to static JSON
+    const loadContent = async () => {
+      try {
+        // First try the CMS API endpoint
+        let response = await fetch('/api/cms/get-block.php?slug=services-smart-entertainment');
+        if (!response.ok) {
+          // Fallback to static JSON
+          response = await fetch('/content/solutions/main.json');
+        }
+        
+        const data = await response.json();
+        setContent(data);
+      } catch (error) {
+        console.error('Error loading solutions content:', error);
+      }
+    };
+    
+    loadContent();
   }, []);
 
   const handleNavClick = (href: string) => {
@@ -53,11 +67,11 @@ const SolutionsSection = () => {
   }
 
   return (
-    <section id="solutions" className="section--wm wm--solutions py-20 bg-secondary/20">
+    <section id="solutions" className="section--wm wm--solutions py-20 gradient-card">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center bg-govisan-gold/10 text-govisan-gold px-4 py-2 rounded-full text-sm font-medium mb-6">
+          <div className="inline-flex items-center gradient-gold text-white px-4 py-2 rounded-full text-sm font-medium mb-6 shadow-gold">
             <Settings className="h-4 w-4 mr-2" />
             Our Services
           </div>
@@ -79,14 +93,14 @@ const SolutionsSection = () => {
             return (
               <div
                 key={solution.title}
-                className="group bg-white rounded-2xl p-8 shadow-premium hover:shadow-gold transition-all duration-500 hover:-translate-y-2"
+                className="group glass hover:shadow-teal transition-all duration-500 hover:-translate-y-2 rounded-2xl p-8 border-0"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="w-16 h-16 bg-govisan-gold/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-govisan-gold/20 transition-colors">
-                  <IconComponent className="h-8 w-8 text-govisan-gold" />
+                <div className="w-16 h-16 gradient-accent rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <IconComponent className="h-8 w-8 text-white" />
                 </div>
                 
-                <h3 className="text-xl font-semibold text-foreground mb-4 group-hover:text-govisan-navy transition-colors">
+                <h3 className="text-xl font-semibold text-foreground mb-4 group-hover:text-govisan-teal transition-colors">
                   {solution.title}
                 </h3>
                 
@@ -97,7 +111,7 @@ const SolutionsSection = () => {
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   {solution.features.map((feature) => (
                     <li key={feature} className="flex items-center">
-                      <div className="w-1.5 h-1.5 bg-govisan-gold rounded-full mr-3 flex-shrink-0"></div>
+                      <div className="w-1.5 h-1.5 bg-govisan-teal rounded-full mr-3 flex-shrink-0"></div>
                       {feature}
                     </li>
                   ))}
