@@ -38,16 +38,16 @@ const HeroSection = () => {
   
   return (
     <section className="section--wm wm--home py-20 text-white relative overflow-hidden" style={{
-      backgroundImage: `linear-gradient(rgba(10, 26, 47, 0.7), rgba(10, 26, 47, 0.7)), url('/src/assets/hero-background.jpg')`,
+      backgroundImage: `url('/src/assets/hero-background.jpg')`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat'
     }}>
       {/* Animated background elements */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 left-10 w-32 h-32 gradient-blue rounded-full animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-24 h-24 gradient-gold rounded-full animate-ping"></div>
-        <div className="absolute bottom-20 left-1/4 w-40 h-40 gradient-accent rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute inset-0 opacity-15">
+        <div className="absolute top-10 left-10 w-32 h-32 bg-blue-500 rounded-full animate-pulse"></div>
+        <div className="absolute top-40 right-20 w-24 h-24 bg-yellow-400 rounded-full animate-ping"></div>
+        <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-blue-600 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -87,7 +87,7 @@ const HeroSection = () => {
                 className="glass p-6 rounded-2xl text-center hover:bg-white/20 transition-all duration-300"
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
-                <div className="text-4xl md:text-5xl font-bold mb-2 gradient-gold bg-clip-text text-transparent">
+                <div className="text-4xl md:text-5xl font-bold mb-2 text-yellow-400">
                   {stat.number}
                 </div>
                 <div className="text-white/80 font-medium">
