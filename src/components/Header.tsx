@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import govisanLogo from '@/assets/govisan-logo.png';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -35,23 +34,16 @@ const Header = () => {
 
   return (
     <header className={cn(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-      isScrolled 
-        ? "bg-white/95 backdrop-blur-md shadow-lg" 
-        : "bg-gradient-to-b from-white/10 via-white/5 to-transparent backdrop-blur-sm"
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md",
+      isScrolled ? "shadow-lg" : ""
     )}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-28 py-2">
+        <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex items-center">
-            <img 
-              src={govisanLogo} 
-              alt="GOVISAN Solutions" 
-              className={cn(
-                "h-16 w-auto transition-all duration-300 object-contain",
-                isScrolled ? "h-14 opacity-100" : "h-16 opacity-95 brightness-125 contrast-110"
-              )}
-            />
+            <div className="text-2xl font-bold text-govisan-navy">
+              GOVISAN Solutions
+            </div>
           </div>
 
           {/* Desktop Navigation */}
@@ -60,12 +52,7 @@ const Header = () => {
               <button
                 key={item.name}
                 onClick={() => handleNavClick(item.href)}
-                className={cn(
-                  "transition-colors duration-300 font-medium",
-                  isScrolled 
-                    ? "text-govisan-navy hover:text-govisan-gold" 
-                    : "text-white hover:text-govisan-gold"
-                )}
+                className="text-govisan-navy hover:text-govisan-gold transition-colors duration-200 font-medium"
               >
                 {item.name}
               </button>
@@ -76,7 +63,7 @@ const Header = () => {
           <div className="hidden lg:flex items-center space-x-4">
             <Button
               onClick={() => handleNavClick('#contact')}
-              className="bg-govisan-gold hover:bg-govisan-gold-light text-govisan-navy font-medium px-6 shadow-gold"
+              className="bg-govisan-gold hover:bg-govisan-gold/90 text-white font-medium px-6"
             >
               Request Proposal
             </Button>
@@ -88,10 +75,7 @@ const Header = () => {
               variant="ghost"
               size="icon"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={cn(
-                "transition-colors duration-300",
-                isScrolled ? "text-govisan-navy" : "text-white"
-              )}
+              className="text-govisan-navy"
             >
               {isMenuOpen ? (
                 <X className="h-6 w-6" />
@@ -105,7 +89,7 @@ const Header = () => {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="lg:hidden">
-            <div className="px-2 pt-2 pb-6 space-y-1 bg-white/95 backdrop-blur-md border-t border-white/20">
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200">
               {navigation.map((item) => (
                 <button
                   key={item.name}
@@ -118,7 +102,7 @@ const Header = () => {
               <div className="px-3 py-2">
                 <Button
                   onClick={() => handleNavClick('#contact')}
-                  className="w-full bg-govisan-gold hover:bg-govisan-gold-light text-govisan-navy font-medium shadow-gold"
+                  className="w-full bg-govisan-gold hover:bg-govisan-gold/90 text-white font-medium"
                 >
                   Request Proposal
                 </Button>
