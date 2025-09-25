@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import govisanLogo from '@/assets/govisan-logo.jpeg';
+import govisanLogo from '@/assets/govisan-logo.png';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
