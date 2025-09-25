@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import govisanLogo from '@/assets/govisan-logo.jpeg';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -43,12 +44,14 @@ const Header = () => {
         <div className="flex justify-between items-center h-24 py-2">
           {/* Logo */}
           <div className="flex items-center">
-            <div className={cn(
-              "text-2xl font-bold transition-colors duration-300",
-              isScrolled ? "text-govisan-navy" : "text-white"
-            )}>
-              GOVISAN Solutions
-            </div>
+            <img 
+              src={govisanLogo} 
+              alt="GOVISAN Solutions" 
+              className={cn(
+                "h-12 w-auto transition-all duration-300 object-contain",
+                isScrolled ? "opacity-100" : "opacity-90 brightness-110"
+              )}
+            />
           </div>
 
           {/* Desktop Navigation */}
