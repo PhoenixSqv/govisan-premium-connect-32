@@ -116,32 +116,77 @@ const AboutSection = () => {
         </div>
         
         {/* Trusted Brands Carousel */}
-        <div className="mt-20 text-center">
-          <p className="text-lg text-muted-foreground max-w-4xl mx-auto leading-relaxed mb-12">
-            Trusted by leading hospitality & real estate brands
-          </p>
+        <div className="mt-20">
+          <div className="text-center mb-16">
+            <h3 className="text-3xl font-bold text-govisan-navy mb-4">Trusted Partners</h3>
+            <p className="text-lg text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+              Leading hospitality & real estate brands worldwide trust our expertise
+            </p>
+          </div>
           
-          <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex">
-              {brands.map((brand, index) => <div key={brand.name} className="flex-[0_0_50%] min-w-0 md:flex-[0_0_33.333%] lg:flex-[0_0_20%] pl-4">
-                  <div className="flex items-center justify-center p-8 h-32 w-full hover:scale-105 transition-all duration-300 group cursor-pointer bg-white border border-gray-100 rounded-lg mx-2">
-                    <img 
-                      src={brand.logo} 
-                      alt={brand.name}
-                      className="max-h-20 max-w-full object-contain"
-                    />
+          <div className="relative">
+            {/* Background gradient */}
+            <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background z-10 pointer-events-none"></div>
+            
+            <div className="overflow-hidden" ref={emblaRef}>
+              <div className="flex">
+                {brands.map((brand, index) => (
+                  <div key={brand.name} className="flex-[0_0_50%] min-w-0 md:flex-[0_0_33.333%] lg:flex-[0_0_25%] pl-6">
+                    <div className="group cursor-pointer mx-3">
+                      <div className="relative bg-gradient-to-br from-white to-gray-50 border border-gray-200/50 rounded-2xl p-8 h-36 flex items-center justify-center shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+                        {/* Subtle background pattern */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-govisan-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        
+                        {/* Logo container */}
+                        <div className="relative z-10 transform group-hover:scale-110 transition-transform duration-500">
+                          <img 
+                            src={brand.logo} 
+                            alt={`${brand.name} logo`}
+                            className="max-h-16 max-w-full object-contain filter brightness-90 group-hover:brightness-100 transition-all duration-500"
+                          />
+                        </div>
+                        
+                        {/* Hover glow effect */}
+                        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-govisan-gold/10 to-govisan-navy/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      </div>
+                      
+                      {/* Brand name on hover */}
+                      <div className="text-center mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span className="text-sm font-medium text-govisan-navy">{brand.name}</span>
+                      </div>
+                    </div>
                   </div>
-                </div>)}
-              {/* Duplicate brands for seamless loop */}
-              {brands.map((brand, index) => <div key={`duplicate-${brand.name}`} className="flex-[0_0_50%] min-w-0 md:flex-[0_0_33.333%] lg:flex-[0_0_20%] pl-4">
-                  <div className="flex items-center justify-center p-8 h-32 w-full hover:scale-105 transition-all duration-300 group cursor-pointer bg-white border border-gray-100 rounded-lg mx-2">
-                    <img 
-                      src={brand.logo} 
-                      alt={brand.name}
-                      className="max-h-20 max-w-full object-contain"
-                    />
+                ))}
+                
+                {/* Duplicate brands for seamless loop */}
+                {brands.map((brand, index) => (
+                  <div key={`duplicate-${brand.name}`} className="flex-[0_0_50%] min-w-0 md:flex-[0_0_33.333%] lg:flex-[0_0_25%] pl-6">
+                    <div className="group cursor-pointer mx-3">
+                      <div className="relative bg-gradient-to-br from-white to-gray-50 border border-gray-200/50 rounded-2xl p-8 h-36 flex items-center justify-center shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+                        {/* Subtle background pattern */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-govisan-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        
+                        {/* Logo container */}
+                        <div className="relative z-10 transform group-hover:scale-110 transition-transform duration-500">
+                          <img 
+                            src={brand.logo} 
+                            alt={`${brand.name} logo`}
+                            className="max-h-16 max-w-full object-contain filter brightness-90 group-hover:brightness-100 transition-all duration-500"
+                          />
+                        </div>
+                        
+                        {/* Hover glow effect */}
+                        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-govisan-gold/10 to-govisan-navy/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      </div>
+                      
+                      {/* Brand name on hover */}
+                      <div className="text-center mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span className="text-sm font-medium text-govisan-navy">{brand.name}</span>
+                      </div>
+                    </div>
                   </div>
-                </div>)}
+                ))}
+              </div>
             </div>
           </div>
         </div>
