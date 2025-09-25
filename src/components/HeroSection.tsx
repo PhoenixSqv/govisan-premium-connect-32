@@ -45,7 +45,7 @@ const HeroSection = () => {
     }}>
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 left-10 w-32 h-32 gradient-teal rounded-full animate-pulse"></div>
+        <div className="absolute top-10 left-10 w-32 h-32 gradient-blue rounded-full animate-pulse"></div>
         <div className="absolute top-40 right-20 w-24 h-24 gradient-gold rounded-full animate-ping"></div>
         <div className="absolute bottom-20 left-1/4 w-40 h-40 gradient-accent rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
       </div>
@@ -69,7 +69,7 @@ const HeroSection = () => {
                 size="lg"
                 className={
                   button.type === 'primary'
-                    ? 'bg-govisan-gold hover:bg-govisan-gold-light text-govisan-navy border-0 font-semibold px-8 py-4 text-lg shadow-gold hover:shadow-teal transition-all duration-300'
+                    ? 'bg-govisan-gold hover:bg-govisan-gold-light text-govisan-navy border-0 font-semibold px-8 py-4 text-lg shadow-gold hover:shadow-blue transition-all duration-300'
                     : 'bg-white/10 hover:bg-white hover:text-govisan-navy border-2 border-white text-white font-semibold px-8 py-4 text-lg backdrop-blur-sm transition-all duration-300'
                 }
               >
