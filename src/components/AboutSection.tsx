@@ -131,9 +131,9 @@ const AboutSection = () => {
             <div className="overflow-hidden" ref={emblaRef}>
               <div className="flex">
                 {brands.map((brand, index) => (
-                  <div key={brand.name} className="flex-[0_0_50%] min-w-0 md:flex-[0_0_33.333%] lg:flex-[0_0_25%] pl-6">
+                  <div key={brand.name} className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.333%] pl-6">
                     <div className="group cursor-pointer mx-3">
-                      <div className="relative bg-gradient-to-br from-white to-gray-50 border border-gray-200/50 rounded-2xl p-8 h-36 flex items-center justify-center shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+                      <div className="relative bg-gradient-to-br from-white to-gray-50 border border-gray-200/50 rounded-2xl p-12 h-48 flex items-center justify-center shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
                         {/* Subtle background pattern */}
                         <div className="absolute inset-0 bg-gradient-to-br from-govisan-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         
@@ -142,7 +142,7 @@ const AboutSection = () => {
                           <img 
                             src={brand.logo} 
                             alt={`${brand.name} logo`}
-                            className="max-h-16 max-w-full object-contain filter brightness-90 group-hover:brightness-100 transition-all duration-500"
+                            className="max-h-24 max-w-full object-contain filter brightness-90 group-hover:brightness-100 transition-all duration-500"
                           />
                         </div>
                         
@@ -150,9 +150,9 @@ const AboutSection = () => {
                         <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-govisan-gold/10 to-govisan-navy/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                       </div>
                       
-                      {/* Brand name on hover */}
-                      <div className="text-center mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span className="text-sm font-medium text-govisan-navy">{brand.name}</span>
+                      {/* Brand name always visible */}
+                      <div className="text-center mt-4">
+                        <span className="text-base font-medium text-govisan-navy">{brand.name}</span>
                       </div>
                     </div>
                   </div>
@@ -160,9 +160,9 @@ const AboutSection = () => {
                 
                 {/* Duplicate brands for seamless loop */}
                 {brands.map((brand, index) => (
-                  <div key={`duplicate-${brand.name}`} className="flex-[0_0_50%] min-w-0 md:flex-[0_0_33.333%] lg:flex-[0_0_25%] pl-6">
+                  <div key={`duplicate-${brand.name}`} className="flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.333%] pl-6">
                     <div className="group cursor-pointer mx-3">
-                      <div className="relative bg-gradient-to-br from-white to-gray-50 border border-gray-200/50 rounded-2xl p-8 h-36 flex items-center justify-center shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+                      <div className="relative bg-gradient-to-br from-white to-gray-50 border border-gray-200/50 rounded-2xl p-12 h-48 flex items-center justify-center shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
                         {/* Subtle background pattern */}
                         <div className="absolute inset-0 bg-gradient-to-br from-govisan-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         
@@ -171,7 +171,7 @@ const AboutSection = () => {
                           <img 
                             src={brand.logo} 
                             alt={`${brand.name} logo`}
-                            className="max-h-16 max-w-full object-contain filter brightness-90 group-hover:brightness-100 transition-all duration-500"
+                            className="max-h-24 max-w-full object-contain filter brightness-90 group-hover:brightness-100 transition-all duration-500"
                           />
                         </div>
                         
@@ -179,9 +179,9 @@ const AboutSection = () => {
                         <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-govisan-gold/10 to-govisan-navy/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                       </div>
                       
-                      {/* Brand name on hover */}
-                      <div className="text-center mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span className="text-sm font-medium text-govisan-navy">{brand.name}</span>
+                      {/* Brand name always visible */}
+                      <div className="text-center mt-4">
+                        <span className="text-base font-medium text-govisan-navy">{brand.name}</span>
                       </div>
                     </div>
                   </div>
