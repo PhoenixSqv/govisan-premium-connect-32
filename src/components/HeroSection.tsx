@@ -46,7 +46,6 @@ const HeroSection = () => {
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-15">
         <div className="absolute top-10 left-10 w-32 h-32 bg-blue-500 rounded-full animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-24 h-24 bg-yellow-400 rounded-full animate-ping"></div>
         <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-blue-600 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
       </div>
       
