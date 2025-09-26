@@ -35,9 +35,9 @@ const SectionDivider: React.FC<SectionDividerProps> = ({
       >
         <defs>
           <linearGradient id="divider-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="hsl(var(--govisan-teal))" />
-            <stop offset="50%" stopColor="hsl(var(--govisan-gold))" />
-            <stop offset="100%" stopColor="hsl(var(--govisan-cyan))" />
+            <stop offset="0%" stopColor="hsl(var(--govisan-navy))" />
+            <stop offset="50%" stopColor="hsl(var(--govisan-blue))" />
+            <stop offset="100%" stopColor="hsl(var(--govisan-navy))" />
           </linearGradient>
         </defs>
         <path
