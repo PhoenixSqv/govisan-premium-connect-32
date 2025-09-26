@@ -9,7 +9,7 @@ const Header = () => {
 
   const navigation = [
     { name: 'Home', href: '#hero' },
-    { name: 'About Govisan', href: '#about' },
+    { name: 'Over 25 years', href: '#about' },
     { name: 'Solutions', href: '#solutions' },
     { name: 'Specialization', href: '#specialization' },
     { name: 'Success Stories', href: '#success' },
