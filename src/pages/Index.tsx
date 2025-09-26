@@ -18,7 +18,7 @@ const Index = () => {
       <Header />
       
       <main>
-        <section className="snap-start">
+        <section id="hero" className="snap-start">
           <HeroSection />
         </section>
         <SectionDivider variant="wave" />
