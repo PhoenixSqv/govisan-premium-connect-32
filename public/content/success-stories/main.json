@@ -1,0 +1,126 @@
+{
+  "title": "Success Stories",
+  "subtitle": "Partnering with Iconic Global Hospitality Brands",
+  "clients": [
+    {
+      "id": "mandarin-oriental",
+      "clientName": "Mandarin Oriental",
+      "logo": "/images/clients/mandarin-oriental.png",
+      "projectTitle": "Seamless Smart Integration",
+      "location": "Maldives",
+      "description": "Transforming a luxury resort in the Maldives with cutting-edge connectivity infrastructure for world-class guest experiences.",
+      "gallery": [
+        "/images/cases/mandarin-oriental-1.jpg",
+        "/images/cases/mandarin-oriental-2.jpg",
+        "/images/cases/mandarin-oriental-3.jpg"
+      ],
+      "stats": [
+        { "label": "Network Uptime", "value": "99.9%" },
+        { "label": "Guests Served", "value": "5,000+" },
+        { "label": "Guest Satisfaction", "value": "4.9/5" },
+        { "label": "Connectivity Complaints", "value": "0" }
+      ],
+      "technologies": ["WiFi 6E", "Fiber Optic", "IoT Integration", "Smart Room Controls", "Guest Portal"]
+    },
+    {
+      "id": "six-senses",
+      "clientName": "Six Senses",
+      "logo": "/images/clients/six-senses.png",
+      "projectTitle": "Alpine Resort Network",
+      "location": "Switzerland",
+      "description": "Complete telecommunications overhaul for a premium mountain resort chain with seamless connectivity across multiple properties.",
+      "gallery": [
+        "/images/cases/six-senses-1.jpg",
+        "/images/cases/six-senses-2.jpg",
+        "/images/cases/six-senses-3.jpg"
+      ],
+      "stats": [
+        { "label": "Connection Speed Increase", "value": "25%" },
+        { "label": "Guests Served", "value": "3,200+" },
+        { "label": "Guest Rating", "value": "4.8/5" },
+        { "label": "Properties Connected", "value": "5" }
+      ],
+      "technologies": ["WiFi 6E", "Inter-resort Roaming", "Mountain Infrastructure", "Weather-resistant Systems", "Mobile Integration"]
+    },
+    {
+      "id": "bovis",
+      "clientName": "Bovis",
+      "logo": "/images/clients/bovis.png",
+      "projectTitle": "Smart Construction Management",
+      "location": "Multiple Locations",
+      "description": "Advanced telecommunications infrastructure for construction management and project coordination across multiple hospitality developments.",
+      "gallery": [
+        "/images/cases/bovis-1.jpg",
+        "/images/cases/bovis-2.jpg",
+        "/images/cases/bovis-3.jpg"
+      ],
+      "stats": [
+        { "label": "Projects Managed", "value": "15+" },
+        { "label": "Efficiency Gain", "value": "35%" },
+        { "label": "Communication Uptime", "value": "99.8%" },
+        { "label": "Cost Reduction", "value": "20%" }
+      ],
+      "technologies": ["Project Management Systems", "Real-time Communication", "IoT Monitoring", "Cloud Infrastructure", "Mobile Apps"]
+    },
+    {
+      "id": "hard-rock",
+      "clientName": "Hard Rock",
+      "logo": "/images/clients/hard-rock.png",
+      "projectTitle": "Entertainment Venue Technology",
+      "location": "Global Venues",
+      "description": "Cutting-edge audio-visual and connectivity solutions for Hard Rock venues worldwide, enhancing guest entertainment experiences.",
+      "gallery": [
+        "/images/cases/hard-rock-1.jpg",
+        "/images/cases/hard-rock-2.jpg",
+        "/images/cases/hard-rock-3.jpg"
+      ],
+      "stats": [
+        { "label": "Venues Connected", "value": "12+" },
+        { "label": "Audio Quality", "value": "Studio Grade" },
+        { "label": "Guest Experience", "value": "4.9/5" },
+        { "label": "System Reliability", "value": "99.9%" }
+      ],
+      "technologies": ["Professional Audio", "Digital Signage", "High-speed WiFi", "Entertainment Systems", "Live Streaming"]
+    },
+    {
+      "id": "asg-iberia",
+      "clientName": "ASG Iberia",
+      "logo": "/images/clients/asg-iberia.png",
+      "projectTitle": "Iberian Peninsula Network",
+      "location": "Spain & Portugal",
+      "description": "Comprehensive telecommunications network deployment across ASG Iberia's hospitality properties in Spain and Portugal.",
+      "gallery": [
+        "/images/cases/asg-iberia-1.jpg",
+        "/images/cases/asg-iberia-2.jpg",
+        "/images/cases/asg-iberia-3.jpg"
+      ],
+      "stats": [
+        { "label": "Properties Connected", "value": "8+" },
+        { "label": "Coverage Area", "value": "2 Countries" },
+        { "label": "Network Performance", "value": "99.7%" },
+        { "label": "Guest Satisfaction", "value": "4.8/5" }
+      ],
+      "technologies": ["Multi-site Networking", "Unified Communications", "Guest WiFi", "Property Management", "Security Systems"]
+    },
+    {
+      "id": "kkh-property",
+      "clientName": "KKH Property Investors",
+      "logo": "/images/clients/kkh-property.png",
+      "projectTitle": "Investment Property Technology",
+      "location": "Asia Pacific",
+      "description": "Technology infrastructure solutions for KKH Property Investors' portfolio of luxury hospitality and residential developments.",
+      "gallery": [
+        "/images/cases/kkh-property-1.jpg",
+        "/images/cases/kkh-property-2.jpg",
+        "/images/cases/kkh-property-3.jpg"
+      ],
+      "stats": [
+        { "label": "Investment Properties", "value": "20+" },
+        { "label": "Technology ROI", "value": "40%" },
+        { "label": "Operational Efficiency", "value": "30%" },
+        { "label": "Tenant Satisfaction", "value": "4.9/5" }
+      ],
+      "technologies": ["Smart Building Systems", "Investment Analytics", "Property Management", "Tenant Portals", "Energy Management"]
+    }
+  ]
+}

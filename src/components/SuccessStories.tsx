@@ -1,14 +1,21 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
 import { ArrowRight, MapPin, Users, Star } from 'lucide-react';
 import maldivesProject from '@/assets/maldives-project.jpg';
 
 const SuccessStories = () => {
+  const navigate = useNavigate();
+
   const handleNavClick = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleViewAllStories = () => {
+    navigate('/success-stories');
   };
 
   const stories = [
@@ -146,7 +153,7 @@ const SuccessStories = () => {
         {/* More Stories CTA */}
         <div className="text-center mt-12">
           <Button 
-            onClick={() => handleNavClick('#contact')}
+            onClick={handleViewAllStories}
             className="bg-govisan-gold hover:bg-govisan-gold/90 text-white font-semibold px-8 py-4 text-lg group"
           >
             View All Success Stories
