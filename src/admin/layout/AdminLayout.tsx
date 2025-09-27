@@ -75,6 +75,12 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
       current: location.pathname.includes('/admin/cases')
     },
     {
+      name: 'Success Stories',
+      href: '/admin/success-stories',
+      icon: Trophy,
+      current: location.pathname.includes('/admin/success-stories')
+    },
+    {
       name: 'About',
       href: '/admin/about',
       icon: Building2,

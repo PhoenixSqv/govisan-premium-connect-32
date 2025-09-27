@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from './ui/button';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -6,6 +7,8 @@ import { cn } from '@/lib/utils';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   const navigation = [
     { name: 'Home', href: '#hero' },
@@ -26,9 +29,16 @@ const Header = () => {
 
   const handleNavClick = (href: string) => {
     setIsMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    
+    if (isHomePage) {
+      // Si estamos en home, hacer scroll
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Si estamos en otra página, navegar a home con anchor
+      window.location.href = `/${href}`;
     }
   };
 
@@ -41,9 +51,9 @@ const Header = () => {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="text-2xl font-bold text-govisan-navy">
+            <Link to="/" className="text-2xl font-bold text-govisan-navy hover:text-govisan-gold transition-colors">
               GOVISAN Solutions
-            </div>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}

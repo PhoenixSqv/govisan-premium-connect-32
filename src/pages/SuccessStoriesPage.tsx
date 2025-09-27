@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { MapPin, Users, Star, TrendingUp } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { MapPin, Users, Star, TrendingUp, ArrowLeft, Home } from 'lucide-react';
 
 interface Client {
   id: string;
@@ -74,13 +75,26 @@ const SuccessStoriesPage = () => {
       
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-primary/10 to-secondary/10 py-24 mt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-            {content.title}
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
-            {content.subtitle}
-          </p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Back to Home Button */}
+          <div className="mb-8">
+            <Link to="/">
+              <Button variant="outline" className="group">
+                <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform duration-200" />
+                Back to Home
+              </Button>
+            </Link>
+          </div>
+          
+          {/* Hero Content */}
+          <div className="text-center">
+            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
+              {content.title}
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
+              {content.subtitle}
+            </p>
+          </div>
         </div>
       </section>
 

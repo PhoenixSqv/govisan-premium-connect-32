@@ -20,6 +20,7 @@ import CasesPage from "./admin/pages/CasesPage";
 import AboutPage from "./admin/pages/AboutPage";
 import InsightsPage from "./admin/pages/InsightsPage";
 import ContactPage from "./admin/pages/ContactPage";
+import SuccessStoriesAdminPage from "./admin/pages/SuccessStoriesAdminPage";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,7 @@ const App = () => (
             <Route path="/admin/about" element={<AdminLayout><AboutPage /></AdminLayout>} />
             <Route path="/admin/insights" element={<AdminLayout><InsightsPage /></AdminLayout>} />
             <Route path="/admin/contact" element={<AdminLayout><ContactPage /></AdminLayout>} />
+            <Route path="/admin/success-stories" element={<AdminLayout><SuccessStoriesAdminPage /></AdminLayout>} />
             <Route path="/admin/content" element={<AdminLayout><ContentEditor type="page" onSave={() => {}} /></AdminLayout>} />
             <Route path="/admin/media" element={<AdminLayout><MediaLibraryPage /></AdminLayout>} />
             <Route path="/admin/links-audit" element={<AdminLayout><LinksAuditPage /></AdminLayout>} />
