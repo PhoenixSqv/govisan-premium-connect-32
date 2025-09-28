@@ -140,7 +140,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ className = '' }) => {
   };
 
   return (
-    <div className={`fixed bottom-6 left-6 z-50 ${className}`}>
+    <div className={`fixed bottom-5 left-5 z-40 ${className}`}>
       {/* Chat Button */}
       <Button
         onClick={() => setIsOpen(!isOpen)}

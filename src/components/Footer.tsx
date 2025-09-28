@@ -166,7 +166,7 @@ const Footer = () => {
                       <li key={item.name}>
                         <button 
                           onClick={item.onClick}
-                          className="text-white/70 hover:text-primary transition-colors text-left"
+                          className="text-white/70 hover:text-govisan-gold transition-colors text-left"
                         >
                           {item.name}
                         </button>

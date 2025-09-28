@@ -85,14 +85,14 @@ const SpecializationSection = () => {
                 />
                 
                 {/* Dark Overlay */}
-                <div className="absolute inset-0 bg-black/80 transition-opacity duration-300 group-hover:bg-black/70" />
+                <div className="absolute inset-0 bg-black/80 transition-opacity duration-300 group-hover:bg-black/80" />
                 
                 <CardContent className="relative z-10 p-8 h-full flex flex-col text-white">
                   <div className="flex items-center mb-6">
                     <div className="w-12 h-12 bg-primary/90 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
                       <IconComponent className="h-6 w-6 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold leading-tight text-white group-hover:text-primary-foreground transition-colors" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
+                    <h3 className="text-xl font-bold leading-tight text-white group-hover:text-white transition-colors" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
                       {specialization.title}
                     </h3>
                   </div>
