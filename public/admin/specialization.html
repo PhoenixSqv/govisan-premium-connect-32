@@ -3,260 +3,394 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Govisan CMS - Our Specialization</title>
+    <title>Govisan CMS - Complete Management</title>
     <link rel="stylesheet" href="admin.css">
 </head>
-<body class="cms-page">
+<body>
     <div class="cms-header">
-        <div class="header-left">
-            <h1>Govisan CMS</h1>
-        </div>
-        <div class="header-right">
-            <div class="user-info">
-                <span>Welcome, admin@govisan.com</span>
-                <a href="#" onclick="logout()" class="logout-btn">Logout</a>
-            </div>
+        <h1>Govisan CMS</h1>
+        <div class="user-info">
+            <span>Welcome, admin@govisan.com</span>
+            <a href="login.html">Logout</a>
         </div>
     </div>
-
+    
     <div class="cms-container">
         <nav class="cms-sidebar">
-            <ul class="sidebar-nav">
-                <li><a href="dashboard.html" class="nav-link">📊 Dashboard</a></li>
-                <li><a href="sections.html" class="nav-link">📝 All Sections</a></li>
-                <li><a href="specialization.html" class="nav-link active">⚙️ Specialization</a></li>
-                <li><a href="../" target="_blank" class="nav-link">👁️ Preview Site</a></li>
+            <ul>
+                <li><a href="dashboard.html">📊 Dashboard</a></li>
+                <li><a href="specialization.html" class="active">⚙️ Complete CMS</a></li>
+                <li><a href="../" target="_blank">👁️ Preview Site</a></li>
             </ul>
         </nav>
         
         <main class="cms-content">
-            <div class="content-header">
-                <h2>Our Specialization Management</h2>
-                <p>Manage the specialization sections displayed on your website</p>
+            <!-- PESTAÑAS DE NAVEGACIÓN -->
+            <div class="cms-tabs">
+                <button class="tab-button active" data-tab="hero-tab">🏠 Hero</button>
+                <button class="tab-button" data-tab="company-tab">🏢 Company</button>
+                <button class="tab-button" data-tab="services-tab">🔧 Services</button>
+                <button class="tab-button" data-tab="specialization-tab">⚙️ Specialization</button>
+                <button class="tab-button" data-tab="casestudies-tab">📊 Case Studies</button>
+                <button class="tab-button" data-tab="blog-tab">📝 Blog</button>
+                <button class="tab-button" data-tab="contact-tab">📞 Contact</button>
             </div>
             
-            <div class="specialization-cms">
-                <div class="specialization-grid">
-                    <!-- Hospitality Technology -->
-                    <div class="spec-section">
-                        <div class="spec-header">
-                            <h3>🏨 Hospitality Technology</h3>
+            <!-- CONTENIDO DE CADA PESTAÑA -->
+            <div class="tab-container">
+                
+                <!-- HERO TAB -->
+                <div class="tab-content active" id="hero-tab">
+                    <h3>Hero Section</h3>
+                    <input type="text" id="hero-title" placeholder="Main Title">
+                    <input type="text" id="hero-subtitle" placeholder="Subtitle">
+                    <textarea id="hero-description" placeholder="Description" rows="3"></textarea>
+                    
+                    <h4>Statistics</h4>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <label>Statistic 1</label>
+                            <input type="text" id="stat1-number" placeholder="25+">
+                            <input type="text" id="stat1-label" placeholder="Years of Excellence">
                         </div>
-                        <div class="spec-form">
-                            <div class="form-group">
-                                <label for="hospitality-title">Section Title</label>
-                                <input type="text" id="hospitality-title" placeholder="Hospitality Technology" maxlength="50">
-                            </div>
-                            <div class="form-group">
-                                <label for="hospitality-description">Description</label>
-                                <textarea id="hospitality-description" placeholder="Comprehensive technology solutions for luxury hotels..." rows="3" maxlength="200"></textarea>
-                                <small class="char-count"><span id="hospitality-desc-count">0</span>/200</small>
-                            </div>
-                            <div class="form-group">
-                                <label>Services (5 required)</label>
-                                <div class="services-inputs">
-                                    <input type="text" id="hospitality-service-1" placeholder="Property Management Systems">
-                                    <input type="text" id="hospitality-service-2" placeholder="Guest Experience Platforms">
-                                    <input type="text" id="hospitality-service-3" placeholder="Revenue Management Systems">
-                                    <input type="text" id="hospitality-service-4" placeholder="Mobile Applications">
-                                    <input type="text" id="hospitality-service-5" placeholder="Digital Concierge Services">
-                                </div>
-                            </div>
+                        <div class="stat-item">
+                            <label>Statistic 2</label>
+                            <input type="text" id="stat2-number" placeholder="+60,000">
+                            <input type="text" id="stat2-label" placeholder="guestrooms connected">
+                        </div>
+                        <div class="stat-item">
+                            <label>Statistic 3</label>
+                            <input type="text" id="stat3-number" placeholder="11">
+                            <input type="text" id="stat3-label" placeholder="countries">
                         </div>
                     </div>
+                </div>
+                
+                <!-- COMPANY TAB -->
+                <div class="tab-content" id="company-tab">
+                    <h3>Company Information</h3>
+                    <input type="text" id="company-section-title" placeholder="Section Title (Over 25 years)">
+                    <textarea id="company-main-desc" placeholder="Main Description" rows="4"></textarea>
                     
-                    <!-- Real Estate Technology -->
-                    <div class="spec-section">
-                        <div class="spec-header">
-                            <h3>🏠 Real Estate Technology</h3>
+                    <div class="company-blocks">
+                        <div class="company-block">
+                            <h4>Global Experience</h4>
+                            <input type="text" id="global-title" placeholder="Title">
+                            <textarea id="global-desc" placeholder="Description" rows="3"></textarea>
                         </div>
-                        <div class="spec-form">
-                            <div class="form-group">
-                                <label for="real-estate-title">Section Title</label>
-                                <input type="text" id="real-estate-title" placeholder="Real Estate Technology" maxlength="50">
-                            </div>
-                            <div class="form-group">
-                                <label for="real-estate-description">Description</label>
-                                <textarea id="real-estate-description" placeholder="Smart building solutions and property management systems..." rows="3" maxlength="200"></textarea>
-                                <small class="char-count"><span id="real-estate-desc-count">0</span>/200</small>
-                            </div>
-                            <div class="form-group">
-                                <label>Services (5 required)</label>
-                                <div class="services-inputs">
-                                    <input type="text" id="real-estate-service-1" placeholder="Smart Building Systems">
-                                    <input type="text" id="real-estate-service-2" placeholder="Property Management Platforms">
-                                    <input type="text" id="real-estate-service-3" placeholder="Tenant Experience Apps">
-                                    <input type="text" id="real-estate-service-4" placeholder="Energy Management">
-                                    <input type="text" id="real-estate-service-5" placeholder="Security & Access Control">
-                                </div>
-                            </div>
+                        <div class="company-block">
+                            <h4>Commitment to Excellence</h4>
+                            <input type="text" id="commitment-title" placeholder="Title">
+                            <textarea id="commitment-desc" placeholder="Description" rows="3"></textarea>
+                        </div>
+                        <div class="company-block">
+                            <h4>Customer-Centric</h4>
+                            <input type="text" id="customer-title" placeholder="Title">
+                            <textarea id="customer-desc" placeholder="Description" rows="3"></textarea>
                         </div>
                     </div>
-                    
-                    <!-- Network Infrastructure -->
-                    <div class="spec-section">
-                        <div class="spec-header">
-                            <h3>🌐 Network Infrastructure</h3>
-                        </div>
-                        <div class="spec-form">
-                            <div class="form-group">
-                                <label for="network-title">Section Title</label>
-                                <input type="text" id="network-title" placeholder="Network Infrastructure" maxlength="50">
-                            </div>
-                            <div class="form-group">
-                                <label for="network-description">Description</label>
-                                <textarea id="network-description" placeholder="Robust networking solutions for hospitality and real estate..." rows="3" maxlength="200"></textarea>
-                                <small class="char-count"><span id="network-desc-count">0</span>/200</small>
-                            </div>
-                            <div class="form-group">
-                                <label>Services (5 required)</label>
-                                <div class="services-inputs">
-                                    <input type="text" id="network-service-1" placeholder="Enterprise WiFi Solutions">
-                                    <input type="text" id="network-service-2" placeholder="Network Security">
-                                    <input type="text" id="network-service-3" placeholder="Fiber Optic Infrastructure">
-                                    <input type="text" id="network-service-4" placeholder="Cloud Integration">
-                                    <input type="text" id="network-service-5" placeholder="24/7 Monitoring">
-                                </div>
+                </div>
+                
+                <!-- SERVICES TAB -->
+                <div class="tab-content" id="services-tab">
+                    <h3>Services Management</h3>
+                    <div class="services-grid">
+                        <div class="service-section">
+                            <h4>Wiredscore Certifications & Technologies</h4>
+                            <input type="text" id="wiredscore-title" placeholder="Title">
+                            <textarea id="wiredscore-desc" placeholder="Description" rows="3"></textarea>
+                            <div class="services-list">
+                                <input type="text" id="wiredscore-service-1" placeholder="Service 1">
+                                <input type="text" id="wiredscore-service-2" placeholder="Service 2">
+                                <input type="text" id="wiredscore-service-3" placeholder="Service 3">
+                                <input type="text" id="wiredscore-service-4" placeholder="Service 4">
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Smart Entertainment Solutions -->
-                    <div class="spec-section">
-                        <div class="spec-header">
-                            <h3>🎬 Smart Entertainment Solutions</h3>
-                        </div>
-                        <div class="spec-form">
-                            <div class="form-group">
-                                <label for="entertainment-title">Section Title</label>
-                                <input type="text" id="entertainment-title" placeholder="Smart Entertainment Solutions" maxlength="50">
-                            </div>
-                            <div class="form-group">
-                                <label for="entertainment-description">Description</label>
-                                <textarea id="entertainment-description" placeholder="Cutting-edge entertainment systems for hospitality venues..." rows="3" maxlength="200"></textarea>
-                                <small class="char-count"><span id="entertainment-desc-count">0</span>/200</small>
-                            </div>
-                            <div class="form-group">
-                                <label>Services (5 required)</label>
-                                <div class="services-inputs">
-                                    <input type="text" id="entertainment-service-1" placeholder="Digital Signage">
-                                    <input type="text" id="entertainment-service-2" placeholder="Interactive Displays">
-                                    <input type="text" id="entertainment-service-3" placeholder="Streaming Solutions">
-                                    <input type="text" id="entertainment-service-4" placeholder="Event Technology">
-                                    <input type="text" id="entertainment-service-5" placeholder="Premium Audio & Sound Systems">
-                                </div>
+                        
+                        <div class="service-section">
+                            <h4>Network Infrastructure</h4>
+                            <input type="text" id="network-infra-title" placeholder="Title">
+                            <textarea id="network-infra-desc" placeholder="Description" rows="3"></textarea>
+                            <div class="services-list">
+                                <input type="text" id="network-infra-service-1" placeholder="Service 1">
+                                <input type="text" id="network-infra-service-2" placeholder="Service 2">
+                                <input type="text" id="network-infra-service-3" placeholder="Service 3">
+                                <input type="text" id="network-infra-service-4" placeholder="Service 4">
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Business Intelligence -->
-                    <div class="spec-section">
-                        <div class="spec-header">
-                            <h3>📊 Business Intelligence</h3>
-                        </div>
-                        <div class="spec-form">
-                            <div class="form-group">
-                                <label for="business-intelligence-title">Section Title</label>
-                                <input type="text" id="business-intelligence-title" placeholder="Business Intelligence" maxlength="50">
-                            </div>
-                            <div class="form-group">
-                                <label for="business-intelligence-description">Description</label>
-                                <textarea id="business-intelligence-description" placeholder="Data-driven insights and analytics for informed decisions..." rows="3" maxlength="200"></textarea>
-                                <small class="char-count"><span id="business-intelligence-desc-count">0</span>/200</small>
-                            </div>
-                            <div class="form-group">
-                                <label>Services (5 required)</label>
-                                <div class="services-inputs">
-                                    <input type="text" id="business-intelligence-service-1" placeholder="Data Analytics">
-                                    <input type="text" id="business-intelligence-service-2" placeholder="Performance Dashboards">
-                                    <input type="text" id="business-intelligence-service-3" placeholder="Revenue Optimization">
-                                    <input type="text" id="business-intelligence-service-4" placeholder="Market Intelligence">
-                                    <input type="text" id="business-intelligence-service-5" placeholder="Predictive Analytics">
-                                </div>
+                        
+                        <div class="service-section">
+                            <h4>Audiovisual Systems</h4>
+                            <input type="text" id="audiovisual-title" placeholder="Title">
+                            <textarea id="audiovisual-desc" placeholder="Description" rows="3"></textarea>
+                            <div class="services-list">
+                                <input type="text" id="audiovisual-service-1" placeholder="Service 1">
+                                <input type="text" id="audiovisual-service-2" placeholder="Service 2">
+                                <input type="text" id="audiovisual-service-3" placeholder="Service 3">
+                                <input type="text" id="audiovisual-service-4" placeholder="Service 4">
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- IoT & Automation -->
-                    <div class="spec-section">
-                        <div class="spec-header">
-                            <h3>🤖 IoT & Automation</h3>
-                        </div>
-                        <div class="spec-form">
-                            <div class="form-group">
-                                <label for="iot-title">Section Title</label>
-                                <input type="text" id="iot-title" placeholder="IoT & Automation" maxlength="50">
-                            </div>
-                            <div class="form-group">
-                                <label for="iot-description">Description</label>
-                                <textarea id="iot-description" placeholder="Internet of Things solutions for smart automation..." rows="3" maxlength="200"></textarea>
-                                <small class="char-count"><span id="iot-desc-count">0</span>/200</small>
-                            </div>
-                            <div class="form-group">
-                                <label>Services (5 required)</label>
-                                <div class="services-inputs">
-                                    <input type="text" id="iot-service-1" placeholder="Smart Room Controls">
-                                    <input type="text" id="iot-service-2" placeholder="Environmental Monitoring">
-                                    <input type="text" id="iot-service-3" placeholder="Automated Workflows">
-                                    <input type="text" id="iot-service-4" placeholder="Sensor Networks">
-                                    <input type="text" id="iot-service-5" placeholder="Connected Appliances & Smart Devices">
-                                </div>
+                        
+                        <div class="service-section">
+                            <h4>Smart Building Integration</h4>
+                            <input type="text" id="smart-building-title" placeholder="Title">
+                            <textarea id="smart-building-desc" placeholder="Description" rows="3"></textarea>
+                            <div class="services-list">
+                                <input type="text" id="smart-building-service-1" placeholder="Service 1">
+                                <input type="text" id="smart-building-service-2" placeholder="Service 2">
+                                <input type="text" id="smart-building-service-3" placeholder="Service 3">
+                                <input type="text" id="smart-building-service-4" placeholder="Service 4">
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="cms-actions">
-                    <button onclick="saveData()" class="btn-save" id="saveBtn">
-                        <span class="btn-icon">💾</span>
-                        <span class="btn-text">Save Changes</span>
-                    </button>
-                    <button onclick="window.open('../', '_blank')" class="btn-preview">
-                        <span class="btn-icon">👁️</span>
-                        <span class="btn-text">Preview Site</span>
-                    </button>
-                    <button onclick="resetForm()" class="btn-reset">
-                        <span class="btn-icon">🔄</span>
-                        <span class="btn-text">Reset</span>
-                    </button>
+                <!-- SPECIALIZATION TAB -->
+                <div class="tab-content" id="specialization-tab">
+                    <h3>Our Specialization</h3>
+                    <div class="specialization-grid">
+                        <!-- Hospitality Technology -->
+                        <div class="service-section">
+                            <h4>🏨 Hospitality Technology</h4>
+                            <input type="text" id="hospitality-title" placeholder="Hospitality Technology">
+                            <textarea id="hospitality-description" placeholder="Comprehensive technology solutions for luxury hotels..." rows="3"></textarea>
+                            <div class="services-list">
+                                <input type="text" id="hospitality-service-1" placeholder="Property Management Systems">
+                                <input type="text" id="hospitality-service-2" placeholder="Guest Experience Platforms">
+                                <input type="text" id="hospitality-service-3" placeholder="Revenue Management Systems">
+                                <input type="text" id="hospitality-service-4" placeholder="Mobile Applications">
+                                <input type="text" id="hospitality-service-5" placeholder="Digital Concierge Services">
+                            </div>
+                        </div>
+                        
+                        <!-- Real Estate Technology -->
+                        <div class="service-section">
+                            <h4>🏠 Real Estate Technology</h4>
+                            <input type="text" id="real-estate-title" placeholder="Real Estate Technology">
+                            <textarea id="real-estate-description" placeholder="Smart building solutions and property management systems..." rows="3"></textarea>
+                            <div class="services-list">
+                                <input type="text" id="real-estate-service-1" placeholder="Smart Building Systems">
+                                <input type="text" id="real-estate-service-2" placeholder="Property Management Platforms">
+                                <input type="text" id="real-estate-service-3" placeholder="Tenant Experience Apps">
+                                <input type="text" id="real-estate-service-4" placeholder="Energy Management">
+                                <input type="text" id="real-estate-service-5" placeholder="Security & Access Control">
+                            </div>
+                        </div>
+                        
+                        <!-- Network Infrastructure -->
+                        <div class="service-section">
+                            <h4>🌐 Network Infrastructure</h4>
+                            <input type="text" id="network-title" placeholder="Network Infrastructure">
+                            <textarea id="network-description" placeholder="Robust networking solutions for hospitality and real estate..." rows="3"></textarea>
+                            <div class="services-list">
+                                <input type="text" id="network-service-1" placeholder="Enterprise WiFi Solutions">
+                                <input type="text" id="network-service-2" placeholder="Network Security">
+                                <input type="text" id="network-service-3" placeholder="Fiber Optic Infrastructure">
+                                <input type="text" id="network-service-4" placeholder="Cloud Integration">
+                                <input type="text" id="network-service-5" placeholder="24/7 Monitoring">
+                            </div>
+                        </div>
+                        
+                        <!-- Smart Entertainment Solutions -->
+                        <div class="service-section">
+                            <h4>🎬 Smart Entertainment Solutions</h4>
+                            <input type="text" id="entertainment-title" placeholder="Smart Entertainment Solutions">
+                            <textarea id="entertainment-description" placeholder="Cutting-edge entertainment systems for hospitality venues..." rows="3"></textarea>
+                            <div class="services-list">
+                                <input type="text" id="entertainment-service-1" placeholder="Digital Signage">
+                                <input type="text" id="entertainment-service-2" placeholder="Interactive Displays">
+                                <input type="text" id="entertainment-service-3" placeholder="Streaming Solutions">
+                                <input type="text" id="entertainment-service-4" placeholder="Event Technology">
+                                <input type="text" id="entertainment-service-5" placeholder="Premium Audio & Sound Systems">
+                            </div>
+                        </div>
+                        
+                        <!-- Business Intelligence -->
+                        <div class="service-section">
+                            <h4>📊 Business Intelligence</h4>
+                            <input type="text" id="business-intelligence-title" placeholder="Business Intelligence">
+                            <textarea id="business-intelligence-description" placeholder="Data-driven insights and analytics for informed decisions..." rows="3"></textarea>
+                            <div class="services-list">
+                                <input type="text" id="business-intelligence-service-1" placeholder="Data Analytics">
+                                <input type="text" id="business-intelligence-service-2" placeholder="Performance Dashboards">
+                                <input type="text" id="business-intelligence-service-3" placeholder="Revenue Optimization">
+                                <input type="text" id="business-intelligence-service-4" placeholder="Market Intelligence">
+                                <input type="text" id="business-intelligence-service-5" placeholder="Predictive Analytics">
+                            </div>
+                        </div>
+                        
+                        <!-- IoT & Automation -->
+                        <div class="service-section">
+                            <h4>🤖 IoT & Automation</h4>
+                            <input type="text" id="iot-title" placeholder="IoT & Automation">
+                            <textarea id="iot-description" placeholder="Internet of Things solutions for smart automation..." rows="3"></textarea>
+                            <div class="services-list">
+                                <input type="text" id="iot-service-1" placeholder="Smart Room Controls">
+                                <input type="text" id="iot-service-2" placeholder="Environmental Monitoring">
+                                <input type="text" id="iot-service-3" placeholder="Automated Workflows">
+                                <input type="text" id="iot-service-4" placeholder="Sensor Networks">
+                                <input type="text" id="iot-service-5" placeholder="Connected Appliances & Smart Devices">
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                
+                <!-- CASE STUDIES TAB -->
+                <div class="tab-content" id="casestudies-tab">
+                    <h3>Case Studies Management</h3>
+                    <div class="cases-grid">
+                        <div class="case-section">
+                            <h4>Mandarin Oriental Project</h4>
+                            <input type="text" id="mandarin-title" placeholder="Project Title">
+                            <textarea id="mandarin-desc" placeholder="Project Description" rows="3"></textarea>
+                            <input type="text" id="mandarin-location" placeholder="Location">
+                            <input type="number" id="mandarin-rooms" placeholder="Number of Rooms" step="1">
+                            <input type="number" id="mandarin-rating" placeholder="Rating" step="0.1" min="1" max="5">
+                            <div class="metrics-grid">
+                                <input type="text" id="mandarin-metric1" placeholder="Metric 1 (e.g., 99.9% network uptime)">
+                                <input type="text" id="mandarin-metric2" placeholder="Metric 2">
+                                <input type="text" id="mandarin-metric3" placeholder="Metric 3">
+                            </div>
+                        </div>
+                        
+                        <div class="case-section">
+                            <h4>Six Senses Project</h4>
+                            <input type="text" id="sixsenses-title" placeholder="Project Title">
+                            <textarea id="sixsenses-desc" placeholder="Project Description" rows="3"></textarea>
+                            <input type="text" id="sixsenses-location" placeholder="Location">
+                            <input type="number" id="sixsenses-rooms" placeholder="Number of Rooms" step="1">
+                            <input type="number" id="sixsenses-rating" placeholder="Rating" step="0.1" min="1" max="5">
+                            <div class="metrics-grid">
+                                <input type="text" id="sixsenses-metric1" placeholder="Metric 1">
+                                <input type="text" id="sixsenses-metric2" placeholder="Metric 2">
+                                <input type="text" id="sixsenses-metric3" placeholder="Metric 3">
+                            </div>
+                        </div>
+                        
+                        <div class="case-section">
+                            <h4>Fairmont Bangkok Project</h4>
+                            <input type="text" id="fairmont-title" placeholder="Project Title">
+                            <textarea id="fairmont-desc" placeholder="Project Description" rows="3"></textarea>
+                            <input type="text" id="fairmont-location" placeholder="Location">
+                            <input type="number" id="fairmont-rooms" placeholder="Number of Rooms" step="1">
+                            <input type="number" id="fairmont-rating" placeholder="Rating" step="0.1" min="1" max="5">
+                            <div class="metrics-grid">
+                                <input type="text" id="fairmont-metric1" placeholder="Metric 1">
+                                <input type="text" id="fairmont-metric2" placeholder="Metric 2">
+                                <input type="text" id="fairmont-metric3" placeholder="Metric 3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- BLOG TAB -->
+                <div class="tab-content" id="blog-tab">
+                    <h3>Blog & Insights Management</h3>
+                    <div class="blog-posts">
+                        <div class="post-section">
+                            <h4>Blog Post 1</h4>
+                            <input type="text" id="post1-title" placeholder="Article Title">
+                            <select id="post1-category">
+                                <option value="Technology">Technology</option>
+                                <option value="Sustainability">Sustainability</option>
+                                <option value="Market Analysis">Market Analysis</option>
+                            </select>
+                            <input type="text" id="post1-readtime" placeholder="Read Time (e.g., 5 min read)">
+                            <input type="date" id="post1-date">
+                            <textarea id="post1-excerpt" placeholder="Article excerpt/summary" rows="4"></textarea>
+                        </div>
+                        
+                        <div class="post-section">
+                            <h4>Blog Post 2</h4>
+                            <input type="text" id="post2-title" placeholder="Article Title">
+                            <select id="post2-category">
+                                <option value="Technology">Technology</option>
+                                <option value="Sustainability">Sustainability</option>
+                                <option value="Market Analysis">Market Analysis</option>
+                            </select>
+                            <input type="text" id="post2-readtime" placeholder="Read Time">
+                            <input type="date" id="post2-date">
+                            <textarea id="post2-excerpt" placeholder="Article excerpt/summary" rows="4"></textarea>
+                        </div>
+                        
+                        <div class="post-section">
+                            <h4>Blog Post 3</h4>
+                            <input type="text" id="post3-title" placeholder="Article Title">
+                            <select id="post3-category">
+                                <option value="Technology">Technology</option>
+                                <option value="Sustainability">Sustainability</option>
+                                <option value="Market Analysis">Market Analysis</option>
+                            </select>
+                            <input type="text" id="post3-readtime" placeholder="Read Time">
+                            <input type="date" id="post3-date">
+                            <textarea id="post3-excerpt" placeholder="Article excerpt/summary" rows="4"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- CONTACT TAB -->
+                <div class="tab-content" id="contact-tab">
+                    <h3>Contact Information</h3>
+                    <div class="offices-grid">
+                        <div class="office-section">
+                            <h4>Barcelona Office</h4>
+                            <textarea id="barcelona-address" placeholder="Full Address" rows="3"></textarea>
+                            <input type="tel" id="barcelona-phone" placeholder="Phone Number">
+                            <input type="email" id="barcelona-email" placeholder="Email">
+                        </div>
+                        
+                        <div class="office-section">
+                            <h4>Bengaluru Office</h4>
+                            <textarea id="bengaluru-address" placeholder="Full Address" rows="3"></textarea>
+                            <input type="tel" id="bengaluru-phone" placeholder="Phone Number">
+                            <input type="email" id="bengaluru-email" placeholder="Email">
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- BOTONES DE ACCIÓN -->
+            <div class="cms-actions">
+                <button onclick="saveAllData()" class="btn-save">💾 Save All Changes</button>
+                <button onclick="window.open('../', '_blank')" class="btn-preview">👁️ Preview Site</button>
+                <button onclick="loadAllData()" class="btn-reset">🔄 Reload Data</button>
             </div>
         </main>
     </div>
     
     <script src="admin.js"></script>
     <script>
-        // Check authentication
-        if (!localStorage.getItem('cms_token')) {
-            window.location.href = 'login.html';
-        }
-        
-        // Character count for textareas
+        // Navegación entre pestañas
         document.addEventListener('DOMContentLoaded', function() {
-            const textareas = document.querySelectorAll('textarea[maxlength]');
-            textareas.forEach(textarea => {
-                const sectionName = textarea.id.split('-')[0];
-                const counter = document.getElementById(sectionName + '-desc-count');
-                
-                textarea.addEventListener('input', function() {
-                    if (counter) {
-                        counter.textContent = this.value.length;
-                        if (this.value.length > 180) {
-                            counter.style.color = '#e74c3c';
-                        } else {
-                            counter.style.color = '#7f8c8d';
-                        }
-                    }
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const tabId = e.target.dataset.tab;
+                    
+                    // Cambiar pestaña activa
+                    document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+                    
+                    e.target.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
                 });
-                
-                // Initialize count
-                if (counter) {
-                    counter.textContent = textarea.value.length;
-                }
             });
-            
-            // Load existing data
-            loadData();
+        });
+
+        // Funciones placeholder para PHP posterior
+        function saveAllData() {
+            console.log('saveAllData - conectar a PHP');
+            alert('Save function - connect to PHP backend');
+        }
+
+        function loadAllData() {
+            console.log('loadAllData - conectar a PHP');
+            alert('Load function - connect to PHP backend');
+        }
+
+        // Cargar al inicio
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('CMS loaded - ready for PHP connection');
         });
     </script>
 </body>
