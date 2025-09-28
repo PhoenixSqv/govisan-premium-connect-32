@@ -128,7 +128,7 @@ const Footer = () => {
                   <h3 className="text-lg font-semibold text-govisan-gold mb-4">Company</h3>
                   <ul className="space-y-3">
                     {navigation.company.map(item => <li key={item.name}>
-                        <a href={item.href} className="text-white/70 hover:text-white transition-colors">
+                        <a href={item.href} className="text-white/70 hover:text-govisan-gold transition-colors">
                           {item.name}
                         </a>
                       </li>)}
@@ -139,7 +139,7 @@ const Footer = () => {
                   <h3 className="text-lg font-semibold text-govisan-gold mb-4">Solutions</h3>
                   <ul className="space-y-3">
                     {navigation.solutions.map(item => <li key={item.name}>
-                        <a href={item.href} className="text-white/70 hover:text-white transition-colors">
+                        <a href={item.href} className="text-white/70 hover:text-govisan-gold transition-colors">
                           {item.name}
                         </a>
                       </li>)}
@@ -151,7 +151,7 @@ const Footer = () => {
                   <ul className="space-y-3">
                     {navigation.resources.map(item => (
                       <li key={item.name}>
-                        <a href={item.href} className="text-white/70 hover:text-white transition-colors">
+                        <a href={item.href} className="text-white/70 hover:text-govisan-gold transition-colors">
                           {item.name}
                         </a>
                       </li>
