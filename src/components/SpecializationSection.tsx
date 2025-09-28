@@ -85,32 +85,32 @@ const SpecializationSection = () => {
                 />
                 
                 {/* Dark Overlay */}
-                <div className="absolute inset-0 bg-black/70 transition-opacity duration-300 group-hover:bg-black/60" />
+                <div className="absolute inset-0 bg-black/80 transition-opacity duration-300 group-hover:bg-black/70" />
                 
                 <CardContent className="relative z-10 p-8 h-full flex flex-col text-white">
                   <div className="flex items-center mb-6">
                     <div className="w-12 h-12 bg-primary/90 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
                       <IconComponent className="h-6 w-6 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold leading-tight group-hover:text-primary-foreground transition-colors">
+                    <h3 className="text-xl font-bold leading-tight text-white group-hover:text-primary-foreground transition-colors" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
                       {specialization.title}
                     </h3>
                   </div>
                   
-                  <p className="text-white/90 mb-6 leading-relaxed text-sm">
+                  <p className="text-white mb-6 leading-relaxed text-sm font-medium" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
                     {specialization.description}
                   </p>
                   
                   <div className="mt-auto">
-                    <ul className="space-y-2 text-xs text-white/80">
+                    <ul className="space-y-2 text-xs text-white font-medium">
                       {specialization.features.slice(0, 4).map((feature) => (
-                        <li key={feature} className="flex items-center">
-                          <div className="w-1 h-1 bg-primary rounded-full mr-3 flex-shrink-0"></div>
+                        <li key={feature} className="flex items-center" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
+                          <div className="w-2 h-2 bg-white rounded-full mr-3 flex-shrink-0"></div>
                           {feature}
                         </li>
                       ))}
                       {specialization.features.length > 4 && (
-                        <li className="text-primary font-medium">
+                        <li className="text-white font-medium" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
                           +{specialization.features.length - 4} more services
                         </li>
                       )}

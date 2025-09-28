@@ -1,6 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Linkedin, Youtube, Mail, Phone, MapPin } from 'lucide-react';
+import LegalModal from './LegalModal';
+
 const Footer = () => {
+  const [legalModal, setLegalModal] = useState<{
+    isOpen: boolean;
+    type: 'privacy' | 'terms' | 'cookies' | 'compliance' | null;
+  }>({
+    isOpen: false,
+    type: null
+  });
+
+  const openLegalModal = (type: 'privacy' | 'terms' | 'cookies' | 'compliance') => {
+    setLegalModal({ isOpen: true, type });
+  };
+
+  const closeLegalModal = () => {
+    setLegalModal({ isOpen: false, type: null });
+  };
   const navigation = {
     company: [{
       name: 'About Govisan',
@@ -43,16 +60,20 @@ const Footer = () => {
     }],
     legal: [{
       name: 'Privacy Policy',
-      href: '#privacy'
+      href: '#privacy',
+      onClick: () => openLegalModal('privacy')
     }, {
-      name: 'Terms of Service',
-      href: '#terms'
+      name: 'Terms of Service', 
+      href: '#terms',
+      onClick: () => openLegalModal('terms')
     }, {
       name: 'Cookie Policy',
-      href: '#cookies'
+      href: '#cookies',
+      onClick: () => openLegalModal('cookies')
     }, {
       name: 'Compliance',
-      href: '#compliance'
+      href: '#compliance',
+      onClick: () => openLegalModal('compliance')
     }]
   };
   const socialLinks = [{
@@ -125,16 +146,32 @@ const Footer = () => {
                   </ul>
                 </div>
                 
-                
+                <div>
+                  <h3 className="text-lg font-semibold text-govisan-gold mb-4">Resources</h3>
+                  <ul className="space-y-3">
+                    {navigation.resources.map(item => (
+                      <li key={item.name}>
+                        <a href={item.href} className="text-white/70 hover:text-white transition-colors">
+                          {item.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
                 
                 <div>
                   <h3 className="text-lg font-semibold text-govisan-gold mb-4">Legal</h3>
                   <ul className="space-y-3">
-                    {navigation.legal.map(item => <li key={item.name}>
-                        <a href={item.href} className="text-white/70 hover:text-white transition-colors">
+                    {navigation.legal.map(item => (
+                      <li key={item.name}>
+                        <button 
+                          onClick={item.onClick}
+                          className="text-white/70 hover:text-primary transition-colors text-left"
+                        >
                           {item.name}
-                        </a>
-                      </li>)}
+                        </button>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>
@@ -178,6 +215,13 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      
+      {/* Legal Modal */}
+      <LegalModal 
+        isOpen={legalModal.isOpen}
+        onClose={closeLegalModal}
+        type={legalModal.type}
+      />
     </footer>;
 };
 export default Footer;

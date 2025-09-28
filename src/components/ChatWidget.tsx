@@ -140,7 +140,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ className = '' }) => {
   };
 
   return (
-    <div className={`fixed bottom-6 right-6 z-50 ${className}`}>
+    <div className={`fixed bottom-6 left-6 z-50 ${className}`}>
       {/* Chat Button */}
       <Button
         onClick={() => setIsOpen(!isOpen)}
@@ -160,7 +160,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ className = '' }) => {
 
       {/* Chat Panel */}
       {isOpen && (
-        <div className="absolute bottom-16 right-0 w-80 sm:w-96 h-96 bg-white rounded-2xl shadow-glass border border-white/20 flex flex-col overflow-hidden animate-fade-in">
+        <div className="absolute bottom-16 left-0 w-80 sm:w-96 h-96 bg-white rounded-2xl shadow-glass border border-white/20 flex flex-col overflow-hidden animate-fade-in">
           {/* Header */}
           <div className="gradient-accent p-4 text-white">
             <div className="flex items-center justify-between">
