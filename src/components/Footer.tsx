@@ -186,15 +186,15 @@ const Footer = () => {
                     <div className="space-y-2 text-sm text-white/70">
                       <div className="flex items-center">
                         <MapPin className="h-4 w-4 mr-2 text-govisan-gold" />
-                        {office.address}
+                        <span className="hover:text-govisan-gold transition-colors duration-300 cursor-pointer">{office.address}</span>
                       </div>
                       <div className="flex items-center">
                         <Phone className="h-4 w-4 mr-2 text-govisan-gold" />
-                        {office.phone}
+                        <span className="hover:text-govisan-gold transition-colors duration-300 cursor-pointer">{office.phone}</span>
                       </div>
                       <div className="flex items-center">
                         <Mail className="h-4 w-4 mr-2 text-govisan-gold" />
-                        {office.email}
+                        <span className="hover:text-govisan-gold transition-colors duration-300 cursor-pointer">{office.email}</span>
                       </div>
                     </div>
                   </div>)}

@@ -85,35 +85,33 @@ const SpecializationSection = () => {
                 />
                 
                 {/* Dark Overlay */}
-                <div className="absolute inset-0 bg-black/80 transition-opacity duration-300 group-hover:bg-black/80" />
+                <div className="absolute inset-0 bg-black/40 transition-opacity duration-300 group-hover:bg-black/40" />
                 
-                <CardContent className="relative z-10 p-8 h-full flex flex-col text-white">
+                {/* Bottom Gradient for Text Readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                
+                <CardContent className="relative z-10 p-6 pt-4 h-full flex flex-col text-white">
                   <div className="flex items-center mb-6">
                     <div className="w-12 h-12 bg-primary/90 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
                       <IconComponent className="h-6 w-6 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold leading-tight text-white group-hover:text-white transition-colors" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
+                    <h3 className="text-xl font-bold leading-tight text-white group-hover:text-white transition-colors" style={{ textShadow: '2px 2px 6px rgba(0,0,0,0.9)' }}>
                       {specialization.title}
                     </h3>
                   </div>
                   
-                  <p className="text-white mb-6 leading-relaxed text-sm font-medium" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
+                  <p className="text-white mb-6 leading-relaxed text-sm font-medium" style={{ textShadow: '2px 2px 6px rgba(0,0,0,0.9)' }}>
                     {specialization.description}
                   </p>
                   
                   <div className="mt-auto">
                     <ul className="space-y-2 text-xs text-white font-medium">
-                      {specialization.features.slice(0, 4).map((feature) => (
-                        <li key={feature} className="flex items-center" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
+                      {specialization.features.map((feature) => (
+                        <li key={feature} className="flex items-center" style={{ textShadow: '2px 2px 6px rgba(0,0,0,0.9)' }}>
                           <div className="w-2 h-2 bg-white rounded-full mr-3 flex-shrink-0"></div>
                           {feature}
                         </li>
                       ))}
-                      {specialization.features.length > 4 && (
-                        <li className="text-white font-medium" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>
-                          +{specialization.features.length - 4} more services
-                        </li>
-                      )}
                     </ul>
                   </div>
                 </CardContent>
