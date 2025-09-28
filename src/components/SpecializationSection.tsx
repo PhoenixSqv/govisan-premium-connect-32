@@ -2,6 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from './ui/card';
 import * as LucideIcons from 'lucide-react';
 
+// Import specialization background images
+import hospitalityTechImage from '@/assets/specializations/hospitality-tech.jpg';
+import realEstateTechImage from '@/assets/specializations/real-estate-tech.jpg';
+import networkInfraImage from '@/assets/specializations/network-infrastructure.jpg';
+import entertainmentImage from '@/assets/specializations/entertainment-solutions.jpg';
+import businessIntelImage from '@/assets/specializations/business-intelligence.jpg';
+import iotAutomationImage from '@/assets/specializations/iot-automation.jpg';
+
 interface SpecializationItem {
   icon: string;
   title: string;
@@ -18,6 +26,16 @@ interface SpecializationContent {
 
 const SpecializationSection = () => {
   const [content, setContent] = useState<SpecializationContent | null>(null);
+
+  // Map specialization titles to their background images
+  const backgroundImages = {
+    'Hospitality Technology': hospitalityTechImage,
+    'Real Estate Technology': realEstateTechImage,
+    'Network Infrastructure': networkInfraImage,
+    'Smart Entertainment Solutions': entertainmentImage,
+    'Business Intelligence': businessIntelImage,
+    'IoT & Automation': iotAutomationImage,
+  };
 
   useEffect(() => {
     // Load from static JSON for now - ready for PHP API migration
@@ -52,34 +70,52 @@ const SpecializationSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {content.specializations.map((specialization, index) => {
             const IconComponent = (LucideIcons as any)[specialization.icon] || LucideIcons.Settings;
+            const backgroundImage = backgroundImages[specialization.title as keyof typeof backgroundImages];
             
             return (
               <Card 
                 key={specialization.title}
-                className="group glass hover:shadow-teal transition-all duration-500 hover:-translate-y-2 border-0"
+                className="group relative overflow-hidden border-0 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 h-[400px]"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <CardContent className="p-8">
-                  <div className="w-16 h-16 gradient-accent rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                    <IconComponent className="h-8 w-8 text-white" />
+                {/* Background Image */}
+                <div
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                  style={{ backgroundImage: `url(${backgroundImage})` }}
+                />
+                
+                {/* Dark Overlay */}
+                <div className="absolute inset-0 bg-black/70 transition-opacity duration-300 group-hover:bg-black/60" />
+                
+                <CardContent className="relative z-10 p-8 h-full flex flex-col text-white">
+                  <div className="flex items-center mb-6">
+                    <div className="w-12 h-12 bg-primary/90 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
+                      <IconComponent className="h-6 w-6 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold leading-tight group-hover:text-primary-foreground transition-colors">
+                      {specialization.title}
+                    </h3>
                   </div>
                   
-                  <h3 className="text-xl font-semibold text-foreground mb-4 group-hover:text-govisan-teal transition-colors">
-                    {specialization.title}
-                  </h3>
-                  
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                  <p className="text-white/90 mb-6 leading-relaxed text-sm">
                     {specialization.description}
                   </p>
                   
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    {specialization.features.map((feature) => (
-                      <li key={feature} className="flex items-center">
-                        <div className="w-1.5 h-1.5 bg-govisan-teal rounded-full mr-3 flex-shrink-0"></div>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="mt-auto">
+                    <ul className="space-y-2 text-xs text-white/80">
+                      {specialization.features.slice(0, 4).map((feature) => (
+                        <li key={feature} className="flex items-center">
+                          <div className="w-1 h-1 bg-primary rounded-full mr-3 flex-shrink-0"></div>
+                          {feature}
+                        </li>
+                      ))}
+                      {specialization.features.length > 4 && (
+                        <li className="text-primary font-medium">
+                          +{specialization.features.length - 4} more services
+                        </li>
+                      )}
+                    </ul>
+                  </div>
                 </CardContent>
               </Card>
             );

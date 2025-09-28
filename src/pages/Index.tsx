@@ -11,10 +11,13 @@ import SectionDivider from '@/components/SectionDivider';
 import ChatWidget from '@/components/ChatWidget';
 import FinalCTA from '@/components/FinalCTA';
 import Footer from '@/components/Footer';
+import BackToTop from '@/components/BackToTop';
+import ScrollProgress from '@/components/ScrollProgress';
 
 const Index = () => {
   return (
     <div className="min-h-screen scroll-smooth snap-y snap-mandatory overflow-y-scroll">
+      <ScrollProgress />
       <Header />
       
       <main>
@@ -56,8 +59,9 @@ const Index = () => {
       
       <Footer />
       
-      {/* Floating Chat Widget */}
+      {/* Floating Widgets */}
       <ChatWidget />
+      <BackToTop />
     </div>
   );
 };

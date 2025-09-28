@@ -16,11 +16,11 @@
       ],
       "stats": [
         { "label": "Network Uptime", "value": "99.9%" },
-        { "label": "Guests Served", "value": "5,000+" },
-        { "label": "Guest Satisfaction", "value": "4.9/5" },
-        { "label": "Connectivity Complaints", "value": "0" }
+        { "label": "Guest Satisfaction Increase", "value": "+40%" },
+        { "label": "ROI Achievement", "value": "180%" },
+        { "label": "Implementation Time", "value": "6 months" }
       ],
-      "technologies": ["WiFi 6E", "Fiber Optic", "IoT Integration", "Smart Room Controls", "Guest Portal"]
+      "technologies": ["WiFi 6E", "Fiber Optics", "IoT Integration", "Smart Room Controls", "Guest Portal", "5G Ready"]
     },
     {
       "id": "six-senses",
@@ -35,12 +35,12 @@
         "/images/cases/six-senses-3.jpg"
       ],
       "stats": [
-        { "label": "Connection Speed Increase", "value": "25%" },
-        { "label": "Guests Served", "value": "3,200+" },
-        { "label": "Guest Rating", "value": "4.8/5" },
-        { "label": "Properties Connected", "value": "5" }
+        { "label": "Connection Speed Increase", "value": "+25%" },
+        { "label": "Operational Efficiency", "value": "+35%" },
+        { "label": "Energy Savings", "value": "22%" },
+        { "label": "Cross-Property Roaming", "value": "100%" }
       ],
-      "technologies": ["WiFi 6E", "Inter-resort Roaming", "Mountain Infrastructure", "Weather-resistant Systems", "Mobile Integration"]
+      "technologies": ["WiFi 6E", "Inter-resort Roaming", "Mountain Infrastructure", "Weather-resistant Systems", "Mobile Integration", "Edge Computing"]
     },
     {
       "id": "bovis",
@@ -55,12 +55,12 @@
         "/images/cases/bovis-3.jpg"
       ],
       "stats": [
-        { "label": "Projects Managed", "value": "15+" },
-        { "label": "Efficiency Gain", "value": "35%" },
+        { "label": "Project Efficiency Gain", "value": "+35%" },
         { "label": "Communication Uptime", "value": "99.8%" },
-        { "label": "Cost Reduction", "value": "20%" }
+        { "label": "Cost Reduction", "value": "20%" },
+        { "label": "Timeline Acceleration", "value": "+15%" }
       ],
-      "technologies": ["Project Management Systems", "Real-time Communication", "IoT Monitoring", "Cloud Infrastructure", "Mobile Apps"]
+      "technologies": ["Project Management Systems", "Real-time Communication", "IoT Monitoring", "Cloud Infrastructure", "Mobile Apps", "AI Analytics"]
     },
     {
       "id": "hard-rock",
@@ -75,12 +75,12 @@
         "/images/cases/hard-rock-3.jpg"
       ],
       "stats": [
-        { "label": "Venues Connected", "value": "12+" },
-        { "label": "Audio Quality", "value": "Studio Grade" },
-        { "label": "Guest Experience", "value": "4.9/5" },
-        { "label": "System Reliability", "value": "99.9%" }
+        { "label": "Audio System Performance", "value": "Studio Grade" },
+        { "label": "Guest Experience Score", "value": "4.9/5" },
+        { "label": "System Reliability", "value": "99.9%" },
+        { "label": "Revenue Impact", "value": "+28%" }
       ],
-      "technologies": ["Professional Audio", "Digital Signage", "High-speed WiFi", "Entertainment Systems", "Live Streaming"]
+      "technologies": ["Professional Audio", "Digital Signage", "High-speed WiFi", "Entertainment Systems", "Live Streaming", "Immersive Tech"]
     },
     {
       "id": "asg-iberia",
@@ -95,12 +95,12 @@
         "/images/cases/asg-iberia-3.jpg"
       ],
       "stats": [
-        { "label": "Properties Connected", "value": "8+" },
-        { "label": "Coverage Area", "value": "2 Countries" },
         { "label": "Network Performance", "value": "99.7%" },
-        { "label": "Guest Satisfaction", "value": "4.8/5" }
+        { "label": "Coverage Expansion", "value": "2 Countries" },
+        { "label": "Guest Satisfaction", "value": "4.8/5" },
+        { "label": "Operational Cost Savings", "value": "18%" }
       ],
-      "technologies": ["Multi-site Networking", "Unified Communications", "Guest WiFi", "Property Management", "Security Systems"]
+      "technologies": ["Multi-site Networking", "Unified Communications", "Guest WiFi", "Property Management", "Security Systems", "Cloud Integration"]
     },
     {
       "id": "kkh-property",
@@ -115,12 +115,12 @@
         "/images/cases/kkh-property-3.jpg"
       ],
       "stats": [
-        { "label": "Investment Properties", "value": "20+" },
         { "label": "Technology ROI", "value": "40%" },
-        { "label": "Operational Efficiency", "value": "30%" },
-        { "label": "Tenant Satisfaction", "value": "4.9/5" }
+        { "label": "Operational Efficiency", "value": "+30%" },
+        { "label": "Tenant Satisfaction", "value": "4.9/5" },
+        { "label": "Smart Building Integration", "value": "95%" }
       ],
-      "technologies": ["Smart Building Systems", "Investment Analytics", "Property Management", "Tenant Portals", "Energy Management"]
+      "technologies": ["Smart Building Systems", "Investment Analytics", "Property Management", "Tenant Portals", "Energy Management", "Predictive Analytics"]
     }
   ]
 }
