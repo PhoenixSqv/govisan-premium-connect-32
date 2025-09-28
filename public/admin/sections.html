@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Govisan CMS - Content Management</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="cms-header">
+        <h1>Govisan CMS</h1>
+        <div class="user-info">
+            <span>Welcome, admin@govisan.com</span>
+            <a href="#" onclick="logout()">Logout</a>
+        </div>
+    </div>
+
+    <div class="cms-container">
+        <nav class="cms-sidebar">
+            <ul>
+                <li><a href="dashboard.html">📊 Dashboard</a></li>
+                <li><a href="sections.html" class="active">📝 All Sections</a></li>
+                <li><a href="specialization.html">⚙️ Specialization</a></li>
+                <li><a href="../" target="_blank">👁️ Preview Site</a></li>
+            </ul>
+        </nav>
+        
+        <main class="cms-content">
+            <div class="sections-cms">
+                <h2>Website Content Management</h2>
+                
+                <!-- Tab Navigation -->
+                <div class="tab-navigation">
+                    <button class="tab-btn active" onclick="showTab('hero')">🏠 Hero</button>
+                    <button class="tab-btn" onclick="showTab('about')">ℹ️ About</button>
+                    <button class="tab-btn" onclick="showTab('services')">🔧 Services</button>
+                    <button class="tab-btn" onclick="showTab('cases')">📂 Cases</button>
+                    <button class="tab-btn" onclick="showTab('insights')">📰 Insights</button>
+                    <button class="tab-btn" onclick="showTab('contact')">📞 Contact</button>
+                </div>
+
+                <!-- HERO SECTION TAB -->
+                <div id="hero-tab" class="tab-content active">
+                    <h3>Hero Section</h3>
+                    <div class="form-section">
+                        <label>Main Title:</label>
+                        <input type="text" id="hero-title" placeholder="Main headline">
+                        
+                        <label>Subtitle:</label>
+                        <textarea id="hero-subtitle" rows="3" placeholder="Subtitle description"></textarea>
+                        
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <label>Stat 1 - Number:</label>
+                                <input type="text" id="hero-stat1-number" placeholder="25+">
+                                <label>Stat 1 - Label:</label>
+                                <input type="text" id="hero-stat1-label" placeholder="Years of Excellence">
+                            </div>
+                            <div class="stat-item">
+                                <label>Stat 2 - Number:</label>
+                                <input type="text" id="hero-stat2-number" placeholder="+60,000">
+                                <label>Stat 2 - Label:</label>
+                                <input type="text" id="hero-stat2-label" placeholder="guestrooms connected">
+                            </div>
+                            <div class="stat-item">
+                                <label>Stat 3 - Number:</label>
+                                <input type="text" id="hero-stat3-number" placeholder="11">
+                                <label>Stat 3 - Label:</label>
+                                <input type="text" id="hero-stat3-label" placeholder="countries">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ABOUT SECTION TAB -->
+                <div id="about-tab" class="tab-content">
+                    <h3>About Section</h3>
+                    <div class="form-section">
+                        <label>Main Title:</label>
+                        <input type="text" id="about-title" placeholder="Over 25 years driving IT">
+                        
+                        <label>Description:</label>
+                        <textarea id="about-description" rows="4" placeholder="Main description"></textarea>
+                        
+                        <div class="values-grid">
+                            <div class="value-item">
+                                <h4>Global Experience</h4>
+                                <label>Title:</label>
+                                <input type="text" id="about-value1-title" placeholder="Global Experience">
+                                <label>Description:</label>
+                                <textarea id="about-value1-desc" rows="2"></textarea>
+                            </div>
+                            <div class="value-item">
+                                <h4>Commitment to Excellence</h4>
+                                <label>Title:</label>
+                                <input type="text" id="about-value2-title" placeholder="Commitment to Excellence">
+                                <label>Description:</label>
+                                <textarea id="about-value2-desc" rows="2"></textarea>
+                            </div>
+                            <div class="value-item">
+                                <h4>Customer-Centric</h4>
+                                <label>Title:</label>
+                                <input type="text" id="about-value3-title" placeholder="Customer-Centric">
+                                <label>Description:</label>
+                                <textarea id="about-value3-desc" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SERVICES SECTION TAB -->
+                <div id="services-tab" class="tab-content">
+                    <h3>Services Section</h3>
+                    <div class="form-section">
+                        <label>Section Title:</label>
+                        <input type="text" id="services-title" placeholder="Solutions & Services">
+                        
+                        <label>Section Description:</label>
+                        <textarea id="services-description" rows="4"></textarea>
+                        
+                        <div class="services-grid">
+                            <div class="service-item">
+                                <h4>Service 1</h4>
+                                <input type="text" id="service1-title" placeholder="Service Title">
+                                <textarea id="service1-description" rows="2" placeholder="Service Description"></textarea>
+                                <label>Features (one per line):</label>
+                                <textarea id="service1-features" rows="3" placeholder="Feature 1&#10;Feature 2&#10;Feature 3"></textarea>
+                            </div>
+                            <div class="service-item">
+                                <h4>Service 2</h4>
+                                <input type="text" id="service2-title" placeholder="Service Title">
+                                <textarea id="service2-description" rows="2" placeholder="Service Description"></textarea>
+                                <label>Features (one per line):</label>
+                                <textarea id="service2-features" rows="3" placeholder="Feature 1&#10;Feature 2&#10;Feature 3"></textarea>
+                            </div>
+                            <div class="service-item">
+                                <h4>Service 3</h4>
+                                <input type="text" id="service3-title" placeholder="Service Title">
+                                <textarea id="service3-description" rows="2" placeholder="Service Description"></textarea>
+                                <label>Features (one per line):</label>
+                                <textarea id="service3-features" rows="3" placeholder="Feature 1&#10;Feature 2&#10;Feature 3"></textarea>
+                            </div>
+                            <div class="service-item">
+                                <h4>Service 4</h4>
+                                <input type="text" id="service4-title" placeholder="Service Title">
+                                <textarea id="service4-description" rows="2" placeholder="Service Description"></textarea>
+                                <label>Features (one per line):</label>
+                                <textarea id="service4-features" rows="3" placeholder="Feature 1&#10;Feature 2&#10;Feature 3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CASE STUDIES TAB -->
+                <div id="cases-tab" class="tab-content">
+                    <h3>Case Studies</h3>
+                    <div class="form-section">
+                        <label>Section Title:</label>
+                        <input type="text" id="cases-title" placeholder="Partnering with Iconic Global hospitality Brands">
+                        
+                        <label>Section Description:</label>
+                        <textarea id="cases-description" rows="3"></textarea>
+                        
+                        <div class="cases-grid">
+                            <div class="case-item">
+                                <h4>Case Study 1</h4>
+                                <input type="text" id="case1-title" placeholder="Project Title">
+                                <input type="text" id="case1-location" placeholder="Location">
+                                <input type="text" id="case1-guests" placeholder="Guests Number">
+                                <input type="text" id="case1-rating" placeholder="Rating">
+                                <textarea id="case1-description" rows="2" placeholder="Project Description"></textarea>
+                                <label>Achievements (one per line):</label>
+                                <textarea id="case1-achievements" rows="3" placeholder="Achievement 1&#10;Achievement 2&#10;Achievement 3"></textarea>
+                            </div>
+                            <div class="case-item">
+                                <h4>Case Study 2</h4>
+                                <input type="text" id="case2-title" placeholder="Project Title">
+                                <input type="text" id="case2-location" placeholder="Location">
+                                <input type="text" id="case2-guests" placeholder="Guests Number">
+                                <input type="text" id="case2-rating" placeholder="Rating">
+                                <textarea id="case2-description" rows="2" placeholder="Project Description"></textarea>
+                                <label>Achievements (one per line):</label>
+                                <textarea id="case2-achievements" rows="3" placeholder="Achievement 1&#10;Achievement 2&#10;Achievement 3"></textarea>
+                            </div>
+                            <div class="case-item">
+                                <h4>Case Study 3</h4>
+                                <input type="text" id="case3-title" placeholder="Project Title">
+                                <input type="text" id="case3-location" placeholder="Location">
+                                <input type="text" id="case3-guests" placeholder="Guests Number">
+                                <input type="text" id="case3-rating" placeholder="Rating">
+                                <textarea id="case3-description" rows="2" placeholder="Project Description"></textarea>
+                                <label>Achievements (one per line):</label>
+                                <textarea id="case3-achievements" rows="3" placeholder="Achievement 1&#10;Achievement 2&#10;Achievement 3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- INSIGHTS TAB -->
+                <div id="insights-tab" class="tab-content">
+                    <h3>Blog & Insights</h3>
+                    <div class="form-section">
+                        <div class="insights-grid">
+                            <div class="insight-item">
+                                <h4>Article 1</h4>
+                                <input type="text" id="insight1-title" placeholder="Article Title">
+                                <input type="text" id="insight1-category" placeholder="Category">
+                                <input type="date" id="insight1-date">
+                                <input type="text" id="insight1-readtime" placeholder="5 min read">
+                                <textarea id="insight1-excerpt" rows="3" placeholder="Article excerpt"></textarea>
+                            </div>
+                            <div class="insight-item">
+                                <h4>Article 2</h4>
+                                <input type="text" id="insight2-title" placeholder="Article Title">
+                                <input type="text" id="insight2-category" placeholder="Category">
+                                <input type="date" id="insight2-date">
+                                <input type="text" id="insight2-readtime" placeholder="5 min read">
+                                <textarea id="insight2-excerpt" rows="3" placeholder="Article excerpt"></textarea>
+                            </div>
+                            <div class="insight-item">
+                                <h4>Article 3</h4>
+                                <input type="text" id="insight3-title" placeholder="Article Title">
+                                <input type="text" id="insight3-category" placeholder="Category">
+                                <input type="date" id="insight3-date">
+                                <input type="text" id="insight3-readtime" placeholder="5 min read">
+                                <textarea id="insight3-excerpt" rows="3" placeholder="Article excerpt"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTACT TAB -->
+                <div id="contact-tab" class="tab-content">
+                    <h3>Contact Information</h3>
+                    <div class="form-section">
+                        <label>Contact Title:</label>
+                        <input type="text" id="contact-title" placeholder="Let's Build the Future Together">
+                        
+                        <label>Contact Description:</label>
+                        <textarea id="contact-description" rows="2"></textarea>
+                        
+                        <div class="offices-grid">
+                            <div class="office-item">
+                                <h4>Office 1 - Barcelona</h4>
+                                <input type="text" id="office1-city" placeholder="Barcelona">
+                                <input type="text" id="office1-country" placeholder="Spain">
+                                <textarea id="office1-address" rows="2" placeholder="Address"></textarea>
+                                <input type="tel" id="office1-phone" placeholder="Phone">
+                                <input type="email" id="office1-email" placeholder="Email">
+                            </div>
+                            <div class="office-item">
+                                <h4>Office 2 - Bengaluru</h4>
+                                <input type="text" id="office2-city" placeholder="Bengaluru">
+                                <input type="text" id="office2-country" placeholder="India">
+                                <textarea id="office2-address" rows="2" placeholder="Address"></textarea>
+                                <input type="tel" id="office2-phone" placeholder="Phone">
+                                <input type="email" id="office2-email" placeholder="Email">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="cms-actions">
+                    <button onclick="saveAllSections()" class="btn-save">💾 Save All Changes</button>
+                    <button onclick="window.open('../', '_blank')" class="btn-preview">👁️ Preview Site</button>
+                    <button onclick="resetCurrentTab()" class="btn-reset">🔄 Reset Current Tab</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="admin.js"></script>
+    <script>
+        // Tab functionality
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Load data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAllSections();
+        });
+    </script>
+</body>
+</html>

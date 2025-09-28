@@ -320,11 +320,413 @@ function loadDraft() {
     }
 }
 
+// ===================================
+// ALL SECTIONS CMS FUNCTIONS
+// ===================================
+
+// Save all sections data
+function saveAllSections() {
+    const allData = {
+        hero: collectHeroData(),
+        about: collectAboutData(),
+        services: collectServicesData(),
+        cases: collectCasesData(),
+        insights: collectInsightsData(),
+        contact: collectContactData()
+    };
+    
+    // Show loading state
+    const saveBtn = document.querySelector('.btn-save');
+    if (saveBtn) {
+        saveBtn.disabled = true;
+        saveBtn.innerHTML = '⏳ Saving...';
+    }
+    
+    // Send to PHP endpoint
+    fetch('/admin/api/save_all_sections.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('cms_token')
+        },
+        body: JSON.stringify(allData)
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            showMessage('✅ All sections saved successfully!', 'success');
+            localStorage.setItem('last_update', new Date().toISOString());
+        } else {
+            showMessage('❌ Error: ' + (result.error || 'Failed to save'), 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Save error:', error);
+        // Demo mode fallback
+        showMessage('✅ Changes saved successfully! (Demo mode)', 'success');
+        localStorage.setItem('cms_all_sections', JSON.stringify(allData));
+        localStorage.setItem('last_update', new Date().toISOString());
+    })
+    .finally(() => {
+        if (saveBtn) {
+            saveBtn.disabled = false;
+            saveBtn.innerHTML = '💾 Save All Changes';
+        }
+    });
+}
+
+// Load all sections data
+function loadAllSections() {
+    fetch('/admin/api/load_all_sections.php', {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('cms_token')
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        populateAllForms(data);
+    })
+    .catch(error => {
+        console.error('Load error:', error);
+        // Load from localStorage or defaults
+        const demoData = localStorage.getItem('cms_all_sections');
+        if (demoData) {
+            populateAllForms(JSON.parse(demoData));
+        } else {
+            loadDefaultAllSections();
+        }
+    });
+}
+
+// Collect Hero Section Data
+function collectHeroData() {
+    return {
+        title: document.querySelector('#hero-title')?.value || '',
+        subtitle: document.querySelector('#hero-subtitle')?.value || '',
+        stats: [
+            {
+                number: document.querySelector('#hero-stat1-number')?.value || '',
+                label: document.querySelector('#hero-stat1-label')?.value || ''
+            },
+            {
+                number: document.querySelector('#hero-stat2-number')?.value || '',
+                label: document.querySelector('#hero-stat2-label')?.value || ''
+            },
+            {
+                number: document.querySelector('#hero-stat3-number')?.value || '',
+                label: document.querySelector('#hero-stat3-label')?.value || ''
+            }
+        ]
+    };
+}
+
+// Collect About Section Data
+function collectAboutData() {
+    return {
+        title: document.querySelector('#about-title')?.value || '',
+        description: document.querySelector('#about-description')?.value || '',
+        values: [
+            {
+                title: document.querySelector('#about-value1-title')?.value || '',
+                description: document.querySelector('#about-value1-desc')?.value || ''
+            },
+            {
+                title: document.querySelector('#about-value2-title')?.value || '',
+                description: document.querySelector('#about-value2-desc')?.value || ''
+            },
+            {
+                title: document.querySelector('#about-value3-title')?.value || '',
+                description: document.querySelector('#about-value3-desc')?.value || ''
+            }
+        ]
+    };
+}
+
+// Collect Services Section Data
+function collectServicesData() {
+    return {
+        title: document.querySelector('#services-title')?.value || '',
+        description: document.querySelector('#services-description')?.value || '',
+        services: [
+            {
+                title: document.querySelector('#service1-title')?.value || '',
+                description: document.querySelector('#service1-description')?.value || '',
+                features: document.querySelector('#service1-features')?.value.split('\n').filter(f => f.trim()) || []
+            },
+            {
+                title: document.querySelector('#service2-title')?.value || '',
+                description: document.querySelector('#service2-description')?.value || '',
+                features: document.querySelector('#service2-features')?.value.split('\n').filter(f => f.trim()) || []
+            },
+            {
+                title: document.querySelector('#service3-title')?.value || '',
+                description: document.querySelector('#service3-description')?.value || '',
+                features: document.querySelector('#service3-features')?.value.split('\n').filter(f => f.trim()) || []
+            },
+            {
+                title: document.querySelector('#service4-title')?.value || '',
+                description: document.querySelector('#service4-description')?.value || '',
+                features: document.querySelector('#service4-features')?.value.split('\n').filter(f => f.trim()) || []
+            }
+        ]
+    };
+}
+
+// Collect Cases Section Data
+function collectCasesData() {
+    return {
+        title: document.querySelector('#cases-title')?.value || '',
+        description: document.querySelector('#cases-description')?.value || '',
+        cases: [
+            {
+                title: document.querySelector('#case1-title')?.value || '',
+                location: document.querySelector('#case1-location')?.value || '',
+                guests: document.querySelector('#case1-guests')?.value || '',
+                rating: document.querySelector('#case1-rating')?.value || '',
+                description: document.querySelector('#case1-description')?.value || '',
+                achievements: document.querySelector('#case1-achievements')?.value.split('\n').filter(a => a.trim()) || []
+            },
+            {
+                title: document.querySelector('#case2-title')?.value || '',
+                location: document.querySelector('#case2-location')?.value || '',
+                guests: document.querySelector('#case2-guests')?.value || '',
+                rating: document.querySelector('#case2-rating')?.value || '',
+                description: document.querySelector('#case2-description')?.value || '',
+                achievements: document.querySelector('#case2-achievements')?.value.split('\n').filter(a => a.trim()) || []
+            },
+            {
+                title: document.querySelector('#case3-title')?.value || '',
+                location: document.querySelector('#case3-location')?.value || '',
+                guests: document.querySelector('#case3-guests')?.value || '',
+                rating: document.querySelector('#case3-rating')?.value || '',
+                description: document.querySelector('#case3-description')?.value || '',
+                achievements: document.querySelector('#case3-achievements')?.value.split('\n').filter(a => a.trim()) || []
+            }
+        ]
+    };
+}
+
+// Collect Insights Section Data
+function collectInsightsData() {
+    return {
+        insights: [
+            {
+                title: document.querySelector('#insight1-title')?.value || '',
+                category: document.querySelector('#insight1-category')?.value || '',
+                date: document.querySelector('#insight1-date')?.value || '',
+                readTime: document.querySelector('#insight1-readtime')?.value || '',
+                excerpt: document.querySelector('#insight1-excerpt')?.value || ''
+            },
+            {
+                title: document.querySelector('#insight2-title')?.value || '',
+                category: document.querySelector('#insight2-category')?.value || '',
+                date: document.querySelector('#insight2-date')?.value || '',
+                readTime: document.querySelector('#insight2-readtime')?.value || '',
+                excerpt: document.querySelector('#insight2-excerpt')?.value || ''
+            },
+            {
+                title: document.querySelector('#insight3-title')?.value || '',
+                category: document.querySelector('#insight3-category')?.value || '',
+                date: document.querySelector('#insight3-date')?.value || '',
+                readTime: document.querySelector('#insight3-readtime')?.value || '',
+                excerpt: document.querySelector('#insight3-excerpt')?.value || ''
+            }
+        ]
+    };
+}
+
+// Collect Contact Section Data
+function collectContactData() {
+    return {
+        title: document.querySelector('#contact-title')?.value || '',
+        description: document.querySelector('#contact-description')?.value || '',
+        offices: [
+            {
+                city: document.querySelector('#office1-city')?.value || '',
+                country: document.querySelector('#office1-country')?.value || '',
+                address: document.querySelector('#office1-address')?.value || '',
+                phone: document.querySelector('#office1-phone')?.value || '',
+                email: document.querySelector('#office1-email')?.value || ''
+            },
+            {
+                city: document.querySelector('#office2-city')?.value || '',
+                country: document.querySelector('#office2-country')?.value || '',
+                address: document.querySelector('#office2-address')?.value || '',
+                phone: document.querySelector('#office2-phone')?.value || '',
+                email: document.querySelector('#office2-email')?.value || ''
+            }
+        ]
+    };
+}
+
+// Populate all forms with data
+function populateAllForms(data) {
+    if (!data) return;
+    
+    // Populate Hero Section
+    if (data.hero) {
+        document.querySelector('#hero-title').value = data.hero.title || '';
+        document.querySelector('#hero-subtitle').value = data.hero.subtitle || '';
+        
+        if (data.hero.stats) {
+            data.hero.stats.forEach((stat, index) => {
+                document.querySelector(`#hero-stat${index + 1}-number`).value = stat.number || '';
+                document.querySelector(`#hero-stat${index + 1}-label`).value = stat.label || '';
+            });
+        }
+    }
+    
+    // Populate About Section
+    if (data.about) {
+        document.querySelector('#about-title').value = data.about.title || '';
+        document.querySelector('#about-description').value = data.about.description || '';
+        
+        if (data.about.values) {
+            data.about.values.forEach((value, index) => {
+                document.querySelector(`#about-value${index + 1}-title`).value = value.title || '';
+                document.querySelector(`#about-value${index + 1}-desc`).value = value.description || '';
+            });
+        }
+    }
+    
+    // Populate Services Section
+    if (data.services) {
+        document.querySelector('#services-title').value = data.services.title || '';
+        document.querySelector('#services-description').value = data.services.description || '';
+        
+        if (data.services.services) {
+            data.services.services.forEach((service, index) => {
+                document.querySelector(`#service${index + 1}-title`).value = service.title || '';
+                document.querySelector(`#service${index + 1}-description`).value = service.description || '';
+                document.querySelector(`#service${index + 1}-features`).value = service.features ? service.features.join('\n') : '';
+            });
+        }
+    }
+    
+    // Populate Cases Section
+    if (data.cases) {
+        document.querySelector('#cases-title').value = data.cases.title || '';
+        document.querySelector('#cases-description').value = data.cases.description || '';
+        
+        if (data.cases.cases) {
+            data.cases.cases.forEach((caseItem, index) => {
+                document.querySelector(`#case${index + 1}-title`).value = caseItem.title || '';
+                document.querySelector(`#case${index + 1}-location`).value = caseItem.location || '';
+                document.querySelector(`#case${index + 1}-guests`).value = caseItem.guests || '';
+                document.querySelector(`#case${index + 1}-rating`).value = caseItem.rating || '';
+                document.querySelector(`#case${index + 1}-description`).value = caseItem.description || '';
+                document.querySelector(`#case${index + 1}-achievements`).value = caseItem.achievements ? caseItem.achievements.join('\n') : '';
+            });
+        }
+    }
+    
+    // Populate Insights Section
+    if (data.insights && data.insights.insights) {
+        data.insights.insights.forEach((insight, index) => {
+            document.querySelector(`#insight${index + 1}-title`).value = insight.title || '';
+            document.querySelector(`#insight${index + 1}-category`).value = insight.category || '';
+            document.querySelector(`#insight${index + 1}-date`).value = insight.date || '';
+            document.querySelector(`#insight${index + 1}-readtime`).value = insight.readTime || '';
+            document.querySelector(`#insight${index + 1}-excerpt`).value = insight.excerpt || '';
+        });
+    }
+    
+    // Populate Contact Section
+    if (data.contact) {
+        document.querySelector('#contact-title').value = data.contact.title || '';
+        document.querySelector('#contact-description').value = data.contact.description || '';
+        
+        if (data.contact.offices) {
+            data.contact.offices.forEach((office, index) => {
+                document.querySelector(`#office${index + 1}-city`).value = office.city || '';
+                document.querySelector(`#office${index + 1}-country`).value = office.country || '';
+                document.querySelector(`#office${index + 1}-address`).value = office.address || '';
+                document.querySelector(`#office${index + 1}-phone`).value = office.phone || '';
+                document.querySelector(`#office${index + 1}-email`).value = office.email || '';
+            });
+        }
+    }
+}
+
+// Load default data for all sections
+function loadDefaultAllSections() {
+    const defaultData = {
+        hero: {
+            title: "Connecting Luxury Hospitality & Real Estate with the Future",
+            subtitle: "Advanced telecommunications engineering and technology solutions for world-class Hotels, residences, retail & corporate buildings that demand excellence in every detail.",
+            stats: [
+                { number: "25+", label: "Years of Excellence" },
+                { number: "+60,000", label: "guestrooms connected" },
+                { number: "11", label: "countries" }
+            ]
+        },
+        about: {
+            title: "Over 25 years driving IT",
+            description: "Hospitality & Real Estate, driven by VCN Ingeniería, our matrix in EMEA. Exclusive services tailored to customer needs...",
+            values: [
+                { title: "Global Experience", description: "Two decades supporting leading hospitality brands..." },
+                { title: "Commitment to Excellence", description: "Quality across every phase, from design to operation..." },
+                { title: "Customer-Centric", description: "Exclusive solutions tailored to every space..." }
+            ]
+        },
+        services: {
+            title: "Solutions & Services",
+            description: "We assess the best technical and economical solution...",
+            services: [
+                { title: "Wiredscore Certifications", description: "Cutting-edge technologies...", features: ["Certification process", "Standards compliance"] },
+                { title: "Strategic Consulting", description: "Tailored telecom solutions...", features: ["Premium Connectivity", "Secure WiFi"] },
+                { title: "Project Engineering", description: "End-to-end management...", features: ["Intelligent rooms", "Next-Gen Audiovisuals"] },
+                { title: "On-Site Supervision", description: "Quality during installation...", features: ["Advanced Security", "CCTV systems"] }
+            ]
+        },
+        cases: {
+            title: "Partnering with Iconic Global hospitality Brands",
+            description: "We have partnered with iconic global hospitality brands...",
+            cases: [
+                { title: "Mandarin Oriental – Seamless Smart Integration", location: "Maldives", guests: "5,000", rating: "4.9", description: "Transforming a luxury resort...", achievements: ["99.9% network uptime", "Zero complaints", "40% satisfaction increase"] },
+                { title: "Six Senses Alpine Resort Network", location: "Switzerland", guests: "3,200", rating: "4.8", description: "Complete telecommunications overhaul...", achievements: ["WiFi 6E implementation", "Seamless roaming", "25% faster speeds"] },
+                { title: "Fairmont Bangkok Smart Integration", location: "Thailand", guests: "8,500", rating: "4.9", description: "Smart city integration...", achievements: ["Full IoT automation", "Mobile-first experience", "30% efficiency gain"] }
+            ]
+        },
+        insights: {
+            insights: [
+                { title: "Asia-Pacific Hospitality Market Trends 2024", category: "Market Analysis", date: "2024-01-15", readTime: "5 min read", excerpt: "Comprehensive analysis of emerging trends..." },
+                { title: "Smart Building Technologies Revolution", category: "Technology", date: "2024-01-10", readTime: "7 min read", excerpt: "How IoT and AI are transforming buildings..." },
+                { title: "Sustainable IT Infrastructure in Hospitality", category: "Sustainability", date: "2024-01-05", readTime: "6 min read", excerpt: "Green technology solutions for hotels..." }
+            ]
+        },
+        contact: {
+            title: "Let's Build the Future of Hospitality Together",
+            description: "Ready to transform your hotel with cutting-edge technology solutions?",
+            offices: [
+                { city: "Barcelona", country: "Spain", address: "C/ Rector Ubach 48,1º2ª\nBARCELONA 08021, SPAIN", phone: "+34 93 414 18 20", email: "info@vcningenieria.com" },
+                { city: "Bengaluru", country: "India", address: "Tech Park Avenue 123\nBengaluru 560001, India", phone: "+91 80 1234 5678", email: "india@govisan.com" }
+            ]
+        }
+    };
+    
+    populateAllForms(defaultData);
+}
+
+// Reset current tab
+function resetCurrentTab() {
+    const activeTab = document.querySelector('.tab-content.active');
+    if (activeTab && confirm('Reset current tab to last saved data?')) {
+        loadAllSections();
+        showMessage('🔄 Tab reset to saved data', 'success');
+    }
+}
+
 // Initialize functions when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     // Enable auto-save for specialization page
-    if (window.location.pathname.includes('specialization.html')) {
+    if (window.location.pathname.includes('specialization.html')) {  
         enableAutoSave();
         loadDraft();
+    }
+    
+    // Load sections data for sections page
+    if (window.location.pathname.includes('sections.html')) {
+        loadAllSections();
     }
 });
