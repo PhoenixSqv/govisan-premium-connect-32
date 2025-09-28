@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Govisan CMS - Dashboard</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="cms-page">
+    <div class="cms-header">
+        <div class="header-left">
+            <h1>Govisan CMS</h1>
+        </div>
+        <div class="header-right">
+            <div class="user-info">
+                <span>Welcome, admin@govisan.com</span>
+                <a href="#" onclick="logout()" class="logout-btn">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="cms-container">
+        <nav class="cms-sidebar">
+            <ul class="sidebar-nav">
+                <li><a href="dashboard.html" class="nav-link active">📊 Dashboard</a></li>
+                <li><a href="specialization.html" class="nav-link">⚙️ Our Specialization</a></li>
+                <li><a href="../" target="_blank" class="nav-link">👁️ Preview Site</a></li>
+            </ul>
+        </nav>
+        
+        <main class="cms-content">
+            <div class="content-header">
+                <h2>Dashboard</h2>
+                <p>Overview of your website content management</p>
+            </div>
+            
+            <div class="dashboard-cards">
+                <div class="dashboard-card">
+                    <div class="card-icon">⚙️</div>
+                    <div class="card-content">
+                        <h3>Specialization Sections</h3>
+                        <p class="big-number">6</p>
+                        <p class="card-description">Active sections configured</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="specialization.html" class="btn-card">Manage</a>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="card-icon">📊</div>
+                    <div class="card-content">
+                        <h3>Content Status</h3>
+                        <p class="big-number">Live</p>
+                        <p class="card-description">Website is published</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="../" target="_blank" class="btn-card">View</a>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="card-icon">🔄</div>
+                    <div class="card-content">
+                        <h3>Last Updated</h3>
+                        <p class="big-number" id="lastUpdate">--</p>
+                        <p class="card-description">Content modification</p>
+                    </div>
+                    <div class="card-action">
+                        <button onclick="checkUpdates()" class="btn-card">Refresh</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-sections">
+                <div class="section-card">
+                    <h3>Quick Actions</h3>
+                    <div class="quick-actions">
+                        <a href="specialization.html" class="action-btn">
+                            <span class="action-icon">⚙️</span>
+                            <span class="action-text">Edit Specializations</span>
+                        </a>
+                        <a href="../" target="_blank" class="action-btn">
+                            <span class="action-icon">👁️</span>
+                            <span class="action-text">Preview Website</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="section-card">
+                    <h3>Recent Activity</h3>
+                    <div class="activity-list" id="activityList">
+                        <div class="activity-item">
+                            <span class="activity-time">Just now</span>
+                            <span class="activity-text">Dashboard accessed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="admin.js"></script>
+    <script>
+        // Check authentication
+        if (!localStorage.getItem('cms_token')) {
+            window.location.href = 'login.html';
+        }
+        
+        function checkUpdates() {
+            // This will connect to PHP later
+            fetch('/admin/api/get_last_update.php')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('lastUpdate').textContent = data.lastUpdate || 'Never';
+                })
+                .catch(error => {
+                    // Simulate data for demo
+                    const now = new Date();
+                    document.getElementById('lastUpdate').textContent = now.toLocaleDateString();
+                });
+        }
+        
+        // Load dashboard data
+        document.addEventListener('DOMContentLoaded', function() {
+            checkUpdates();
+        });
+    </script>
+</body>
+</html>

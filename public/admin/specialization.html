@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Govisan CMS - Our Specialization</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="cms-page">
+    <div class="cms-header">
+        <div class="header-left">
+            <h1>Govisan CMS</h1>
+        </div>
+        <div class="header-right">
+            <div class="user-info">
+                <span>Welcome, admin@govisan.com</span>
+                <a href="#" onclick="logout()" class="logout-btn">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="cms-container">
+        <nav class="cms-sidebar">
+            <ul class="sidebar-nav">
+                <li><a href="dashboard.html" class="nav-link">📊 Dashboard</a></li>
+                <li><a href="specialization.html" class="nav-link active">⚙️ Our Specialization</a></li>
+                <li><a href="../" target="_blank" class="nav-link">👁️ Preview Site</a></li>
+            </ul>
+        </nav>
+        
+        <main class="cms-content">
+            <div class="content-header">
+                <h2>Our Specialization Management</h2>
+                <p>Manage the specialization sections displayed on your website</p>
+            </div>
+            
+            <div class="specialization-cms">
+                <div class="specialization-grid">
+                    <!-- Hospitality Technology -->
+                    <div class="spec-section">
+                        <div class="spec-header">
+                            <h3>🏨 Hospitality Technology</h3>
+                        </div>
+                        <div class="spec-form">
+                            <div class="form-group">
+                                <label for="hospitality-title">Section Title</label>
+                                <input type="text" id="hospitality-title" placeholder="Hospitality Technology" maxlength="50">
+                            </div>
+                            <div class="form-group">
+                                <label for="hospitality-description">Description</label>
+                                <textarea id="hospitality-description" placeholder="Comprehensive technology solutions for luxury hotels..." rows="3" maxlength="200"></textarea>
+                                <small class="char-count"><span id="hospitality-desc-count">0</span>/200</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Services (5 required)</label>
+                                <div class="services-inputs">
+                                    <input type="text" id="hospitality-service-1" placeholder="Property Management Systems">
+                                    <input type="text" id="hospitality-service-2" placeholder="Guest Experience Platforms">
+                                    <input type="text" id="hospitality-service-3" placeholder="Revenue Management Systems">
+                                    <input type="text" id="hospitality-service-4" placeholder="Mobile Applications">
+                                    <input type="text" id="hospitality-service-5" placeholder="Digital Concierge Services">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Real Estate Technology -->
+                    <div class="spec-section">
+                        <div class="spec-header">
+                            <h3>🏠 Real Estate Technology</h3>
+                        </div>
+                        <div class="spec-form">
+                            <div class="form-group">
+                                <label for="real-estate-title">Section Title</label>
+                                <input type="text" id="real-estate-title" placeholder="Real Estate Technology" maxlength="50">
+                            </div>
+                            <div class="form-group">
+                                <label for="real-estate-description">Description</label>
+                                <textarea id="real-estate-description" placeholder="Smart building solutions and property management systems..." rows="3" maxlength="200"></textarea>
+                                <small class="char-count"><span id="real-estate-desc-count">0</span>/200</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Services (5 required)</label>
+                                <div class="services-inputs">
+                                    <input type="text" id="real-estate-service-1" placeholder="Smart Building Systems">
+                                    <input type="text" id="real-estate-service-2" placeholder="Property Management Platforms">
+                                    <input type="text" id="real-estate-service-3" placeholder="Tenant Experience Apps">
+                                    <input type="text" id="real-estate-service-4" placeholder="Energy Management">
+                                    <input type="text" id="real-estate-service-5" placeholder="Security & Access Control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Network Infrastructure -->
+                    <div class="spec-section">
+                        <div class="spec-header">
+                            <h3>🌐 Network Infrastructure</h3>
+                        </div>
+                        <div class="spec-form">
+                            <div class="form-group">
+                                <label for="network-title">Section Title</label>
+                                <input type="text" id="network-title" placeholder="Network Infrastructure" maxlength="50">
+                            </div>
+                            <div class="form-group">
+                                <label for="network-description">Description</label>
+                                <textarea id="network-description" placeholder="Robust networking solutions for hospitality and real estate..." rows="3" maxlength="200"></textarea>
+                                <small class="char-count"><span id="network-desc-count">0</span>/200</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Services (5 required)</label>
+                                <div class="services-inputs">
+                                    <input type="text" id="network-service-1" placeholder="Enterprise WiFi Solutions">
+                                    <input type="text" id="network-service-2" placeholder="Network Security">
+                                    <input type="text" id="network-service-3" placeholder="Fiber Optic Infrastructure">
+                                    <input type="text" id="network-service-4" placeholder="Cloud Integration">
+                                    <input type="text" id="network-service-5" placeholder="24/7 Monitoring">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Smart Entertainment Solutions -->
+                    <div class="spec-section">
+                        <div class="spec-header">
+                            <h3>🎬 Smart Entertainment Solutions</h3>
+                        </div>
+                        <div class="spec-form">
+                            <div class="form-group">
+                                <label for="entertainment-title">Section Title</label>
+                                <input type="text" id="entertainment-title" placeholder="Smart Entertainment Solutions" maxlength="50">
+                            </div>
+                            <div class="form-group">
+                                <label for="entertainment-description">Description</label>
+                                <textarea id="entertainment-description" placeholder="Cutting-edge entertainment systems for hospitality venues..." rows="3" maxlength="200"></textarea>
+                                <small class="char-count"><span id="entertainment-desc-count">0</span>/200</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Services (5 required)</label>
+                                <div class="services-inputs">
+                                    <input type="text" id="entertainment-service-1" placeholder="Digital Signage">
+                                    <input type="text" id="entertainment-service-2" placeholder="Interactive Displays">
+                                    <input type="text" id="entertainment-service-3" placeholder="Streaming Solutions">
+                                    <input type="text" id="entertainment-service-4" placeholder="Event Technology">
+                                    <input type="text" id="entertainment-service-5" placeholder="Premium Audio & Sound Systems">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Business Intelligence -->
+                    <div class="spec-section">
+                        <div class="spec-header">
+                            <h3>📊 Business Intelligence</h3>
+                        </div>
+                        <div class="spec-form">
+                            <div class="form-group">
+                                <label for="business-intelligence-title">Section Title</label>
+                                <input type="text" id="business-intelligence-title" placeholder="Business Intelligence" maxlength="50">
+                            </div>
+                            <div class="form-group">
+                                <label for="business-intelligence-description">Description</label>
+                                <textarea id="business-intelligence-description" placeholder="Data-driven insights and analytics for informed decisions..." rows="3" maxlength="200"></textarea>
+                                <small class="char-count"><span id="business-intelligence-desc-count">0</span>/200</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Services (5 required)</label>
+                                <div class="services-inputs">
+                                    <input type="text" id="business-intelligence-service-1" placeholder="Data Analytics">
+                                    <input type="text" id="business-intelligence-service-2" placeholder="Performance Dashboards">
+                                    <input type="text" id="business-intelligence-service-3" placeholder="Revenue Optimization">
+                                    <input type="text" id="business-intelligence-service-4" placeholder="Market Intelligence">
+                                    <input type="text" id="business-intelligence-service-5" placeholder="Predictive Analytics">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- IoT & Automation -->
+                    <div class="spec-section">
+                        <div class="spec-header">
+                            <h3>🤖 IoT & Automation</h3>
+                        </div>
+                        <div class="spec-form">
+                            <div class="form-group">
+                                <label for="iot-title">Section Title</label>
+                                <input type="text" id="iot-title" placeholder="IoT & Automation" maxlength="50">
+                            </div>
+                            <div class="form-group">
+                                <label for="iot-description">Description</label>
+                                <textarea id="iot-description" placeholder="Internet of Things solutions for smart automation..." rows="3" maxlength="200"></textarea>
+                                <small class="char-count"><span id="iot-desc-count">0</span>/200</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Services (5 required)</label>
+                                <div class="services-inputs">
+                                    <input type="text" id="iot-service-1" placeholder="Smart Room Controls">
+                                    <input type="text" id="iot-service-2" placeholder="Environmental Monitoring">
+                                    <input type="text" id="iot-service-3" placeholder="Automated Workflows">
+                                    <input type="text" id="iot-service-4" placeholder="Sensor Networks">
+                                    <input type="text" id="iot-service-5" placeholder="Connected Appliances & Smart Devices">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cms-actions">
+                    <button onclick="saveData()" class="btn-save" id="saveBtn">
+                        <span class="btn-icon">💾</span>
+                        <span class="btn-text">Save Changes</span>
+                    </button>
+                    <button onclick="window.open('../', '_blank')" class="btn-preview">
+                        <span class="btn-icon">👁️</span>
+                        <span class="btn-text">Preview Site</span>
+                    </button>
+                    <button onclick="resetForm()" class="btn-reset">
+                        <span class="btn-icon">🔄</span>
+                        <span class="btn-text">Reset</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="admin.js"></script>
+    <script>
+        // Check authentication
+        if (!localStorage.getItem('cms_token')) {
+            window.location.href = 'login.html';
+        }
+        
+        // Character count for textareas
+        document.addEventListener('DOMContentLoaded', function() {
+            const textareas = document.querySelectorAll('textarea[maxlength]');
+            textareas.forEach(textarea => {
+                const sectionName = textarea.id.split('-')[0];
+                const counter = document.getElementById(sectionName + '-desc-count');
+                
+                textarea.addEventListener('input', function() {
+                    if (counter) {
+                        counter.textContent = this.value.length;
+                        if (this.value.length > 180) {
+                            counter.style.color = '#e74c3c';
+                        } else {
+                            counter.style.color = '#7f8c8d';
+                        }
+                    }
+                });
+                
+                // Initialize count
+                if (counter) {
+                    counter.textContent = textarea.value.length;
+                }
+            });
+            
+            // Load existing data
+            loadData();
+        });
+    </script>
+</body>
+</html>

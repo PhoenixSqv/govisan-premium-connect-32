@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Govisan CMS - Login</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <div class="login-form-wrapper">
+            <form class="login-form" id="loginForm">
+                <div class="logo-section">
+                    <h1>Govisan CMS</h1>
+                    <p>Content Management System</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="username">Email</label>
+                    <input type="email" id="username" name="username" placeholder="admin@govisan.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="••••••••" required>
+                </div>
+                
+                <button type="submit" class="btn-login">
+                    <span class="btn-text">Login</span>
+                    <span class="btn-loading" style="display: none;">Logging in...</span>
+                </button>
+                
+                <div class="error-message" id="errorMessage" style="display: none;"></div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="admin.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleLogin();
+        });
+        
+        function handleLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMsg = document.getElementById('errorMessage');
+            const btnText = document.querySelector('.btn-text');
+            const btnLoading = document.querySelector('.btn-loading');
+            
+            // Show loading state
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline';
+            errorMsg.style.display = 'none';
+            
+            // This will connect to PHP later
+            fetch('/admin/api/login.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    localStorage.setItem('cms_token', result.token);
+                    window.location.href = 'dashboard.html';
+                } else {
+                    errorMsg.textContent = result.error || 'Invalid credentials';
+                    errorMsg.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                // For now, simulate successful login for testing
+                console.log('Login attempt:', { username, password });
+                if (username === 'admin@govisan.com' && password === 'admin123') {
+                    localStorage.setItem('cms_token', 'demo_token');
+                    window.location.href = 'dashboard.html';
+                } else {
+                    errorMsg.textContent = 'Invalid credentials';
+                    errorMsg.style.display = 'block';
+                }
+            })
+            .finally(() => {
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
+            });
+        }
+    </script>
+</body>
+</html>
