@@ -38,7 +38,7 @@ const HeroSection = () => {
   
   return (
     <section className="section--wm wm--home py-20 text-white relative overflow-hidden" style={{
-      backgroundImage: `url('/src/assets/hero-background.jpg')`,
+      backgroundImage: `url('${content.backgroundImage}')`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat'
