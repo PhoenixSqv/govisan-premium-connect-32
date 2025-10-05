@@ -1,0 +1,488 @@
+{
+  "designSystem": {
+    "metadata": {
+      "projectName": "GOVISAN Solutions",
+      "version": "1.0.0",
+      "lastUpdated": "2025-10-05",
+      "description": "Complete design specifications for Govisan luxury hospitality technology solutions website"
+    },
+    
+    "colorPalette": {
+      "brand": {
+        "primary": {
+          "navy": "hsl(210, 60%, 10%)",
+          "navyLight": "hsl(210, 50%, 20%)",
+          "description": "Main brand color - Deep navy for professionalism"
+        },
+        "secondary": {
+          "gold": "hsl(43, 74%, 53%)",
+          "goldLight": "hsl(43, 74%, 70%)",
+          "description": "Luxury accent - Premium gold for elegance"
+        },
+        "accent": {
+          "blueAccent": "hsl(200, 80%, 50%)",
+          "description": "Modern tech accent - Vibrant blue for innovation"
+        }
+      },
+      
+      "semantic": {
+        "light": {
+          "background": "hsl(0, 0%, 100%)",
+          "foreground": "hsl(210, 60%, 10%)",
+          "card": "hsl(0, 0%, 100%)",
+          "cardForeground": "hsl(210, 60%, 10%)",
+          "popover": "hsl(0, 0%, 100%)",
+          "popoverForeground": "hsl(210, 60%, 10%)",
+          "primary": "hsl(210, 60%, 10%)",
+          "primaryForeground": "hsl(0, 0%, 100%)",
+          "secondary": "hsl(210, 40%, 96%)",
+          "secondaryForeground": "hsl(210, 60%, 10%)",
+          "muted": "hsl(210, 40%, 96%)",
+          "mutedForeground": "hsl(210, 30%, 45%)",
+          "accent": "hsl(210, 40%, 96%)",
+          "accentForeground": "hsl(210, 60%, 10%)",
+          "destructive": "hsl(0, 84%, 60%)",
+          "destructiveForeground": "hsl(0, 0%, 100%)",
+          "border": "hsl(210, 40%, 90%)",
+          "input": "hsl(210, 40%, 90%)",
+          "ring": "hsl(210, 60%, 10%)"
+        },
+        "dark": {
+          "background": "hsl(210, 60%, 8%)",
+          "foreground": "hsl(0, 0%, 100%)",
+          "card": "hsl(210, 50%, 12%)",
+          "cardForeground": "hsl(0, 0%, 100%)",
+          "popover": "hsl(210, 50%, 12%)",
+          "popoverForeground": "hsl(0, 0%, 100%)",
+          "primary": "hsl(43, 74%, 53%)",
+          "primaryForeground": "hsl(210, 60%, 10%)",
+          "secondary": "hsl(210, 50%, 20%)",
+          "secondaryForeground": "hsl(0, 0%, 100%)",
+          "muted": "hsl(210, 50%, 20%)",
+          "mutedForeground": "hsl(210, 20%, 70%)",
+          "accent": "hsl(210, 50%, 20%)",
+          "accentForeground": "hsl(0, 0%, 100%)",
+          "destructive": "hsl(0, 62%, 50%)",
+          "destructiveForeground": "hsl(0, 0%, 100%)",
+          "border": "hsl(210, 50%, 20%)",
+          "input": "hsl(210, 50%, 20%)",
+          "ring": "hsl(43, 74%, 53%)"
+        }
+      }
+    },
+    
+    "typography": {
+      "fontFamilies": {
+        "primary": {
+          "name": "Montserrat",
+          "fallback": "sans-serif",
+          "usage": "All text content",
+          "weights": [300, 400, 500, 600, 700, 800],
+          "source": "Google Fonts"
+        }
+      },
+      
+      "scale": {
+        "headings": {
+          "h1": {
+            "desktop": "3.5rem - 4.5rem (56px - 72px)",
+            "mobile": "2.5rem - 3rem (40px - 48px)",
+            "weight": "700-800 (Bold-ExtraBold)",
+            "lineHeight": "1.1",
+            "letterSpacing": "-0.02em"
+          },
+          "h2": {
+            "desktop": "2.5rem - 3.5rem (40px - 56px)",
+            "mobile": "2rem - 2.5rem (32px - 40px)",
+            "weight": "700 (Bold)",
+            "lineHeight": "1.2",
+            "letterSpacing": "-0.01em"
+          },
+          "h3": {
+            "desktop": "2rem - 2.5rem (32px - 40px)",
+            "mobile": "1.75rem - 2rem (28px - 32px)",
+            "weight": "600-700 (SemiBold-Bold)",
+            "lineHeight": "1.3",
+            "letterSpacing": "normal"
+          },
+          "h4": {
+            "desktop": "1.5rem - 2rem (24px - 32px)",
+            "mobile": "1.25rem - 1.5rem (20px - 24px)",
+            "weight": "600 (SemiBold)",
+            "lineHeight": "1.4",
+            "letterSpacing": "normal"
+          }
+        },
+        "body": {
+          "large": {
+            "size": "1.25rem (20px)",
+            "weight": "400 (Regular)",
+            "lineHeight": "1.7",
+            "usage": "Lead paragraphs, hero subtitles"
+          },
+          "base": {
+            "size": "1rem (16px)",
+            "weight": "400 (Regular)",
+            "lineHeight": "1.6",
+            "usage": "Standard body text"
+          },
+          "small": {
+            "size": "0.875rem (14px)",
+            "weight": "400 (Regular)",
+            "lineHeight": "1.5",
+            "usage": "Captions, metadata"
+          }
+        }
+      }
+    },
+    
+    "gradients": {
+      "hero": {
+        "value": "linear-gradient(135deg, hsl(210, 60%, 10%) 0%, hsl(210, 50%, 20%) 50%, hsl(200, 80%, 50%) 100%)",
+        "usage": "Hero sections, primary CTAs",
+        "direction": "135deg diagonal"
+      },
+      "overlay": {
+        "value": "linear-gradient(to bottom, transparent 0%, hsla(210, 60%, 10%, 0.8) 100%)",
+        "usage": "Image overlays for text readability",
+        "direction": "top to bottom"
+      },
+      "subtle": {
+        "value": "linear-gradient(180deg, hsl(210, 40%, 98%) 0%, hsl(0, 0%, 100%) 100%)",
+        "usage": "Section backgrounds",
+        "direction": "180deg vertical"
+      },
+      "card": {
+        "value": "linear-gradient(145deg, hsl(0, 0%, 100%) 0%, hsl(210, 40%, 98%) 100%)",
+        "usage": "Card backgrounds, elevated elements",
+        "direction": "145deg diagonal"
+      },
+      "gold": {
+        "value": "linear-gradient(135deg, hsl(43, 74%, 53%) 0%, hsl(43, 74%, 70%) 100%)",
+        "usage": "Premium features, highlight accents",
+        "direction": "135deg diagonal"
+      }
+    },
+    
+    "shadows": {
+      "elegant": {
+        "value": "0 10px 30px -10px hsla(210, 60%, 10%, 0.2)",
+        "usage": "Cards, elevated UI elements"
+      },
+      "hover": {
+        "value": "0 20px 40px -15px hsla(210, 60%, 10%, 0.3)",
+        "usage": "Interactive elements on hover"
+      },
+      "glow": {
+        "value": "0 0 40px hsla(43, 74%, 70%, 0.3)",
+        "usage": "Gold accent elements, CTAs"
+      },
+      "soft": {
+        "value": "0 2px 8px hsla(210, 60%, 10%, 0.08)",
+        "usage": "Subtle depth, form inputs"
+      },
+      "inset": {
+        "value": "inset 0 2px 4px hsla(210, 60%, 10%, 0.06)",
+        "usage": "Pressed states, input fields"
+      }
+    },
+    
+    "spacing": {
+      "scale": {
+        "xs": "0.25rem (4px)",
+        "sm": "0.5rem (8px)",
+        "base": "1rem (16px)",
+        "md": "1.5rem (24px)",
+        "lg": "2rem (32px)",
+        "xl": "3rem (48px)",
+        "2xl": "4rem (64px)",
+        "3xl": "6rem (96px)",
+        "4xl": "8rem (128px)"
+      },
+      "sections": {
+        "padding": {
+          "desktop": "5rem - 8rem (80px - 128px)",
+          "mobile": "3rem - 4rem (48px - 64px)"
+        },
+        "gap": {
+          "desktop": "3rem - 4rem (48px - 64px)",
+          "mobile": "2rem - 3rem (32px - 48px)"
+        }
+      }
+    },
+    
+    "borderRadius": {
+      "sm": "calc(var(--radius) - 4px)",
+      "md": "calc(var(--radius) - 2px)",
+      "lg": "var(--radius)",
+      "default": "0.5rem (8px)",
+      "usage": {
+        "buttons": "lg",
+        "cards": "lg",
+        "inputs": "md",
+        "badges": "full (9999px)"
+      }
+    },
+    
+    "transitions": {
+      "smooth": {
+        "value": "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+        "usage": "Default transitions"
+      },
+      "fast": {
+        "value": "all 0.15s ease-out",
+        "usage": "Quick feedback interactions"
+      },
+      "elegant": {
+        "value": "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+        "usage": "Smooth, premium animations"
+      }
+    },
+    
+    "animations": {
+      "fadeIn": {
+        "keyframes": "0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); }",
+        "duration": "0.3s",
+        "timing": "ease-out",
+        "usage": "Content reveal, page loads"
+      },
+      "pulse": {
+        "keyframes": "0%, 100% { opacity: 1; } 50% { opacity: 0.5; }",
+        "duration": "2s",
+        "timing": "cubic-bezier(0.4, 0, 0.6, 1)",
+        "iteration": "infinite",
+        "usage": "Loading states, attention grabbers"
+      },
+      "ping": {
+        "keyframes": "75%, 100% { transform: scale(2); opacity: 0; }",
+        "duration": "1s",
+        "timing": "cubic-bezier(0, 0, 0.2, 1)",
+        "iteration": "infinite",
+        "usage": "Notification indicators"
+      },
+      "accordionDown": {
+        "keyframes": "from { height: 0; } to { height: var(--radix-accordion-content-height); }",
+        "duration": "0.2s",
+        "timing": "ease-out",
+        "usage": "Expandable content"
+      }
+    },
+    
+    "layoutStructure": {
+      "container": {
+        "maxWidth": "1400px (2xl)",
+        "padding": {
+          "desktop": "2rem (32px)",
+          "mobile": "1rem (16px)"
+        },
+        "centering": "margin: 0 auto"
+      },
+      
+      "grid": {
+        "columns": {
+          "mobile": "1 column",
+          "tablet": "2 columns",
+          "desktop": "3-4 columns",
+          "large": "6 columns (brands)"
+        },
+        "gap": {
+          "mobile": "1.5rem (24px)",
+          "desktop": "2rem (32px)"
+        }
+      },
+      
+      "sections": {
+        "hero": {
+          "minHeight": "100vh",
+          "padding": "8rem 0 (128px)",
+          "background": "gradient-hero + background image overlay",
+          "textAlignment": "center",
+          "structure": "Title + Subtitle + CTAs + Stats row"
+        },
+        "about": {
+          "padding": "5rem 0 (80px)",
+          "layout": "2-column grid (desktop) / stacked (mobile)",
+          "contentWidth": "max-w-3xl",
+          "background": "gradient-subtle"
+        },
+        "solutions": {
+          "padding": "5rem 0 (80px)",
+          "layout": "3-column grid (desktop) / stacked (mobile)",
+          "cardStyle": "white background + shadow-elegant + hover:shadow-hover",
+          "iconSize": "3rem (48px)"
+        },
+        "specialization": {
+          "padding": "5rem 0 (80px)",
+          "layout": "3-column grid (desktop) / 2-column (tablet) / stacked (mobile)",
+          "imageAspect": "16:9",
+          "overlayGradient": "gradient-overlay"
+        },
+        "successStories": {
+          "padding": "5rem 0 (80px)",
+          "layout": "carousel with embla-carousel",
+          "cardWidth": "400px",
+          "gap": "2rem (32px)"
+        },
+        "insights": {
+          "padding": "5rem 0 (80px)",
+          "layout": "3-column grid (desktop) / stacked (mobile)",
+          "cardStyle": "hover:transform scale(1.02)"
+        },
+        "contact": {
+          "padding": "5rem 0 (80px)",
+          "layout": "2-column grid (form + info) / stacked (mobile)",
+          "formWidth": "max-w-2xl",
+          "background": "gradient-subtle"
+        },
+        "footer": {
+          "padding": "3rem 0 1.5rem (48px 0 24px)",
+          "background": "govisan-navy",
+          "color": "white",
+          "layout": "4-column grid (desktop) / stacked (mobile)"
+        }
+      }
+    },
+    
+    "components": {
+      "buttons": {
+        "primary": {
+          "background": "gradient-hero",
+          "color": "white",
+          "padding": "0.75rem 2rem (12px 32px)",
+          "fontSize": "1rem (16px)",
+          "fontWeight": "600",
+          "borderRadius": "lg",
+          "shadow": "shadow-elegant",
+          "hover": "shadow-hover + scale(1.02)",
+          "transition": "transition-smooth"
+        },
+        "secondary": {
+          "background": "transparent",
+          "border": "2px solid white",
+          "color": "white",
+          "padding": "0.75rem 2rem (12px 32px)",
+          "hover": "background: white/10"
+        },
+        "outline": {
+          "background": "transparent",
+          "border": "1px solid border",
+          "color": "foreground",
+          "hover": "background: accent"
+        }
+      },
+      
+      "cards": {
+        "standard": {
+          "background": "card",
+          "borderRadius": "lg",
+          "padding": "2rem (32px)",
+          "shadow": "shadow-elegant",
+          "hover": "shadow-hover + translateY(-4px)",
+          "transition": "transition-smooth"
+        },
+        "imageCard": {
+          "aspectRatio": "16:9",
+          "overlay": "gradient-overlay",
+          "contentPadding": "1.5rem (24px)",
+          "borderRadius": "lg"
+        }
+      },
+      
+      "forms": {
+        "input": {
+          "background": "background",
+          "border": "1px solid input",
+          "borderRadius": "md",
+          "padding": "0.75rem 1rem (12px 16px)",
+          "fontSize": "1rem (16px)",
+          "focus": "ring-2 ring-ring ring-offset-2",
+          "transition": "transition-smooth"
+        },
+        "textarea": {
+          "minHeight": "150px",
+          "resize": "vertical"
+        },
+        "label": {
+          "fontSize": "0.875rem (14px)",
+          "fontWeight": "500",
+          "marginBottom": "0.5rem (8px)"
+        }
+      },
+      
+      "navigation": {
+        "header": {
+          "position": "fixed",
+          "background": "backdrop-blur-md + background/80",
+          "height": "4rem (64px)",
+          "shadow": "shadow-soft (when scrolled)",
+          "padding": "0 2rem (0 32px)",
+          "zIndex": "50"
+        },
+        "links": {
+          "fontSize": "0.875rem (14px)",
+          "fontWeight": "500",
+          "color": "foreground",
+          "hover": "color: primary",
+          "transition": "transition-fast"
+        }
+      }
+    },
+    
+    "glassEffect": {
+      "light": {
+        "background": "hsla(0, 0%, 100%, 0.7)",
+        "backdropFilter": "blur(10px)",
+        "border": "1px solid hsla(0, 0%, 100%, 0.2)",
+        "shadow": "shadow-elegant"
+      },
+      "dark": {
+        "background": "hsla(210, 60%, 10%, 0.7)",
+        "backdropFilter": "blur(10px)",
+        "border": "1px solid hsla(0, 0%, 100%, 0.1)",
+        "shadow": "shadow-glow"
+      }
+    },
+    
+    "responsiveBreakpoints": {
+      "sm": "640px",
+      "md": "768px",
+      "lg": "1024px",
+      "xl": "1280px",
+      "2xl": "1400px"
+    },
+    
+    "accessibility": {
+      "focusVisible": {
+        "outline": "2px solid ring",
+        "outlineOffset": "2px"
+      },
+      "colorContrast": {
+        "minimum": "WCAG AA (4.5:1 for normal text)",
+        "preferred": "WCAG AAA (7:1 for normal text)"
+      },
+      "touchTargets": {
+        "minimum": "44x44px",
+        "preferred": "48x48px"
+      }
+    },
+    
+    "brandAssets": {
+      "logo": {
+        "primary": "/src/assets/logo.svg",
+        "usage": "Header, footer, branding"
+      },
+      "watermarks": {
+        "home": "/src/assets/watermarks/home.svg",
+        "solutions": "/src/assets/watermarks/solutions.svg",
+        "cases": "/src/assets/watermarks/cases.svg",
+        "about": "/src/assets/watermarks/about.svg",
+        "insights": "/src/assets/watermarks/insights.svg",
+        "contact": "/src/assets/watermarks/contact.svg",
+        "opacity": "0.03-0.05",
+        "position": "fixed background",
+        "size": "60-80% viewport"
+      },
+      "heroBackground": "/images/hero-background.jpg"
+    }
+  }
+}
