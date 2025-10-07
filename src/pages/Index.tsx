@@ -13,11 +13,13 @@ import FinalCTA from '@/components/FinalCTA';
 import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
 import ScrollProgress from '@/components/ScrollProgress';
+import ConstructionBanner from '@/components/ConstructionBanner';
 
 const Index = () => {
   return (
     <div className="min-h-screen scroll-smooth snap-y snap-mandatory overflow-y-scroll">
       <ScrollProgress />
+      <ConstructionBanner />
       <Header />
       
       <main>
